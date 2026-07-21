@@ -1,0 +1,9 @@
+name: fingerprint-full-matchers-benchmark
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pytest>=8,<9
+  - pip:
+      - -e .

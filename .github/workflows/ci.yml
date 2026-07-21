@@ -1,0 +1,44 @@
+name: runtime-ci
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dataset-independent-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "11"
+          cache: maven
+      - name: Install Python package
+        run: python -m pip install '.[test]'
+      - name: Run dataset-independent Python tests
+        run: >-
+          python -m pytest -q
+          tests/test_benchmark_contract.py
+          tests/test_benchmark_runner.py
+          tests/test_protocol_manifest_reader.py
+          tests/test_sourceafis_adapter.py
+          tests/test_sourceafis_client.py
+          tests/test_sourceafis_sidecar_lifecycle.py
+          tests/test_forbidden_runtime_coupling.py
+      - name: Test and build Java 11 sidecar
+        run: mvn -f apps/sourceafis-sidecar/pom.xml clean test package
+      - name: Run health and malformed-input smoke checks
+        run: >-
+          fingerprint-benchmark sourceafis-smoke
+          --jar apps/sourceafis-sidecar/target/sourceafis-sidecar-1.0.0-all.jar
+      - name: Confirm generated artifacts are untracked
+        shell: bash
+        run: |
+          if git ls-files | grep -E '(\.jar$|(^|/)target/|__pycache__|\.pyc$)'; then
+            echo 'Generated artifact is tracked.' >&2
+            exit 1
+          fi
