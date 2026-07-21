@@ -1,0 +1,67 @@
+{
+  "commits": {
+    "frozen_protocol": "29d8de0180403e9aa8a5e81cc468664b96dc8932",
+    "new_runtime": "db1e499f0ee3a5457ec71fbc7feba22214d34116",
+    "old_source": "0893d50d08972fc68337749332ecdaa0faef2a70"
+  },
+  "images": {
+    "sd300b_plain": {
+      "nominal_ppi": 1000,
+      "relative_path": "sd300b/images/1000/png/plain/00001000_plain_1000_11.png",
+      "sha256": "743c73d4a5ae6a270fc6d3c86f8385987c39af674b1d9fe2944a43b204ac7ba4"
+    },
+    "sd300b_roll": {
+      "nominal_ppi": 1000,
+      "relative_path": "sd300b/images/1000/png/roll/00001000_roll_1000_01.png",
+      "sha256": "1415297dfc29b0c5f4507cf51486f235194915714d9437464082db64d6ccba13"
+    },
+    "sd300c_plain": {
+      "nominal_ppi": 2000,
+      "relative_path": "sd300c/images/2000/png/plain/00001000_plain_2000_11.png",
+      "sha256": "256872ede3e8dcf281aae04dceaaf19aefc630f19ca0bd177f20051b879576df"
+    },
+    "sd300c_roll": {
+      "nominal_ppi": 2000,
+      "relative_path": "sd300c/images/2000/png/roll/00001000_roll_2000_01.png",
+      "sha256": "1bc89b63edc8e42c7d89cc0cf079ce62fcac2d485e8ea1fb4cea16f0e169c3df"
+    }
+  },
+  "jars": {
+    "new_sha256": "f930a51337363dbc0ae94bc1b8781b8370e05360507e96a22574c7034410b75b",
+    "old_sha256": "5245f2a1847d489b2199e0c87879ca0fb2465efd7175f60096240f8c0edca9b5"
+  },
+  "package_files": {
+    "QUALIFICATION_REPORT.md": {
+      "sha256": "b0374fa73751a10af7906909b6d2585423d64e4838d0b4e60b2e26870ebb5373",
+      "size_bytes": 3813
+    },
+    "README.md": {
+      "sha256": "62beea9170e7456320a3c7ee165e32b086d81fcba049f12748e99590c930c3ae",
+      "size_bytes": 223
+    },
+    "qualification_environment.json": {
+      "sha256": "efc293ee76dccb163ad8971691dd5273c78d712c456f4e7ec89a751d69b88b85",
+      "size_bytes": 1081
+    },
+    "qualification_manifest.json": {
+      "sha256": "a36f9513e7be928cfcc874930fc29deb97dcfbbb2ab47b1ef9e65b0abb8b47c9",
+      "size_bytes": 1533
+    },
+    "qualification_results.json": {
+      "sha256": "f85e7ea5879352a86cf8de638feeb5b05f92ffe744b7b33caed5d525cc62df19",
+      "size_bytes": 10462
+    }
+  },
+  "protocol_tree_sha256_after": "6c3efe53c620cba9fab8202b57b811c248246785973df9d0757dd2bf7aea39e0",
+  "protocol_tree_sha256_before": "6c3efe53c620cba9fab8202b57b811c248246785973df9d0757dd2bf7aea39e0",
+  "qualification_id": "sourceafis_runtime_v1",
+  "qualification_tests": {
+    "path": "tests/test_sourceafis_runtime_qualification.py",
+    "sha256": "1e9b220a53703f7102b0778e047cac7a74d129b89f2fbc219f63f188db70394d"
+  },
+  "qualification_tool": {
+    "path": "tools/qualify_sourceafis_runtime_v1.py",
+    "sha256": "8fef0d8c8c5c31b7e4f99a5f8537f20fe8a3ccf4e07fcf5cb84ea3b0b745a09f"
+  },
+  "status": "PASS"
+}

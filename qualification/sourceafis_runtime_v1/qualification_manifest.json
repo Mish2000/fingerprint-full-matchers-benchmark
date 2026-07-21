@@ -1,0 +1,46 @@
+{
+  "accuracy_input": false,
+  "canonical_finger": 1,
+  "cohort_member": false,
+  "comparisons": [
+    "sd300b_plain_self",
+    "sd300b_roll_self",
+    "sd300b_plain_roll",
+    "sd300c_plain_self",
+    "sd300c_roll_self",
+    "sd300c_plain_roll"
+  ],
+  "images": {
+    "sd300b_plain": {
+      "nominal_ppi": 1000,
+      "relative_path": "sd300b/images/1000/png/plain/00001000_plain_1000_11.png",
+      "sha256": "743c73d4a5ae6a270fc6d3c86f8385987c39af674b1d9fe2944a43b204ac7ba4"
+    },
+    "sd300b_roll": {
+      "nominal_ppi": 1000,
+      "relative_path": "sd300b/images/1000/png/roll/00001000_roll_1000_01.png",
+      "sha256": "1415297dfc29b0c5f4507cf51486f235194915714d9437464082db64d6ccba13"
+    },
+    "sd300c_plain": {
+      "nominal_ppi": 2000,
+      "relative_path": "sd300c/images/2000/png/plain/00001000_plain_2000_11.png",
+      "sha256": "256872ede3e8dcf281aae04dceaaf19aefc630f19ca0bd177f20051b879576df"
+    },
+    "sd300c_roll": {
+      "nominal_ppi": 2000,
+      "relative_path": "sd300c/images/2000/png/roll/00001000_roll_2000_01.png",
+      "sha256": "1bc89b63edc8e42c7d89cc0cf079ce62fcac2d485e8ea1fb4cea16f0e169c3df"
+    }
+  },
+  "purpose": "successful_path_runtime_qualification_only",
+  "qualification_id": "sourceafis_runtime_v1",
+  "research_result": false,
+  "selection_policy": {
+    "canonical_finger": 1,
+    "fallback_allowed": false,
+    "order": "lexicographically smallest eligible non-cohort subject",
+    "source": "stage0 metadata only"
+  },
+  "subject_id": "00001000",
+  "threshold_input": false
+}

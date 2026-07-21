@@ -1,0 +1,265 @@
+{
+  "canonical_finger": 1,
+  "checks": {
+    "new_internal_determinism": true,
+    "old_internal_determinism": true,
+    "removed_routes_absent": true,
+    "score_parity": true,
+    "template_parity": true
+  },
+  "images": {
+    "sd300b_plain": {
+      "nominal_ppi": 1000,
+      "relative_path": "sd300b/images/1000/png/plain/00001000_plain_1000_11.png",
+      "sha256": "743c73d4a5ae6a270fc6d3c86f8385987c39af674b1d9fe2944a43b204ac7ba4"
+    },
+    "sd300b_roll": {
+      "nominal_ppi": 1000,
+      "relative_path": "sd300b/images/1000/png/roll/00001000_roll_1000_01.png",
+      "sha256": "1415297dfc29b0c5f4507cf51486f235194915714d9437464082db64d6ccba13"
+    },
+    "sd300c_plain": {
+      "nominal_ppi": 2000,
+      "relative_path": "sd300c/images/2000/png/plain/00001000_plain_2000_11.png",
+      "sha256": "256872ede3e8dcf281aae04dceaaf19aefc630f19ca0bd177f20051b879576df"
+    },
+    "sd300c_roll": {
+      "nominal_ppi": 2000,
+      "relative_path": "sd300c/images/2000/png/roll/00001000_roll_2000_01.png",
+      "sha256": "1bc89b63edc8e42c7d89cc0cf079ce62fcac2d485e8ea1fb4cea16f0e169c3df"
+    }
+  },
+  "implementations": {
+    "new": {
+      "contract_version": "sourceafis-sidecar-contract-v1",
+      "implementation_version": "1.0.0",
+      "repetitions": [
+        {
+          "finite_scores": true,
+          "raw_scores": {
+            "sd300b_plain_roll": 110.01934110762956,
+            "sd300b_plain_self": 1177.9539965186484,
+            "sd300b_roll_self": 1177.9539965186484,
+            "sd300c_plain_roll": 135.02288618340845,
+            "sd300c_plain_self": 1107.797666607576,
+            "sd300c_roll_self": 1177.9539965186484
+          },
+          "removed_route_status": {
+            "/extract-final-minutiae": 404,
+            "/extract-template-raw": 404
+          },
+          "repetition": 1,
+          "template_format": {
+            "sd300b_plain": "sourceafis",
+            "sd300b_roll": "sourceafis",
+            "sd300c_plain": "sourceafis",
+            "sd300c_roll": "sourceafis"
+          },
+          "template_sha256": {
+            "sd300b_plain": "bd2d6e8d37da2d64a869d74f38edb2e34c2430d54fc0f39a7ba6e08eecd458e9",
+            "sd300b_roll": "9c9e52e7f0e3bb6ade86798778e86fa04d674f973f00ec01d1fbc75576db1e84",
+            "sd300c_plain": "6d872bf5d25cdc7be52c3402b9fe71e679c60cb5609f8d695e20849396cdef61",
+            "sd300c_roll": "20175f7a4e9829737cd6513c6f061b1abddffba832bc2a98501ed0660e4d820a"
+          },
+          "template_version": {
+            "sd300b_plain": "3.18.1",
+            "sd300b_roll": "3.18.1",
+            "sd300c_plain": "3.18.1",
+            "sd300c_roll": "3.18.1"
+          }
+        },
+        {
+          "finite_scores": true,
+          "raw_scores": {
+            "sd300b_plain_roll": 110.01934110762956,
+            "sd300b_plain_self": 1177.9539965186484,
+            "sd300b_roll_self": 1177.9539965186484,
+            "sd300c_plain_roll": 135.02288618340845,
+            "sd300c_plain_self": 1107.797666607576,
+            "sd300c_roll_self": 1177.9539965186484
+          },
+          "removed_route_status": {
+            "/extract-final-minutiae": 404,
+            "/extract-template-raw": 404
+          },
+          "repetition": 2,
+          "template_format": {
+            "sd300b_plain": "sourceafis",
+            "sd300b_roll": "sourceafis",
+            "sd300c_plain": "sourceafis",
+            "sd300c_roll": "sourceafis"
+          },
+          "template_sha256": {
+            "sd300b_plain": "bd2d6e8d37da2d64a869d74f38edb2e34c2430d54fc0f39a7ba6e08eecd458e9",
+            "sd300b_roll": "9c9e52e7f0e3bb6ade86798778e86fa04d674f973f00ec01d1fbc75576db1e84",
+            "sd300c_plain": "6d872bf5d25cdc7be52c3402b9fe71e679c60cb5609f8d695e20849396cdef61",
+            "sd300c_roll": "20175f7a4e9829737cd6513c6f061b1abddffba832bc2a98501ed0660e4d820a"
+          },
+          "template_version": {
+            "sd300b_plain": "3.18.1",
+            "sd300b_roll": "3.18.1",
+            "sd300c_plain": "3.18.1",
+            "sd300c_roll": "3.18.1"
+          }
+        },
+        {
+          "finite_scores": true,
+          "raw_scores": {
+            "sd300b_plain_roll": 110.01934110762956,
+            "sd300b_plain_self": 1177.9539965186484,
+            "sd300b_roll_self": 1177.9539965186484,
+            "sd300c_plain_roll": 135.02288618340845,
+            "sd300c_plain_self": 1107.797666607576,
+            "sd300c_roll_self": 1177.9539965186484
+          },
+          "removed_route_status": {
+            "/extract-final-minutiae": 404,
+            "/extract-template-raw": 404
+          },
+          "repetition": 3,
+          "template_format": {
+            "sd300b_plain": "sourceafis",
+            "sd300b_roll": "sourceafis",
+            "sd300c_plain": "sourceafis",
+            "sd300c_roll": "sourceafis"
+          },
+          "template_sha256": {
+            "sd300b_plain": "bd2d6e8d37da2d64a869d74f38edb2e34c2430d54fc0f39a7ba6e08eecd458e9",
+            "sd300b_roll": "9c9e52e7f0e3bb6ade86798778e86fa04d674f973f00ec01d1fbc75576db1e84",
+            "sd300c_plain": "6d872bf5d25cdc7be52c3402b9fe71e679c60cb5609f8d695e20849396cdef61",
+            "sd300c_roll": "20175f7a4e9829737cd6513c6f061b1abddffba832bc2a98501ed0660e4d820a"
+          },
+          "template_version": {
+            "sd300b_plain": "3.18.1",
+            "sd300b_roll": "3.18.1",
+            "sd300c_plain": "3.18.1",
+            "sd300c_roll": "3.18.1"
+          }
+        }
+      ]
+    },
+    "old": {
+      "contract_version": "sourceafis-sidecar-v2.3",
+      "implementation_version": "0.4.0",
+      "repetitions": [
+        {
+          "finite_scores": true,
+          "raw_scores": {
+            "sd300b_plain_roll": 110.01934110762956,
+            "sd300b_plain_self": 1177.9539965186484,
+            "sd300b_roll_self": 1177.9539965186484,
+            "sd300c_plain_roll": 135.02288618340845,
+            "sd300c_plain_self": 1107.797666607576,
+            "sd300c_roll_self": 1177.9539965186484
+          },
+          "removed_route_status": {},
+          "repetition": 1,
+          "template_format": {
+            "sd300b_plain": "sourceafis",
+            "sd300b_roll": "sourceafis",
+            "sd300c_plain": "sourceafis",
+            "sd300c_roll": "sourceafis"
+          },
+          "template_sha256": {
+            "sd300b_plain": "bd2d6e8d37da2d64a869d74f38edb2e34c2430d54fc0f39a7ba6e08eecd458e9",
+            "sd300b_roll": "9c9e52e7f0e3bb6ade86798778e86fa04d674f973f00ec01d1fbc75576db1e84",
+            "sd300c_plain": "6d872bf5d25cdc7be52c3402b9fe71e679c60cb5609f8d695e20849396cdef61",
+            "sd300c_roll": "20175f7a4e9829737cd6513c6f061b1abddffba832bc2a98501ed0660e4d820a"
+          },
+          "template_version": {
+            "sd300b_plain": "3.18.1",
+            "sd300b_roll": "3.18.1",
+            "sd300c_plain": "3.18.1",
+            "sd300c_roll": "3.18.1"
+          }
+        },
+        {
+          "finite_scores": true,
+          "raw_scores": {
+            "sd300b_plain_roll": 110.01934110762956,
+            "sd300b_plain_self": 1177.9539965186484,
+            "sd300b_roll_self": 1177.9539965186484,
+            "sd300c_plain_roll": 135.02288618340845,
+            "sd300c_plain_self": 1107.797666607576,
+            "sd300c_roll_self": 1177.9539965186484
+          },
+          "removed_route_status": {},
+          "repetition": 2,
+          "template_format": {
+            "sd300b_plain": "sourceafis",
+            "sd300b_roll": "sourceafis",
+            "sd300c_plain": "sourceafis",
+            "sd300c_roll": "sourceafis"
+          },
+          "template_sha256": {
+            "sd300b_plain": "bd2d6e8d37da2d64a869d74f38edb2e34c2430d54fc0f39a7ba6e08eecd458e9",
+            "sd300b_roll": "9c9e52e7f0e3bb6ade86798778e86fa04d674f973f00ec01d1fbc75576db1e84",
+            "sd300c_plain": "6d872bf5d25cdc7be52c3402b9fe71e679c60cb5609f8d695e20849396cdef61",
+            "sd300c_roll": "20175f7a4e9829737cd6513c6f061b1abddffba832bc2a98501ed0660e4d820a"
+          },
+          "template_version": {
+            "sd300b_plain": "3.18.1",
+            "sd300b_roll": "3.18.1",
+            "sd300c_plain": "3.18.1",
+            "sd300c_roll": "3.18.1"
+          }
+        },
+        {
+          "finite_scores": true,
+          "raw_scores": {
+            "sd300b_plain_roll": 110.01934110762956,
+            "sd300b_plain_self": 1177.9539965186484,
+            "sd300b_roll_self": 1177.9539965186484,
+            "sd300c_plain_roll": 135.02288618340845,
+            "sd300c_plain_self": 1107.797666607576,
+            "sd300c_roll_self": 1177.9539965186484
+          },
+          "removed_route_status": {},
+          "repetition": 3,
+          "template_format": {
+            "sd300b_plain": "sourceafis",
+            "sd300b_roll": "sourceafis",
+            "sd300c_plain": "sourceafis",
+            "sd300c_roll": "sourceafis"
+          },
+          "template_sha256": {
+            "sd300b_plain": "bd2d6e8d37da2d64a869d74f38edb2e34c2430d54fc0f39a7ba6e08eecd458e9",
+            "sd300b_roll": "9c9e52e7f0e3bb6ade86798778e86fa04d674f973f00ec01d1fbc75576db1e84",
+            "sd300c_plain": "6d872bf5d25cdc7be52c3402b9fe71e679c60cb5609f8d695e20849396cdef61",
+            "sd300c_roll": "20175f7a4e9829737cd6513c6f061b1abddffba832bc2a98501ed0660e4d820a"
+          },
+          "template_version": {
+            "sd300b_plain": "3.18.1",
+            "sd300b_roll": "3.18.1",
+            "sd300c_plain": "3.18.1",
+            "sd300c_roll": "3.18.1"
+          }
+        }
+      ]
+    }
+  },
+  "java_version": "17.0.18",
+  "maven_version": "3.9.16",
+  "new_jar_sha256": "f930a51337363dbc0ae94bc1b8781b8370e05360507e96a22574c7034410b75b",
+  "new_source_commit": "db1e499f0ee3a5457ec71fbc7feba22214d34116",
+  "old_jar_sha256": "5245f2a1847d489b2199e0c87879ca0fb2465efd7175f60096240f8c0edca9b5",
+  "old_source_commit": "0893d50d08972fc68337749332ecdaa0faef2a70",
+  "operating_system": "Windows 10",
+  "qualification_id": "sourceafis_runtime_v1",
+  "selected_subject": "00001000",
+  "sourceafis_version": "3.18.1",
+  "status": {
+    "decision_logic_used": false,
+    "frozen_cohort_accessed_by_matcher": false,
+    "new_internal_determinism": true,
+    "old_internal_determinism": true,
+    "removed_routes_absent": true,
+    "research_benchmark_executed": false,
+    "score_parity": true,
+    "status": "PASS",
+    "successful_extraction": true,
+    "successful_verification": true,
+    "template_parity": true,
+    "threshold_used": false
+  }
+}
