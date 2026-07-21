@@ -1,0 +1,25 @@
+Audit completed.
+
+Source repository modified: NO
+Curation directory modified: NO
+Analysis directory modified: NO
+Raw datasets modified: NO
+Migration implementation started: NO
+Subjects reselected: NO
+Manifests generated: NO
+Matcher executed: NO
+
+Repository files reviewed: 161
+Curation files reviewed: 191
+Analysis files reviewed: 9
+
+COPY: 31
+REWRITE: 30
+EXCLUDE: 297
+UNCERTAIN: 3
+
+Stage0 curation verdict:
+READY_WITH_OPEN_QUESTIONS
+
+Reports created under:
+C:\fingerprint-full-matchers-benchmark\migration-audit

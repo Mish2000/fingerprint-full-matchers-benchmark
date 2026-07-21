@@ -1,0 +1,5133 @@
+{
+  "source_repository": "C:\\fingerprint-recognition-research",
+  "curation_root": "C:\\fingerprint-datasets\\NIST\\_curation",
+  "analysis_root": "C:\\fingerprint-datasets\\NIST\\_analysis",
+  "destination_repository": "C:\\fingerprint-full-matchers-benchmark",
+  "phase": "audit_only",
+  "files": [
+    {
+      "source_root": "repository",
+      "path": ".gitattributes",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "configuration",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generic infrastructure or narrow SourceAFIS full-matcher component has no forbidden algorithm coupling.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": ".gitignore",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "configuration",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generic infrastructure or narrow SourceAFIS full-matcher component has no forbidden algorithm coupling.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/pom.xml",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "configuration",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "SourceAFIS 3.18.1",
+        "Jackson Databind 2.17.2",
+        "JUnit 5.10.3",
+        "Java release 11",
+        "pinned Maven plugins"
+      ],
+      "allowed_symbols": [
+        "SourceAFIS and JSON HTTP service dependencies"
+      ],
+      "excluded_symbols": [
+        "jackson-dataformat-cbor"
+      ],
+      "reason": "Preserve pinned SourceAFIS/Java/plugin versions but remove CBOR support used only by raw detector diagnostics.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/src/main/java/org/fingerprintresearch/sourceafis/v2/ApiException.java",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "ApiException"
+      ],
+      "excluded_symbols": [],
+      "reason": "Generic sidecar error type.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/src/main/java/org/fingerprintresearch/sourceafis/v2/BuildInfo.java",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "BuildInfo"
+      ],
+      "excluded_symbols": [],
+      "reason": "Generic build/version metadata support.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/src/main/java/org/fingerprintresearch/sourceafis/v2/SourceAfisSidecarService.java",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "HttpServer",
+        "Jackson Databind",
+        "SourceAfisV2Engine"
+      ],
+      "allowed_symbols": [
+        "/health",
+        "/extract-template",
+        "/verify",
+        "loopback HTTP",
+        "structured errors"
+      ],
+      "excluded_symbols": [
+        "/extract-template-raw",
+        "/extract-final-minutiae",
+        "raw/minutiae response records"
+      ],
+      "reason": "Service mixes required end-to-end routes with detector-only diagnostics; retain only the full-matcher contract.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/src/main/java/org/fingerprintresearch/sourceafis/v2/SourceAfisV2Engine.java",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "com.machinezoo.sourceafis.FingerprintImage",
+        "FingerprintTemplate",
+        "FingerprintMatcher"
+      ],
+      "allowed_symbols": [
+        "health",
+        "extractTemplate",
+        "verify",
+        "templateFromSerialized",
+        "requiredDpi",
+        "raw similarity score"
+      ],
+      "excluded_symbols": [
+        "extractTemplateRaw",
+        "extractFinalMinutiae",
+        "CBOR parsing",
+        "minutia records",
+        "detector-only hashing helpers"
+      ],
+      "reason": "Core engine contains both official full matching and forbidden raw/final-minutiae exposure.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/src/main/resources/sourceafis-sidecar.properties",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "configuration",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "service identity and version properties"
+      ],
+      "excluded_symbols": [
+        "legacy broad-contract version"
+      ],
+      "reason": "Contract version must change when detector-only endpoints are removed while the SourceAFIS version remains pinned.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/src/test/java/org/fingerprintresearch/sourceafis/v2/SourceAfisV2EngineTest.java",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "JUnit",
+        "SourceAfisV2Engine"
+      ],
+      "allowed_symbols": [
+        "health",
+        "template extraction",
+        "verify/raw-score behavior",
+        "DPI validation"
+      ],
+      "excluded_symbols": [
+        "raw-template decoder tests",
+        "final-minutiae tests"
+      ],
+      "reason": "Retain tests proving unchanged full-matcher behavior; remove detector-only assertions.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/target/original-sourceafis-sidecar-0.4.0.jar",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "regenerate_from_frozen_input",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future Java sidecar runtime"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated JAR must not be copied; reproduce later from the audited pinned source and build inputs.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "apps/sourceafis-sidecar/target/sourceafis-sidecar-0.4.0.jar",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "regenerate_from_frozen_input",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future Java sidecar runtime"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated JAR must not be copied; reproduce later from the audited pinned source and build inputs.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/benchmark_contract.md",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "documentation",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "prepare/compare contract",
+        "raw score",
+        "timing",
+        "statuses",
+        "hashes",
+        "atomic publication",
+        "metadata"
+      ],
+      "excluded_symbols": [
+        "legacy pair schema",
+        "single subject_id assumption",
+        "forbidden matcher branches"
+      ],
+      "reason": "General benchmark contract is reusable but must adopt Stage0 pair schemas and SourceAFIS-only scope.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/deepprint_style_feasibility_v1.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/detector_only_joint_500_v1.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/detector_only_protocol.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/fingercode_gabor_aad_feasibility_v1.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/gftt_harris_rootsift_geometric_full_v1.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/ppi_normalized_phase_only_correlation_feasibility_v1.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/sift_geometric_full.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "docs/sourceafis_integration_v2.md",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "documentation",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "/health",
+        "/extract-template",
+        "/verify",
+        "explicit nominal PPI",
+        "raw similarity score"
+      ],
+      "excluded_symbols": [
+        "/extract-template-raw",
+        "/extract-final-minutiae",
+        "detector-only parity workflow"
+      ],
+      "reason": "Documentation mixes the allowed full SourceAFIS path with diagnostic minutiae/raw-template paths.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "environment.yml",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "configuration",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "Python runtime",
+        "pytest development tooling"
+      ],
+      "allowed_symbols": [
+        "minimal runtime and test dependencies"
+      ],
+      "excluded_symbols": [
+        "opencv",
+        "numpy dependencies used by forbidden matchers"
+      ],
+      "reason": "Environment is coupled to forbidden project-owned algorithms; future environment must be minimal and separately created.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/impostor_pairing.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/protocol_metadata.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/sd300b/plain_roll_genuine.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/sd300b/plain_roll_impostor.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/sd300b/plain_self.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/sd300b/roll_self.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/sd300c/plain_roll_genuine.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/sd300c/plain_roll_impostor.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/sd300c/plain_self.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/sd300c/roll_self.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/detector_only_joint_500_v1/selected_identities.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/sd300b/plain_roll.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/sd300b/plain_self.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/sd300b/protocol_audit.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/sd300b/roll_self.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/sd300c/plain_roll.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/sd300c/plain_self.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/sd300c/protocol_audit.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "protocols/sd300c/roll_self.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "protocol_manifest",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Legacy repository protocol is not authoritative for the frozen Stage0 cohort and is unsafe as a new protocol input.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "pyproject.toml",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "configuration",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "Python packaging",
+        "pytest"
+      ],
+      "allowed_symbols": [
+        "fingerprint_benchmark packaging",
+        "SourceAFIS CLI entry points"
+      ],
+      "excluded_symbols": [
+        "SIFT/Harris/detector-only modules and commands",
+        "OpenCV runtime dependency"
+      ],
+      "reason": "Packaging and CLI registry mix reusable infrastructure with prohibited matchers.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "README.md",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "documentation",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "SourceAFIS end-to-end workflow",
+        "reproducibility and audit guidance"
+      ],
+      "excluded_symbols": [
+        "SIFT",
+        "Harris/GFTT",
+        "detector-only",
+        "legacy protocols"
+      ],
+      "reason": "Mixed project overview; rewrite as a SourceAFIS-only benchmark and Stage0 protocol consumer.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/deepprint_style_preflight_v1/checkpoint_manifest.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/deepprint_style_preflight_v1/environment_resolved.yml",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/deepprint_style_preflight_v1/external_source_manifest.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/deepprint_style_preflight_v1/pip_freeze.txt",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/deepprint_style_preflight_v1/preflight_contract.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/deepprint_style_preflight_v1/repeatability_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/deepprint_style_preflight_v1/smoke_cohort.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/deepprint_style_preflight_v1/smoke_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/fingercode_preflight_v1/physical_scale_contract.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/fingercode_preflight_v1/preflight_contract.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/fingercode_preflight_v1/primary_source_manifest.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/fingercode_preflight_v1/reference_point_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/fingercode_preflight_v1/repeatability_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/fingercode_preflight_v1/smoke_cohort.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/fingercode_preflight_v1/smoke_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/fingercode_preflight_v1/specification_completeness.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/physical_scale_contract.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/preflight_contract.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/preparation_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/primary_source_manifest.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/repeatability_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/smoke_cohort.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/smoke_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/specification_and_design_map.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "research/poc_preflight_v1/synthetic_report.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "run-logs/repro-sd300c-plain_self.manual.log",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "run-logs/sd300c-plain_roll.manual.log",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "run-logs/sd300c-roll_self.manual.log",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/__init__.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generic infrastructure or narrow SourceAFIS full-matcher component has no forbidden algorithm coupling.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/bundle.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "bundle publication and validation helpers"
+      ],
+      "excluded_symbols": [],
+      "reason": "Reusable result-bundle validation and publication infrastructure.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/cli.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "runner",
+        "summary",
+        "SourceAfisAdapter",
+        "ManagedSourceAfisSidecar"
+      ],
+      "allowed_symbols": [
+        "sourceafis-smoke",
+        "run-sourceafis",
+        "run-sourceafis-all",
+        "summarize"
+      ],
+      "excluded_symbols": [
+        "SIFT commands/imports",
+        "GFTT-Harris commands/imports",
+        "detector-joint500 commands/imports"
+      ],
+      "reason": "CLI is a shared registry containing both permitted SourceAFIS commands and prohibited research matchers.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/contract.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "prepare/compare protocol",
+        "status and timing records",
+        "metadata and score payload"
+      ],
+      "excluded_symbols": [
+        "legacy result-schema assumptions"
+      ],
+      "reason": "Core contract is generic, but its result schema must be versioned for the Stage0 A/B subject identity model.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/detector_only_joint500.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/detectors/__init__.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/detectors/opencv_gftt_harris.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/detectors/sourceafis_final_minutiae.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/detectors/types.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/gftt_harris_full/__init__.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/gftt_harris_full/adapter.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/gftt_harris_full/config.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/gftt_harris_full/parity.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/gftt_harris_full/repeatability.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/gftt_harris_full/restored_equivalence.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/hashing.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "SHA-256 helpers"
+      ],
+      "excluded_symbols": [],
+      "reason": "Reusable hashing infrastructure.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/io.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "atomic file I/O helpers"
+      ],
+      "excluded_symbols": [],
+      "reason": "Reusable atomic I/O infrastructure.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/__init__.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/descriptors/__init__.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/descriptors/rootsift.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/descriptors/sift_descriptor.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/detector_only.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/geometry.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/matching.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/orientation.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/scoring.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/support.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/local_features/types.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/manifest.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "csv",
+        "hashing",
+        "canonical pair schema"
+      ],
+      "allowed_symbols": [
+        "strict CSV parsing",
+        "path/hash/status validation",
+        "ordered pair records"
+      ],
+      "excluded_symbols": [
+        "legacy repository protocol assumptions",
+        "single subject_id model"
+      ],
+      "reason": "Rewrite readers for frozen Stage0 genuine/impostor columns, including subject_id_a and subject_id_b.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/preflight.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "manifest validation",
+        "filesystem/read-only checks",
+        "PPI contract checks"
+      ],
+      "excluded_symbols": [
+        "SIFT/Harris/detector-only validator registry",
+        "legacy protocols"
+      ],
+      "reason": "Preflight registry is broad and coupled to excluded algorithms and old manifests.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/provenance.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "provenance and implementation hashing helpers"
+      ],
+      "excluded_symbols": [],
+      "reason": "Reusable reproducibility metadata infrastructure.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/runner.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "contract",
+        "manifest",
+        "bundle",
+        "hashing",
+        "provenance"
+      ],
+      "allowed_symbols": [
+        "prepare/compare orchestration",
+        "timing",
+        "failure statuses",
+        "hashes",
+        "atomic publication",
+        "metadata",
+        "score payload"
+      ],
+      "excluded_symbols": [
+        "legacy DEFAULT_DATA_ROOT",
+        "old validator registry",
+        "single subject_id result model"
+      ],
+      "reason": "Generic execution behavior is valuable, but manifest and result identities must be rewritten for Stage0 genuine/impostor pairs.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/__init__.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/adapter.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/config.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/descriptors.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/extractor.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/geometry.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/matching.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/parity.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/preprocessing.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/restored.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sift/scoring.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sourceafis_adapter.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "fingerprint_benchmark.contract",
+        "fingerprint_benchmark.sourceafis_client"
+      ],
+      "allowed_symbols": [
+        "PreparedSourceAfisTemplate",
+        "SourceAfisAdapter"
+      ],
+      "excluded_symbols": [],
+      "reason": "Clean end-to-end adapter: encoded image plus explicit nominal PPI, official template extraction, verify, and raw score.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sourceafis_client.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "urllib",
+        "json",
+        "base64"
+      ],
+      "allowed_symbols": [
+        "SourceAfisSidecarClient",
+        "health",
+        "extract_template",
+        "verify",
+        "persistent loopback HTTP",
+        "structured errors"
+      ],
+      "excluded_symbols": [
+        "RawTemplate",
+        "Minutia",
+        "FinalMinutiae",
+        "extract_template_raw",
+        "extract_final_minutiae",
+        "health requirements for removed endpoints"
+      ],
+      "reason": "Client mixes the complete matcher contract with raw/final-minutiae detector APIs.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/sourceafis_sidecar.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [
+        "subprocess",
+        "SourceAfisSidecarClient"
+      ],
+      "allowed_symbols": [
+        "ManagedSourceAfisSidecar"
+      ],
+      "excluded_symbols": [],
+      "reason": "Reusable managed Java sidecar lifecycle with no detector-only algorithm.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_benchmark/summary.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "result summary helpers"
+      ],
+      "excluded_symbols": [],
+      "reason": "Generic reporting logic; keep only against the rewritten result contract.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/__init__.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "canonical mapping and Stage0 protocol exports"
+      ],
+      "excluded_symbols": [
+        "legacy discovery and matcher-specific exports"
+      ],
+      "reason": "Package exports must be narrowed to structural protocol support.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/audit.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/canonical_fingers.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "FRGP-to-canonical finger mapping"
+      ],
+      "excluded_symbols": [],
+      "reason": "Reusable structural mapping, including thumb rolls 11->1 and 12->6; no biometric scoring.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/nist_sd300.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "release identifiers",
+        "nominal PPI 1000/2000",
+        "path parsing",
+        "canonical finger mapping"
+      ],
+      "excluded_symbols": [
+        "legacy protocol selection assumptions"
+      ],
+      "reason": "Structural dataset helpers are reusable, but the old repository is not authoritative for the frozen cohort.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/plain_roll_protocol.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/plain_self_protocol.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/protocol_dataset.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "read-only protocol dataset access",
+        "path/status/hash validation"
+      ],
+      "excluded_symbols": [
+        "old repository protocol roots and schemas"
+      ],
+      "reason": "Protocol loader must target the frozen Stage0 inputs without treating old protocols as authoritative.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/roll_self_protocol.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/sd300b_plain_roll.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/sd300b_plain_self.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/sd300b_protocol_audit.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/sd300b_roll_self.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/sd300c_plain_roll.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/sd300c_plain_self.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/sd300c_protocol_audit.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/sd300c_roll_self.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "src/fingerprint_data_discovery/self_manifest_common.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "source_code",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "deterministic row/schema/hash helpers"
+      ],
+      "excluded_symbols": [
+        "old cohort discovery",
+        "legacy self-manifest assumptions"
+      ],
+      "reason": "Only generic deterministic helpers may be reused later; self manifests require a new protocol version and lock.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/conftest.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generic infrastructure or narrow SourceAFIS full-matcher component has no forbidden algorithm coupling.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_benchmark_runner.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "timing",
+        "failures",
+        "atomic publication",
+        "hashes",
+        "metadata",
+        "score-payload reproducibility"
+      ],
+      "excluded_symbols": [
+        "legacy manifest and single-subject assumptions"
+      ],
+      "reason": "Rewrite generic runner acceptance tests around the frozen Stage0 pair model.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_canonical_fingers.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generic infrastructure or narrow SourceAFIS full-matcher component has no forbidden algorithm coupling.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_detector_only_hardening.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_detector_only_joint500.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_detector_only_protocol.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_gftt_harris_full.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_local_features.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_nist_sd300.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "nominal PPI",
+        "FRGP/canonical mapping",
+        "path parsing"
+      ],
+      "excluded_symbols": [
+        "legacy protocol expectations"
+      ],
+      "reason": "Keep structural assertions but retarget authority to Stage0.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_opencv_gftt_harris_detector.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_plain_self_protocol.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Test covers excluded algorithm, legacy protocol, broad CLI, or research preflight behavior.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_protocol_dataset.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "read-only manifest/path/hash validation"
+      ],
+      "excluded_symbols": [
+        "old protocol locations and schemas"
+      ],
+      "reason": "Rewrite against frozen Stage0 manifests.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_protocol_hardening.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "schema, traversal, hash, and immutable-input hardening"
+      ],
+      "excluded_symbols": [
+        "old protocol schema fixtures"
+      ],
+      "reason": "Security and validation intent is reusable, but fixtures and schemas are obsolete.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sd300b_plain_roll.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Test covers excluded algorithm, legacy protocol, broad CLI, or research preflight behavior.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sd300b_plain_self.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Test covers excluded algorithm, legacy protocol, broad CLI, or research preflight behavior.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sd300b_protocol_audit.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Test covers excluded algorithm, legacy protocol, broad CLI, or research preflight behavior.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sd300b_roll_self.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Test covers excluded algorithm, legacy protocol, broad CLI, or research preflight behavior.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sd300c_protocols.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Test covers excluded algorithm, legacy protocol, broad CLI, or research preflight behavior.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_self_manifest_common.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "deterministic future self-pair derivation invariants"
+      ],
+      "excluded_symbols": [
+        "legacy generated manifests and cohort assumptions"
+      ],
+      "reason": "Rewrite only when the new protocol version and lock are approved; do not generate manifests during audit.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sift_geometric_core.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sift_geometric_restoration.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sourceafis_adapter.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "encoded bytes",
+        "explicit PPI",
+        "official extract_template/verify calls",
+        "raw score"
+      ],
+      "excluded_symbols": [
+        "raw/final-minutiae client fakes"
+      ],
+      "reason": "Retain end-to-end adapter assertions and remove broad-client contract assumptions.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sourceafis_client_contract_v2.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "/health",
+        "/extract-template",
+        "/verify",
+        "error handling"
+      ],
+      "excluded_symbols": [
+        "/extract-template-raw",
+        "/extract-final-minutiae",
+        "raw/minutiae parsers"
+      ],
+      "reason": "Contract test covers both permitted and detector-only endpoints.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sourceafis_final_minutiae.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Project-owned or detector-only biometric component is outside the permitted full external matcher boundary.",
+      "risk": "high"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sourceafis_sidecar_integration_optional.py",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "optional full SourceAFIS extraction and verification integration"
+      ],
+      "excluded_symbols": [
+        "raw-template/final-minutiae integration"
+      ],
+      "reason": "Optional integration test must be narrowed to the full matcher path and explicit nominal PPI.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "repository",
+      "path": "tests/test_sourceafis_sidecar_lifecycle.py",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "test",
+      "required_by": [
+        "future SourceAFIS-only benchmark"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generic infrastructure or narrow SourceAFIS full-matcher component has no forbidden algorithm coupling.",
+      "risk": "low"
+    },
+    {
+      "source_root": "repository",
+      "path": "write_ai_repo_structure_root.ps1",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Not required by the narrow SourceAFIS end-to-end benchmark and not safe to migrate without redesign.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/.pytest_cache/.gitignore",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/.pytest_cache/CACHEDIR.TAG",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/.pytest_cache/README.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/.pytest_cache/v/cache/nodeids",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/cache/content_cache.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/cache/inventory_cache.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/config/manual_review_decisions.csv",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen manual-review evidence required to explain Stage0 eligibility and selection provenance.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/config/stage0_config.yaml",
+      "classification": "UNCERTAIN",
+      "future_storage_policy": "undecided",
+      "artifact_role": "configuration",
+      "required_by": [
+        "frozen Stage0 authority decision"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Current SHA-256 differs from manifest_lock.config_hash; semantic change adds verification_dir after the recorded lock timestamp.",
+      "risk": "high"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/logs/assess_image_content.log",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/logs/build_inventory.log",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/logs/run_stage0.log",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/logs/validate_png_metadata.log",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/logs/verify_finger_correspondence.log",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/all_genuine_pairs_sd300b.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/all_genuine_pairs_sd300c.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/base_500_genuine_sd300b.csv",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "protocol_manifest",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen authoritative genuine/impostor protocol manifest; verified as 500 ordered rows with existing paths and inventory hashes.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/base_500_genuine_sd300c.csv",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "protocol_manifest",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen authoritative genuine/impostor protocol manifest; verified as 500 ordered rows with existing paths and inventory hashes.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/base_500_impostor_sd300b.csv",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "protocol_manifest",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen authoritative genuine/impostor protocol manifest; verified as 500 ordered rows with existing paths and inventory hashes.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/base_500_impostor_sd300c.csv",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "protocol_manifest",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen authoritative genuine/impostor protocol manifest; verified as 500 ordered rows with existing paths and inventory hashes.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/cross_resolution_map.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/cross_resolution_summary.json",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen Stage0 provenance or verification summary needed to document the authoritative protocol.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/dataset_inventory.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/dataset_inventory.parquet",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/duplicate_identity_review.csv",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen Stage0 provenance or verification summary needed to document the authoritative protocol.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/duplicate_identity_summary.json",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen Stage0 provenance or verification summary needed to document the authoritative protocol.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/eligible_subjects.csv",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "protocol_manifest",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen cohort artifact required to preserve exact identities and order without reselection.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/exclusions.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/genuine_pair_summary.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/image_content_stats.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/incomplete_subjects.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/inventory_summary.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/manifest_lock.json",
+      "classification": "UNCERTAIN",
+      "future_storage_policy": "undecided",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 authority decision"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Artifact/script entries verify, but config_hash does not match the current config and manual_review_decisions.csv is not independently input-hashed.",
+      "risk": "high"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/MANIFEST_SHA256SUMS.txt",
+      "classification": "UNCERTAIN",
+      "future_storage_policy": "undecided",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 authority decision"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "All listed file digests currently verify, but the checksum file inherits the unresolved config/lock authority question.",
+      "risk": "high"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/manual_review_queue.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/non_single_finger_records.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/ppi_metadata_issues.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/protocol_manifest_summary.json",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen Stage0 provenance or verification summary needed to document the authoritative protocol.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/raw_data_verification.json",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen Stage0 provenance or verification summary needed to document the authoritative protocol.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/record_quality_status.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/selected_50_subjects.csv",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "protocol_manifest",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen cohort artifact required to preserve exact identities and order without reselection.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/selected_50_subjects.txt",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "protocol_manifest",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen cohort artifact required to preserve exact identities and order without reselection.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/selection_provenance.json",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen Stage0 provenance or verification summary needed to document the authoritative protocol.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/single_finger_index.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/stage0_summary.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/stage0_summary.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated or detailed curation report remains external corroborating evidence.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/outputs/subject_completeness_summary.json",
+      "classification": "COPY",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "provenance",
+      "required_by": [
+        "frozen Stage0 protocol package"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Small frozen Stage0 provenance or verification summary needed to document the authoritative protocol.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/README.md",
+      "classification": "REWRITE",
+      "future_storage_policy": "copy_into_repository",
+      "artifact_role": "documentation",
+      "required_by": [
+        "future protocol documentation"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "Stage0 cohort, mapping, PPI, frozen-manifest and provenance description"
+      ],
+      "excluded_symbols": [
+        "claims contradicted by analysis AMP-only labels",
+        "claim that current lock exactly covers current config"
+      ],
+      "reason": "Potentially reusable documentation, but it must disclose the config-hash lock break and analysis/curation content-label discrepancy.",
+      "risk": "high"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/requirements.txt",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "configuration",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Curation-only environment specification is not needed by the future benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/assess_image_content.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/build_genuine_pairs.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/build_inventory.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/build_protocol_manifests.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/build_single_finger_index.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/common.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/freeze_manifests.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/generate_report.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/review_duplicates.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/select_subjects.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/validate_png_metadata.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/validate_record_integrity.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/validate_subject_completeness.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/__pycache__/validations.cpython-311.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/assess_image_content.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/build_genuine_pairs.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/build_inventory.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/build_protocol_manifests.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/build_single_finger_index.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/common.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/freeze_manifests.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/generate_report.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/review_duplicates.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/run_stage0.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/select_subjects.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/validate_png_metadata.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/validate_record_integrity.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/validate_subject_completeness.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/validations.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/scripts/verify_finger_correspondence.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "source_code",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction script remains read-only external provenance; the audit does not rerun or migrate curation generation code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/tests/__pycache__/conftest.cpython-311-pytest-9.1.1.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/tests/__pycache__/test_stage0_outputs.cpython-311-pytest-9.1.1.pyc",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "cache",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated cache, log, or bytecode is not a migration input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/tests/conftest.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction test remains with the external curation layer and is not benchmark runtime code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/tests/test_stage0_outputs.py",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "test",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Stage0 construction test remains with the external curation layer and is not benchmark runtime code.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/finger_correspondence_report.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated or detailed curation report remains external corroborating evidence.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/finger_correspondence_summary.json",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/finger_width_by_position.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/ordering_anomalies.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/pair_mapping_audit.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001006.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001018.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001020.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001054.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001082.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001095.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001096.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001106.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001131.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001150.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001158.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001161.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001166.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001168.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001175.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001233.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001245.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001280.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001296.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001300.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001324.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001325.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001337.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001349.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001367.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001380.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001389.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001403.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001406.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001411.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001423.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001435.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001474.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001522.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001537.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001548.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001574.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001612.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001650.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001657.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001701.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001705.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001728.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001732.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001792.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001802.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001824.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001825.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001843.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/plain_roll_sheets/00001880.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/README.md",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "documentation",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated or detailed curation report remains external corroborating evidence.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/segmentation_provenance.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_finger_ordering.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "diagnostic",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Detailed generated verification/diagnostic artifact remains read-only under the dataset root; it is not a minimal Git protocol input.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001006.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001018.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001020.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001054.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001082.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001095.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001096.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001106.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001131.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001150.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001158.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001161.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001166.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001168.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001175.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001233.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001245.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001280.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001296.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001300.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001324.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001325.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001337.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001349.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001367.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001380.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001389.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001403.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001406.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001411.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001423.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001435.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001474.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001522.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001537.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001548.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001574.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001612.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001650.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001657.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001701.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001705.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001728.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001732.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001738.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001792.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001802.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001824.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001825.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001843.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "curation",
+      "path": "stage0_v1/verification/slap_overlays/00001880.png",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "exclude",
+      "artifact_role": "visual_review",
+      "required_by": [],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Generated visual review sheet stays outside Git and is not needed at benchmark runtime.",
+      "risk": "low"
+    },
+    {
+      "source_root": "analysis",
+      "path": "genuine_pairs.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "preliminary_analysis",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Preliminary pair inventory corroborates Stage0 all-genuine structure but is obsolete and unsafe as final protocol input.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "analysis",
+      "path": "master_index.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "preliminary_analysis",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Preliminary structural index used only as corroborating evidence; exact keys and dimensions agree with Stage0 cross-resolution inventory.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "analysis",
+      "path": "README.md",
+      "classification": "REWRITE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "documentation",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [
+        "dataset structure, FRGP mapping, PPI observations"
+      ],
+      "excluded_symbols": [
+        "protocol authority",
+        "quality-based cohort selection",
+        "unqualified AMP-only content claims"
+      ],
+      "reason": "Potentially reusable background documentation, but Stage0 must remain authoritative and the AMP-only statement conflicts with the curation no-content-exclusion account.",
+      "risk": "high"
+    },
+    {
+      "source_root": "analysis",
+      "path": "roll_density_1000.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "preliminary_analysis",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Quality heuristic was not read by Stage0 selection and must not be used for cohort selection without an explicit research decision.",
+      "risk": "high"
+    },
+    {
+      "source_root": "analysis",
+      "path": "sd300c_bad_ppi_files.txt",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "preliminary_analysis",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Corroborating diagnostic list; its 10,115 paths exactly match Stage0 PPI issues, but nominal release PPI remains authoritative.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "analysis",
+      "path": "subject_quality_rank.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "preliminary_analysis",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Quality heuristic was not read by Stage0 selection and must not be used for cohort selection without an explicit research decision.",
+      "risk": "high"
+    },
+    {
+      "source_root": "analysis",
+      "path": "subset_gold_pairs.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "preliminary_analysis",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Preliminary complete-subset pairs are corroborating evidence, not the frozen 50-subject protocol.",
+      "risk": "medium"
+    },
+    {
+      "source_root": "analysis",
+      "path": "subset_gold_subjects.txt",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "preliminary_analysis",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Corroborating list of 832 structurally complete subjects; Stage0 narrows eligibility to 830 by blocking 00001585 and 00001586 on suspected duplicate identity.",
+      "risk": "high"
+    },
+    {
+      "source_root": "analysis",
+      "path": "subset_native_registered.csv",
+      "classification": "EXCLUDE",
+      "future_storage_policy": "reference_external_read_only",
+      "artifact_role": "preliminary_analysis",
+      "required_by": [
+        "audit cross-check only"
+      ],
+      "imports_or_dependencies": [],
+      "allowed_symbols": [],
+      "excluded_symbols": [],
+      "reason": "Preliminary native/registered analysis is not required by the benchmark and is unsafe as a protocol input.",
+      "risk": "medium"
+    }
+  ]
+}
