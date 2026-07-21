@@ -1,0 +1,5 @@
+.gitattributes text eol=lf
+protocols/supervisor_50x10_v1/** -text
+tools/build_supervisor_50x10_v1.py text eol=lf
+tools/validate_supervisor_50x10_v1.py text eol=lf
+tests/test_supervisor_50x10_v1.py text eol=lf

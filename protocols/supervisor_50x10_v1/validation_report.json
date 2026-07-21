@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "cyclic_impostor_pairing_valid": true,
+    "finger_identities": 500,
+    "manifests": 8,
+    "matcher_executed": false,
+    "nominal_ppi_valid": true,
+    "package_lock_valid": true,
+    "relative_paths_valid": true,
+    "rows_per_manifest": 500,
+    "same_logical_structure_across_releases": true,
+    "self_pairs_valid": true,
+    "source_hashes_valid": true,
+    "subjects": 50,
+    "subjects_reselected": false,
+    "total_pairs": 4000
+  },
+  "errors": [],
+  "protocol_id": "supervisor_50x10_v1",
+  "valid": true,
+  "warnings": [
+    "Stage0 config hash mismatch is documented; the old config is not a protocol runtime input.",
+    "Two structurally complete subjects were blocked by an unverified prior-report suspicion and are not part of the frozen cohort.",
+    "Manual review decisions are included and hashed as selection provenance."
+  ]
+}

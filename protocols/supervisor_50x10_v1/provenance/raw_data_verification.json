@@ -1,0 +1,30 @@
+{
+  "all_match": true,
+  "method": "NIST checksum_<ppi>_png_<impression>.csv compared against independently computed SHA-256",
+  "per_release": {
+    "SD300B": {
+      "checksum_files": [
+        "C:\\fingerprint-datasets\\NIST\\sd300b\\images\\1000\\checksum_1000_png_plain.csv",
+        "C:\\fingerprint-datasets\\NIST\\sd300b\\images\\1000\\checksum_1000_png_roll.csv"
+      ],
+      "files_checked": 19435,
+      "matches": 19435,
+      "mismatches": [],
+      "missing_from_inventory": [],
+      "not_published": [],
+      "raw_data_unchanged": true
+    },
+    "SD300C": {
+      "checksum_files": [
+        "C:\\fingerprint-datasets\\NIST\\sd300c\\images\\2000\\checksum_2000_png_plain.csv",
+        "C:\\fingerprint-datasets\\NIST\\sd300c\\images\\2000\\checksum_2000_png_roll.csv"
+      ],
+      "files_checked": 19435,
+      "matches": 19435,
+      "mismatches": [],
+      "missing_from_inventory": [],
+      "not_published": [],
+      "raw_data_unchanged": true
+    }
+  }
+}

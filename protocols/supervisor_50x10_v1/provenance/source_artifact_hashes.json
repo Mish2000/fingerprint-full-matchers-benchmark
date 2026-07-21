@@ -1,0 +1,94 @@
+{
+  "artifacts": [
+    {
+      "path": "config/manual_review_decisions.csv",
+      "role": "selection_provenance",
+      "sha256": "796e055ceafe9ef0d5d8f5185b488e90d9190c153336a3c941a5fe5d2bd990ee",
+      "size_bytes": 2205
+    },
+    {
+      "path": "config/stage0_config.yaml",
+      "role": "historical_configuration_not_protocol_input",
+      "sha256": "3c0fbd38861da31b5bb015f62d7332a58863527529580e5a8a8a66406529e7f3",
+      "size_bytes": 8679
+    },
+    {
+      "path": "outputs/MANIFEST_SHA256SUMS.txt",
+      "role": "historical_stage0_checksum_index",
+      "sha256": "f675d2d99fc58b4ae434899cfb9939d6646f9c7b0179283696b6c388f73139b4",
+      "size_bytes": 2584
+    },
+    {
+      "path": "outputs/base_500_genuine_sd300b.csv",
+      "role": "frozen_genuine_source_manifest",
+      "sha256": "2a5e07c07456f59c1347d6f7157dbea976ad720f11f5ba69e34a3bfef2f7ad55",
+      "size_bytes": 201562
+    },
+    {
+      "path": "outputs/base_500_genuine_sd300c.csv",
+      "role": "frozen_genuine_source_manifest",
+      "sha256": "ddc515b6e6d6fce5d214ebc946979d0df5f9394e2a176de2df0788cdee0208cf",
+      "size_bytes": 201562
+    },
+    {
+      "path": "outputs/base_500_impostor_sd300b.csv",
+      "role": "frozen_impostor_source_manifest",
+      "sha256": "6c960c6da2965c11b36e45486dc6d5dc4a2a61c88b7e7820d3ba8d10c96d2719",
+      "size_bytes": 213033
+    },
+    {
+      "path": "outputs/base_500_impostor_sd300c.csv",
+      "role": "frozen_impostor_source_manifest",
+      "sha256": "b13df2ca50eefef52301b69b55ab0746c7fe4bd8724c13e7ff2f1bcc66ecbdef",
+      "size_bytes": 213033
+    },
+    {
+      "path": "outputs/duplicate_identity_review.csv",
+      "role": "conservative_duplicate_policy_provenance",
+      "sha256": "9f2b7215865c58278c07c855a64375683d3ce85f11bff330af62fd040f0e0687",
+      "size_bytes": 259
+    },
+    {
+      "path": "outputs/duplicate_identity_summary.json",
+      "role": "conservative_duplicate_policy_summary",
+      "sha256": "5bae674e5ed1b1ed762176bf005fe8147038ce11f6f27aa3a9d59857fc121dc6",
+      "size_bytes": 540
+    },
+    {
+      "path": "outputs/manifest_lock.json",
+      "role": "historical_stage0_lock",
+      "sha256": "dc1e507b8914889f8bf89f1e881ed43ec5842ab2dd9442c8f4537d35355eb316",
+      "size_bytes": 11441
+    },
+    {
+      "path": "outputs/raw_data_verification.json",
+      "role": "raw_data_verification_provenance",
+      "sha256": "73cb73ab2687dcd155630177cdd503af6e4373aab27b79786a9a203b9613e7e7",
+      "size_bytes": 983
+    },
+    {
+      "path": "outputs/selected_50_subjects.csv",
+      "role": "frozen_ordered_cohort",
+      "sha256": "a9d30a3de5972389ec76d3b7c7599202591e2c408184c78754df470c1d77d5eb",
+      "size_bytes": 3659
+    },
+    {
+      "path": "outputs/selected_50_subjects.txt",
+      "role": "frozen_ordered_cohort_text",
+      "sha256": "219119d0accc9aaa7446c5d749d37ad63f5003d8fc701342467f42361802cbb2",
+      "size_bytes": 450
+    },
+    {
+      "path": "outputs/selection_provenance.json",
+      "role": "selection_provenance",
+      "sha256": "7596cfc7a4c6244dea056a0c1463511c6f453ab95a37a82056b21602422b882b",
+      "size_bytes": 1733
+    }
+  ],
+  "audit_repository_commit": "a72e97f35b2a66ec6171a6ece25013ae1c371aef",
+  "source_curation_root": "C:\\fingerprint-datasets\\NIST\\_curation\\stage0_v1",
+  "source_repository_commit": "0893d50d08972fc68337749332ecdaa0faef2a70",
+  "stage0_config_used_as_protocol_input": false,
+  "stage0_current_config_sha256": "3c0fbd38861da31b5bb015f62d7332a58863527529580e5a8a8a66406529e7f3",
+  "stage0_locked_config_sha256": "4903c78b3d93218e05b834fc4d9a4308defda894b1a7e47d3169f5aa07bc7570"
+}

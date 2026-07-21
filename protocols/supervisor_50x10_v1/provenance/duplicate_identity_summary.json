@@ -1,0 +1,17 @@
+{
+  "blocked_subject_count": 2,
+  "blocked_subject_ids": [
+    "00001585",
+    "00001586"
+  ],
+  "evidence_type_counts": {
+    "prior_report": 1
+  },
+  "findings": 1,
+  "generated_utc": "2026-07-20T19:07:47Z",
+  "policy": "Any subject appearing in this file with review_required=true is blocked from the 50-subject selection and from impostor pairing until the identity question is manually resolved. No biometric matcher was used to produce any finding.",
+  "script_version": "stage0_v1.0.0",
+  "status_counts": {
+    "suspected": 1
+  }
+}

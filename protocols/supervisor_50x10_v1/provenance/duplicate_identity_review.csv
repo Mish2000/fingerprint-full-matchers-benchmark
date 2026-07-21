@@ -1,0 +1,2 @@
+subject_id_a,subject_id_b,evidence_type,evidence_details,status,review_required,selection_blocked
+00001585,00001586,prior_report,Flagged in Stage 0 task specification as a suspected same-person duplicate pair; not independently confirmed.,suspected,true,true

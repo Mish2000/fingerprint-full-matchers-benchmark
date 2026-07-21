@@ -1,0 +1,42 @@
+{
+  "cohort": {
+    "canonical_fingers_per_subject": 10,
+    "logical_finger_identities": 500,
+    "selection_changed": false,
+    "subject_order_changed": false,
+    "subjects": 50
+  },
+  "comparison_kinds": [
+    "plain_self",
+    "roll_self",
+    "plain_roll_genuine",
+    "plain_roll_next_subject"
+  ],
+  "curation_caveats": {
+    "manual_review_is_provenance_input": true,
+    "stage0_config_hash_mismatch_documented": true,
+    "suspected_duplicate_claimed_as_biometrically_proven": false,
+    "suspected_duplicate_evidence": "unverified_prior_report",
+    "suspected_duplicate_subjects": [
+      "00001585",
+      "00001586"
+    ]
+  },
+  "datasets": {
+    "sd300b": {
+      "nominal_ppi": 1000
+    },
+    "sd300c": {
+      "nominal_ppi": 2000
+    }
+  },
+  "impostor_policy": "cyclic_next_subject_offset_1_same_canonical_finger",
+  "matcher_used_for_curation": false,
+  "pairs_per_kind_per_release": 500,
+  "path_policy": "relative_to_nist_dataset_root",
+  "png_phys_policy": "diagnostic_only",
+  "protocol_id": "supervisor_50x10_v1",
+  "protocol_version": 1,
+  "quality_rank_used_for_selection": false,
+  "status": "frozen_inputs_with_documented_curation_caveats"
+}

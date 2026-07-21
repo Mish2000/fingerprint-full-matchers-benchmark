@@ -1,0 +1,12 @@
+logical_record_key,decision,exclusion_reason,rationale,decided_by
+00001019|plain|F05,challenge,,"Visual review at native resolution: faint but complete ridge flow across the distal joint. Low ridge_block_frac is low INK CONTRAST, not absent ridges. Retained as challenge per protocol rule on faded prints.",stage0_curator
+00001019|plain|F10,challenge,,"Visual review: clear ridge structure, faint inking. Retained as challenge.",stage0_curator
+00001111|plain|F05,challenge,,"Visual review: ridge flow visible across most of the segment; very light inking. Retained as challenge.",stage0_curator
+00001281|plain|F03,challenge,,"Visual review: ridge flow clearly present, low contrast. Falls below the review threshold in SD300C only; SD300B scores 0.0277. Retained as challenge in both releases.",stage0_curator
+00001738|plain|F01,challenge,,"Right thumb (PLAIN FRGP 11). Contrast-stretched review shows a strong, well-defined thumb impression in the lower half of the segment. Retained as challenge.",stage0_curator
+00001738|plain|F06,challenge,,"Left thumb (PLAIN FRGP 12). Contrast-stretched review shows a faint but present impression. Weakest record in the dataset; retained as challenge because ridge content is present, and flagged for downstream awareness.",stage0_curator
+00001738|roll|F01,challenge,,"Subject 00001738 is the known washed-out card. Visual review of the roll shows a complete thumb impression with legible ridge flow. Retained as challenge.",stage0_curator
+00001738|roll|F03,challenge,,"Visual review: complete rolled impression, very light inking. Retained as challenge.",stage0_curator
+00001738|roll|F06,challenge,,"Visual review: complete rolled thumb impression, moderate contrast. Retained as challenge.",stage0_curator
+00001738|roll|F07,challenge,,"Visual review: complete rolled impression with visible ridge flow. Retained as challenge.",stage0_curator
+00001738|roll|F08,challenge,,"Lowest ridge_block_frac of any ROLL image in the dataset (0.0034). Visual review nonetheless shows a complete, legible rolled impression. This record is the clearest demonstration that the contrast statistic must not be used as an exclusion criterion. Retained as challenge.",stage0_curator
