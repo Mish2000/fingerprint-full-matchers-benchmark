@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "cohort_scores_read": false,
+    "evaluation_data_used": false,
+    "expected_classes_valid": true,
+    "failure_policy_valid": true,
+    "fmr_caveat_present": true,
+    "matcher_executed": false,
+    "operator": ">=",
+    "qualification_scores_used": false,
+    "reporting_denominators_valid": true,
+    "self_reporting_separate": true,
+    "single_threshold": true,
+    "sourceafis_version": "3.18.1",
+    "threshold": "40.0",
+    "threshold_sweep_allowed": false
+  },
+  "errors": [],
+  "policy_id": "sourceafis_decision_policy_v1",
+  "valid": true,
+  "warnings": [
+    "The official association between threshold 40 and FMR 0.01% is approximate, quality-dependent, and not an empirical result of this benchmark.",
+    "The frozen impostor manifest contains 500 comparisons per release and cannot by itself validate an FMR claim of 0.01%."
+  ]
+}

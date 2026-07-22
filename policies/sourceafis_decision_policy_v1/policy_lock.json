@@ -1,0 +1,68 @@
+{
+  "commits": {
+    "protocol": "29d8de0180403e9aa8a5e81cc468664b96dc8932",
+    "qualification": "78af9d227a68456f96f1d63d2547222d5435bb5f",
+    "runtime": "db1e499f0ee3a5457ec71fbc7feba22214d34116"
+  },
+  "files": {
+    "policies/sourceafis_decision_policy_v1/README.md": {
+      "sha256": "56fe01e5513d7738b11ec52fda855368fc0f68592499c9d0478dd05da4489056",
+      "size_bytes": 4354
+    },
+    "policies/sourceafis_decision_policy_v1/decision_policy.json": {
+      "sha256": "2bd6ca1d5d472c2c64342f9b59436ba5617240eadcb2e265bb4e5026ecfa1a46",
+      "size_bytes": 2124
+    },
+    "policies/sourceafis_decision_policy_v1/policy_validation_report.json": {
+      "sha256": "8cf87b1a13a2bea9458295f85552d82b2cb2b39362bb02f8bbb25ad624409c21",
+      "size_bytes": 868
+    },
+    "policies/sourceafis_decision_policy_v1/reporting_policy.json": {
+      "sha256": "4445d4a31e022e88d0030f8f30753e30f805ac294ec02f223850b47da5f419d0",
+      "size_bytes": 4809
+    },
+    "policies/sourceafis_decision_policy_v1/source_provenance.json": {
+      "sha256": "7501c03e9cec1b805917abe8bb6c1509771e437758fec17ac08051cea175d2fd",
+      "size_bytes": 1946
+    },
+    "tests/test_sourceafis_decision_policy_v1.py": {
+      "sha256": "47027cb04c428237dcd81ba2246949b523d21d49f7663382f710ba7789f3b002",
+      "size_bytes": 9848
+    },
+    "tools/validate_sourceafis_decision_policy_v1.py": {
+      "sha256": "1f7213023c24acca8d5bb9ed98a65dc8c0260629d377c6f62c9e92ea468d45a5",
+      "size_bytes": 24283
+    }
+  },
+  "operator": ">=",
+  "policy_id": "sourceafis_decision_policy_v1",
+  "policy_version": 1,
+  "protected_areas": {
+    "protocol": {
+      "file_count": 21,
+      "paths": [
+        "protocols/supervisor_50x10_v1"
+      ],
+      "tree_sha256": "b88ce7ef428ab6bbb6ecc36e547ad05fddc0d536f3498159fbf6357d2ea3138e"
+    },
+    "qualification": {
+      "file_count": 7,
+      "paths": [
+        "qualification/sourceafis_runtime_v1"
+      ],
+      "tree_sha256": "b2b9494c9d3e3a1246cd2e42644d9ee864ecccc806dc07be576a8b5af4682f03"
+    },
+    "runtime_sources": {
+      "file_count": 19,
+      "paths": [
+        "src/fingerprint_benchmark",
+        "apps/sourceafis-sidecar/pom.xml",
+        "apps/sourceafis-sidecar/src/main"
+      ],
+      "tree_sha256": "7886827be3775d19d8eaecc89294727efb9a1046633b40cd141588b12d6870f7"
+    }
+  },
+  "source_provenance_sha256": "7501c03e9cec1b805917abe8bb6c1509771e437758fec17ac08051cea175d2fd",
+  "sourceafis_version": "3.18.1",
+  "threshold": "40.0"
+}

@@ -1,0 +1,178 @@
+{
+  "class_specific_metrics": {
+    "expected_different": {
+      "applies_to": [
+        "plain_roll_next_subject"
+      ],
+      "counts": {
+        "correct_different_count": "different_decisions",
+        "false_match_count": "same_decisions"
+      },
+      "prohibited_rate": "false_non_match_rate",
+      "rates": {
+        "correct_reject_rate_valid": {
+          "denominator": "successful_scores",
+          "numerator": "different_decisions"
+        },
+        "false_match_rate_valid": {
+          "denominator": "successful_scores",
+          "numerator": "same_decisions"
+        }
+      }
+    },
+    "expected_same": {
+      "applies_to": [
+        "plain_self",
+        "roll_self",
+        "plain_roll_genuine"
+      ],
+      "counts": {
+        "correct_same_count": "same_decisions",
+        "false_non_match_count": "different_decisions"
+      },
+      "prohibited_rate": "false_match_rate",
+      "rates": {
+        "false_non_match_rate_valid": {
+          "denominator": "successful_scores",
+          "numerator": "different_decisions"
+        },
+        "match_rate_valid": {
+          "denominator": "successful_scores",
+          "numerator": "same_decisions"
+        }
+      }
+    }
+  },
+  "comparison_kind_reporting": {
+    "plain_roll_genuine": {
+      "category": "verification_genuine",
+      "expected_class": "same"
+    },
+    "plain_roll_next_subject": {
+      "category": "verification_impostor",
+      "expected_class": "different"
+    },
+    "plain_self": {
+      "category": "self_consistency",
+      "expected_class": "same",
+      "pool_with_plain_roll_genuine": false
+    },
+    "roll_self": {
+      "category": "self_consistency",
+      "expected_class": "same",
+      "pool_with_plain_roll_genuine": false
+    }
+  },
+  "denominators": {
+    "decision_coverage": {
+      "denominator": "planned_pairs",
+      "numerator": "successful_scores"
+    },
+    "strict_correct_completion_rate": {
+      "denominator": "planned_pairs",
+      "numerator": "correct_decisions"
+    },
+    "technical_failure_rate": {
+      "denominator": "planned_pairs",
+      "numerator": "technical_failures"
+    },
+    "valid_only_correct_rate": {
+      "denominator": "successful_scores",
+      "numerator": "correct_decisions",
+      "zero_denominator_value": null
+    }
+  },
+  "fmr_claims": {
+    "claim_observed_0_01_percent_prohibited": true,
+    "official_threshold_fmr_is_external_approximation": true,
+    "raw_counts_required": true
+  },
+  "human_readable": {
+    "counts_always_displayed": true,
+    "percentage_decimal_places": 2,
+    "percentage_without_counts_prohibited": true
+  },
+  "machine_readable": {
+    "rate_fields": [
+      "numerator",
+      "denominator",
+      "value"
+    ],
+    "ratio_decimal_places": 6,
+    "ratio_value_type": "decimal_string_or_null"
+  },
+  "outcome_mapping": {
+    "different/different": "correct_different",
+    "different/same": "false_match",
+    "same/different": "false_non_match",
+    "same/same": "correct_same",
+    "technical_failure/no_decision": "technical_failure"
+  },
+  "policy_id": "sourceafis_decision_policy_v1",
+  "primary_grouping": [
+    "dataset_release",
+    "comparison_kind"
+  ],
+  "primary_reporting_units": [
+    "sd300b/plain_self",
+    "sd300b/roll_self",
+    "sd300b/plain_roll_genuine",
+    "sd300b/plain_roll_next_subject",
+    "sd300c/plain_self",
+    "sd300c/roll_self",
+    "sd300c/plain_roll_genuine",
+    "sd300c/plain_roll_next_subject"
+  ],
+  "publication": {
+    "atomic_complete_package_required": true,
+    "invalid_input_blocks_final_report": true
+  },
+  "required_counts": [
+    "planned_pairs",
+    "successful_scores",
+    "technical_failures",
+    "same_decisions",
+    "different_decisions",
+    "no_decisions",
+    "correct_decisions",
+    "incorrect_decisions"
+  ],
+  "required_rates": [
+    "decision_coverage",
+    "technical_failure_rate",
+    "valid_only_correct_rate",
+    "strict_correct_completion_rate"
+  ],
+  "retry_policy": {
+    "new_retry_added": false,
+    "selective_failure_rerun_allowed": false,
+    "use_existing_runtime_policy": true
+  },
+  "rounding": {
+    "decision_uses_unrounded_score": true,
+    "human_percentage_decimal_places": 2,
+    "machine_ratio_decimal_places": 6,
+    "mode": "ROUND_HALF_UP"
+  },
+  "secondary_verification_aggregate": {
+    "allowed": true,
+    "counts_required": true,
+    "exclude": [
+      "plain_self",
+      "roll_self"
+    ],
+    "include": [
+      "plain_roll_genuine",
+      "plain_roll_next_subject"
+    ],
+    "per_release_only": true
+  },
+  "technical_failures": {
+    "converted_to_different": false,
+    "converted_to_score_zero": false,
+    "excluded_from_biometric_rate_denominator": true,
+    "included_in_planned_pair_denominator": true,
+    "no_decisions_equal_technical_failures": true,
+    "reported_separately": true
+  }
+}

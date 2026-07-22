@@ -1,0 +1,45 @@
+{
+  "accessed_date": "2026-07-22",
+  "commits": {
+    "protocol": "29d8de0180403e9aa8a5e81cc468664b96dc8932",
+    "qualification": "78af9d227a68456f96f1d63d2547222d5435bb5f",
+    "runtime": "db1e499f0ee3a5457ec71fbc7feba22214d34116"
+  },
+  "decision_rule": {
+    "operator": ">=",
+    "threshold": "40.0"
+  },
+  "maven_coordinates": {
+    "artifact_id": "sourceafis",
+    "group_id": "com.machinezoo.sourceafis",
+    "version": "3.18.1"
+  },
+  "official_sources": [
+    {
+      "source_title": "SourceAFIS for Java",
+      "source_type": "official_documentation",
+      "source_url": "https://sourceafis.machinezoo.com/java",
+      "version": "3.18.1"
+    },
+    {
+      "source_title": "FingerprintMatcher (SourceAFIS 3.18.1 API)",
+      "source_type": "official_javadoc",
+      "source_url": "https://sourceafis.machinezoo.com/javadoc/com.machinezoo.sourceafis/com/machinezoo/sourceafis/FingerprintMatcher.html",
+      "version": "3.18.1"
+    }
+  ],
+  "policy_id": "sourceafis_decision_policy_v1",
+  "sourceafis_version": "3.18.1",
+  "summary": {
+    "application_dependent_caveat": "The application must choose a threshold suited to its own error-cost and quality conditions; 40 is the official starting recommendation frozen here.",
+    "fmr_approximation_caveat": "The official association between threshold 40 and FMR 0.01% is approximate and varies with fingerprint quality; it is not an observed result of this benchmark.",
+    "paraphrased_recommendation": "FingerprintMatcher.match returns a non-negative similarity score that increases with similarity. Compare the unrounded score with score >= threshold; the official Java documentation recommends threshold 40 as a starting point."
+  },
+  "threshold_derivation": {
+    "challenge_records_used": false,
+    "evaluation_scores_used": false,
+    "previous_project_results_used": false,
+    "qualification_scores_used": false,
+    "selection_mode": "official_fixed_recommendation"
+  }
+}

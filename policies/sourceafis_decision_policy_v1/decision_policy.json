@@ -1,0 +1,77 @@
+{
+  "calibration": {
+    "evaluation_data_used": false,
+    "performed": false,
+    "post_hoc_change_allowed": false,
+    "qualification_scores_used": false,
+    "selection_mode": "official_fixed_recommendation",
+    "threshold_sweep_allowed": false
+  },
+  "decision_rule": {
+    "different_decision": "different",
+    "epsilon_comparison": false,
+    "operator": ">=",
+    "round_before_comparison": false,
+    "same_decision": "same",
+    "technical_failure_decision": "no_decision",
+    "threshold": "40.0"
+  },
+  "expected_class": {
+    "plain_roll_genuine": "same",
+    "plain_roll_next_subject": "different",
+    "plain_self": "same",
+    "roll_self": "same"
+  },
+  "invalid_input": {
+    "final_report_allowed": false,
+    "policy_application_status": "INVALID_INPUT",
+    "reasons": [
+      "ok_status_with_missing_score",
+      "ok_status_with_non_finite_score",
+      "ok_status_with_negative_score",
+      "ok_status_with_error_code",
+      "ok_status_with_error_message",
+      "failure_status_with_score",
+      "failure_status_without_error_code",
+      "unknown_comparison_kind"
+    ]
+  },
+  "method": {
+    "method_id": "sourceafis",
+    "score_direction": "higher_is_more_similar",
+    "score_source": "FingerprintMatcher.match",
+    "score_type": "raw_similarity",
+    "sourceafis_version": "3.18.1"
+  },
+  "policy_id": "sourceafis_decision_policy_v1",
+  "policy_version": 1,
+  "scope": {
+    "challenge_records_included": true,
+    "comparison_kinds": [
+      "plain_self",
+      "roll_self",
+      "plain_roll_genuine",
+      "plain_roll_next_subject"
+    ],
+    "dataset_releases": [
+      "sd300b",
+      "sd300c"
+    ],
+    "single_threshold_for_all_comparison_kinds": true,
+    "single_threshold_for_all_releases": true
+  },
+  "status": "frozen",
+  "technical_failure": {
+    "decision": "no_decision",
+    "error_code_must_be_present": true,
+    "raw_score_must_be_absent": true,
+    "status_must_not_equal": "ok"
+  },
+  "valid_score": {
+    "error_code_must_be_absent": true,
+    "error_message_must_be_absent": true,
+    "finite": true,
+    "non_negative": true,
+    "requires_status": "ok"
+  }
+}

@@ -30,6 +30,9 @@ jobs:
           tests/test_sourceafis_sidecar_lifecycle.py
           tests/test_forbidden_runtime_coupling.py
           tests/test_sourceafis_runtime_qualification.py
+          tests/test_sourceafis_decision_policy_v1.py
+      - name: Validate frozen SourceAFIS decision policy
+        run: python tools/validate_sourceafis_decision_policy_v1.py
       - name: Test and build Java 11 sidecar
         run: mvn -f apps/sourceafis-sidecar/pom.xml clean test package
       - name: Run health and malformed-input smoke checks
