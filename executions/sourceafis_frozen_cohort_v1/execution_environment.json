@@ -1,0 +1,23 @@
+{
+  "compiler_release": 11,
+  "conda_environment_modified": false,
+  "environment": "conda_env/fingerprint-recognition-research",
+  "execution_code_commit": "c8af24331dc1b689dec9b2efc0368ed59d8520ee",
+  "execution_finished_utc": "2026-07-22T16:05:52Z",
+  "execution_id": "sourceafis_frozen_cohort_v1",
+  "execution_started_utc": "2026-07-22T15:41:47Z",
+  "jar_sha256": "1a1a82a079570ecbd10ea95a839acb6f9b670f5703c990029ad6c62881660760",
+  "java_distribution": "Zulu OpenJDK",
+  "java_runtime_version": "17.0.18+8-LTS",
+  "java_vendor": "Azul Systems, Inc.",
+  "java_version": "17.0.18",
+  "maven_version": "3.9.16",
+  "os_architecture": "amd64",
+  "persistent_system_environment_modified": false,
+  "python_version": "3.11.15",
+  "same_jar_for_all_manifests": true,
+  "sidecar_contract_version": "sourceafis-sidecar-contract-v1",
+  "sidecar_implementation_version": "1.0.0",
+  "sourceafis_version": "3.18.1",
+  "worktree_clean_at_execution": true
+}

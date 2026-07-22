@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "bundles_valid": 8,
+    "decision_fields_generated": false,
+    "decision_policy_applied": false,
+    "decision_policy_unchanged": true,
+    "fresh_jvm_per_manifest": true,
+    "manifests_executed": 8,
+    "protocol_unchanged": true,
+    "qualification_unchanged": true,
+    "raw_bundles_tracked_by_git": false,
+    "rows_per_bundle": 500,
+    "runtime_unchanged": true,
+    "score_analysis_performed": false,
+    "selective_retries_performed": false,
+    "single_jar_used": true,
+    "single_java_runtime_used": true,
+    "threshold_read_by_execution": false,
+    "total_rows": 4000
+  },
+  "errors": [],
+  "execution_id": "sourceafis_frozen_cohort_v1",
+  "valid": true,
+  "warnings": []
+}

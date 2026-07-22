@@ -1,0 +1,31 @@
+{
+  "decision_policy_applied": false,
+  "decision_policy_id": "sourceafis_decision_policy_v1",
+  "decision_policy_tag": "sourceafis-decision-policy-v1",
+  "execution_code_commit": "c8af24331dc1b689dec9b2efc0368ed59d8520ee",
+  "execution_id": "sourceafis_frozen_cohort_v1",
+  "execution_version": 1,
+  "expected_rows_per_manifest": 500,
+  "expected_total_rows": 4000,
+  "fresh_jvm_per_manifest": true,
+  "manifests": [
+    "sd300b/plain_self.csv",
+    "sd300b/roll_self.csv",
+    "sd300b/plain_roll_genuine.csv",
+    "sd300b/plain_roll_next_subject.csv",
+    "sd300c/plain_self.csv",
+    "sd300c/roll_self.csv",
+    "sd300c/plain_roll_genuine.csv",
+    "sd300c/plain_roll_next_subject.csv"
+  ],
+  "method_id": "sourceafis",
+  "method_version": "3.18.1",
+  "protocol_id": "supervisor_50x10_v1",
+  "protocol_relative_root": "protocols/supervisor_50x10_v1",
+  "protocol_version": 1,
+  "runtime_qualification_id": "sourceafis_runtime_v1",
+  "score_analysis_allowed": false,
+  "selective_retry_allowed": false,
+  "single_jar_for_all_manifests": true,
+  "sourceafis_version": "3.18.1"
+}
