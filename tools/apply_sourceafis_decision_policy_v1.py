@@ -132,6 +132,14 @@ PROCESS_NOTE_CODE_FIX_PREFIX = (
     "a synthetic regression test was added, and the application was restarted from the beginning "
     "using code commit "
 )
+PROCESS_NOTE_LOCAL_VALIDATOR_FIX_PREFIX = (
+    "The second full application attempt at code commit "
+    "96ecd63a77e0c3a6db8d2cb9c2f88007a13c872d published a complete local candidate, "
+    "but the independent post-publication validator treated the expected untracked evaluation "
+    "directory as unrelated worktree dirt. No result package was committed. The attempt artifacts "
+    "were quarantined, a synthetic regression test was added, and the application was restarted "
+    "from the beginning using code commit "
+)
 
 
 class ApplicationBlocked(RuntimeError):
@@ -380,6 +388,12 @@ def _head_commit_and_tree(repository_root: Path) -> tuple[str, str, str | None]:
 
 def _ignored_untracked(relative: str) -> bool:
     parts = PurePosixPath(relative).parts
+    if len(parts) >= 2 and parts[:2] == ("evaluations", APPLICATION_ID):
+        # The independent local validator runs after atomic publication but before
+        # Commit B.  verify_repository() separately and explicitly rejects an
+        # existing package at the pre-score gate, so this narrow status exemption
+        # cannot permit an application overwrite or partial continuation.
+        return True
     if any(part in {"__pycache__", ".pytest_cache", "target"} for part in parts):
         return True
     if parts and parts[0] == "results":
@@ -1066,6 +1080,7 @@ def _build_evaluation_candidate(
             PROCESS_NOTE_QUALIFICATION_DISPLAY,
             PROCESS_NOTE_EXECUTION_IDENTITY,
             PROCESS_NOTE_CODE_FIX_PREFIX + application_code_commit + ".",
+            PROCESS_NOTE_LOCAL_VALIDATOR_FIX_PREFIX + application_code_commit + ".",
         ],
     }
     (candidate / "README.md").write_text(_readme(result["primary"], result["aggregates"]), encoding="utf-8", newline="\n")

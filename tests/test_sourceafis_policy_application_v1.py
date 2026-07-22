@@ -452,6 +452,32 @@ def test_validate_only_mode_is_declared_as_boolean_flag() -> None:
     assert action.const is True
 
 
+def test_published_evaluation_is_the_only_evaluation_status_exemption() -> None:
+    assert application._ignored_untracked(
+        "evaluations/sourceafis_policy_application_v1/application_lock.json"
+    ) is True
+    assert application._ignored_untracked("evaluations/unrelated/file.json") is False
+
+
+def test_repository_precondition_still_blocks_existing_evaluation(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
+) -> None:
+    state = {
+        "branch": "main", "head": "c" * 40, "head_tree": "d" * 40,
+        **application.PROTECTED_GIT_TREES,
+    }
+    monkeypatch.setattr(application, "verify_clean_worktree", lambda _root: state)
+    monkeypatch.setattr(application, "resolve_tag_commit", lambda _root, tag: application.REQUIRED_TAGS[tag])
+    monkeypatch.setattr(
+        application, "_read_loose_object",
+        lambda _git, _sha: ("commit", f"tree {'d' * 40}\nparent {application.SOURCE_EXECUTION_COMMIT}\n".encode()),
+    )
+    (tmp_path / ".git").mkdir()
+    (tmp_path / "evaluations" / application.APPLICATION_ID).mkdir(parents=True)
+    with pytest.raises(application.ApplicationBlocked, match="previous evaluation"):
+        application.verify_repository(tmp_path)
+
+
 def test_failure_path_is_covered_without_real_cohort() -> None:
     row = _row(status="prepare_a_failure", score="", error_code="decode_error", error_message="synthetic")
     assert application.decision_for_row(row, "plain_self")[1:3] == ("no_decision", "technical_failure")
