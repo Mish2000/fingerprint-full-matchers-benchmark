@@ -31,8 +31,17 @@ jobs:
           tests/test_forbidden_runtime_coupling.py
           tests/test_sourceafis_runtime_qualification.py
           tests/test_sourceafis_decision_policy_v1.py
+          tests/test_sourceafis_frozen_cohort_v1.py
       - name: Validate frozen SourceAFIS decision policy
         run: python tools/validate_sourceafis_decision_policy_v1.py
+      - name: Validate SourceAFIS frozen-cohort execution package
+        shell: bash
+        run: |
+          if [ -d executions/sourceafis_frozen_cohort_v1 ]; then
+            python tools/validate_sourceafis_frozen_cohort_v1.py
+          else
+            echo 'Execution package not recorded yet; static validation skipped.'
+          fi
       - name: Test and build Java 11 sidecar
         run: mvn -f apps/sourceafis-sidecar/pom.xml clean test package
       - name: Run health and malformed-input smoke checks
