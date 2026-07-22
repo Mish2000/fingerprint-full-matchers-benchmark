@@ -210,12 +210,17 @@ def verify_environment(repository_root: Path, java: Path, maven: Path) -> dict[s
     java_vendor = properties.get("java.vendor", "")
     java_home = properties.get("java.home", "")
     architecture = properties.get("os.arch", "")
+    # The sidecar reports java.runtime.version ("17.0.18+8-LTS"), which is the string that
+    # reaches bundle provenance; java.version ("17.0.18") is the version we pin.
+    java_runtime_version = properties.get("java.runtime.version", "")
     if java_version != cohort.JAVA_VERSION:
         raise ExecutionBlocked(f"Java version must be {cohort.JAVA_VERSION}, found {java_version!r}")
     if java_vendor != cohort.JAVA_VENDOR:
         raise ExecutionBlocked(f"Java vendor must be {cohort.JAVA_VENDOR}, found {java_vendor!r}")
     if architecture != "amd64":
         raise ExecutionBlocked(f"architecture must be amd64, found {architecture!r}")
+    if not java_runtime_version.startswith(cohort.JAVA_VERSION):
+        raise ExecutionBlocked(f"Java runtime version {java_runtime_version!r} is not a {cohort.JAVA_VERSION} build")
 
     maven_output = _run_text([str(maven), "-version"], env={**os.environ, "JAVA_HOME": java_home})
     maven_version = ""
@@ -249,6 +254,7 @@ def verify_environment(repository_root: Path, java: Path, maven: Path) -> dict[s
         "compiler_release": compiler_release,
         "java_distribution": cohort.JAVA_DISTRIBUTION,
         "java_home": java_home,
+        "java_runtime_version": java_runtime_version,
         "java_vendor": java_vendor,
         "java_version": java_version,
         "maven_version": maven_version,
@@ -506,6 +512,7 @@ def _package_payloads(
         "execution_started_utc": started_at,
         "jar_sha256": jar_sha256,
         "java_distribution": cohort.JAVA_DISTRIBUTION,
+        "java_runtime_version": environment["java_runtime_version"],
         "java_vendor": environment["java_vendor"],
         "java_version": environment["java_version"],
         "maven_version": environment["maven_version"],
@@ -802,7 +809,7 @@ def main(argv: list[str] | None = None) -> int:
             entries = execute_cohort(
                 repository_root=repository_root, dataset_root=args.dataset_root, results_root=results_root,
                 jar_path=jar_path, jar_sha256=jar_sha256, java=args.java,
-                execution_code_commit=repository["head"], java_version=environment["java_version"],
+                execution_code_commit=repository["head"], java_version=environment["java_runtime_version"],
             )
         finally:
             lock_path.unlink(missing_ok=True)

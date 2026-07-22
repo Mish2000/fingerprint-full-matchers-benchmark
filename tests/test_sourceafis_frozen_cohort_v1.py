@@ -31,10 +31,11 @@ from fingerprint_benchmark.runner import RESULT_COLUMNS  # noqa: E402
 
 DEFAULT_JAR_SHA256 = "c" * 64
 DEFAULT_COMMIT = "d" * 40
-DEFAULT_JAVA_VERSION = "17.0.18"
+DEFAULT_JAVA_VERSION = "17.0.18+8-LTS"
 FIRST_MANIFEST = cohort.COHORT_MANIFESTS[0]
 CANONICAL_ENVIRONMENT = {
     "compiler_release": 11,
+    "java_runtime_version": "17.0.18+8-LTS",
     "java_vendor": cohort.JAVA_VENDOR,
     "java_version": cohort.JAVA_VERSION,
     "maven_version": cohort.MAVEN_VERSION,
@@ -381,13 +382,16 @@ def _environment_repository(tmp_path: Path, *, release: str = "11", sourceafis: 
     return repository_root, java, maven
 
 
-def _stub_toolchain(monkeypatch, *, java_version="17.0.18", vendor=cohort.JAVA_VENDOR, maven_version="3.9.16"):
+def _stub_toolchain(monkeypatch, *, java_version="17.0.18", vendor=cohort.JAVA_VENDOR, maven_version="3.9.16",
+                    runtime_version=None):
     java_home = "/opt/jvm"
+    runtime_version = runtime_version if runtime_version is not None else f"{java_version}+8-LTS"
 
     def fake_run_text(command, *, cwd=None, env=None):
         if "-XshowSettings:properties" in command:
             return (
                 f"    java.home = {java_home}\n"
+                f"    java.runtime.version = {runtime_version}\n"
                 f"    java.vendor = {vendor}\n"
                 f"    java.version = {java_version}\n"
                 "    os.arch = amd64\n"
@@ -407,6 +411,15 @@ def test_09_canonical_java_is_accepted(tmp_path, monkeypatch):
     environment = orchestrator.verify_environment(repository_root, java, maven)
     assert environment["java_version"] == "17.0.18"
     assert environment["java_vendor"] == cohort.JAVA_VENDOR
+    # Bundle provenance carries java.runtime.version, which is a build of java.version.
+    assert environment["java_runtime_version"] == "17.0.18+8-LTS"
+
+
+def test_09b_runtime_version_from_another_release_is_rejected(tmp_path, monkeypatch):
+    repository_root, java, maven = _environment_repository(tmp_path)
+    _stub_toolchain(monkeypatch, runtime_version="21.0.4+7-LTS")
+    with pytest.raises(orchestrator.ExecutionBlocked, match="runtime version"):
+        orchestrator.verify_environment(repository_root, java, maven)
 
 
 def test_10_other_java_is_rejected(tmp_path, monkeypatch):
