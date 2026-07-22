@@ -12,6 +12,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Validate SourceAFIS policy application package
+        shell: bash
+        run: |
+          if [ -d evaluations/sourceafis_policy_application_v1 ]; then
+            python tools/validate_sourceafis_policy_application_v1.py
+          else
+            echo 'Policy application package not recorded yet; static validation skipped.'
+          fi
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -42,14 +50,6 @@ jobs:
             python tools/validate_sourceafis_frozen_cohort_v1.py
           else
             echo 'Execution package not recorded yet; static validation skipped.'
-          fi
-      - name: Validate SourceAFIS policy application package
-        shell: bash
-        run: |
-          if [ -d evaluations/sourceafis_policy_application_v1 ]; then
-            python tools/validate_sourceafis_policy_application_v1.py
-          else
-            echo 'Policy application package not recorded yet; static validation skipped.'
           fi
       - name: Test and build Java 11 sidecar
         run: mvn -f apps/sourceafis-sidecar/pom.xml clean test package
