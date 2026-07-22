@@ -1,0 +1,136 @@
+{
+  "aggregate_count": 2,
+  "application_code_commit": "a97f554e64d61a9a6596e160024ad2a4a19b9db6",
+  "application_id": "sourceafis_policy_application_v1",
+  "application_version": 1,
+  "code_files": {
+    "tests/test_sourceafis_policy_application_v1.py": {
+      "sha256": "772341ac5bbf2edd709e2a373bc04e79fb5b9fea07ffdbc5bc9ebbcd833cdfb0",
+      "size_bytes": 23110
+    },
+    "tools/apply_sourceafis_decision_policy_v1.py": {
+      "sha256": "7746bd71dfee2ef50d17d3b0c25d33c0af325a8f8fd4954fce785e58179addeb",
+      "size_bytes": 61089
+    },
+    "tools/validate_sourceafis_policy_application_v1.py": {
+      "sha256": "4603dba26a18d2edf32647018204bb09375409156dc7c0c4388b107b02334b7a",
+      "size_bytes": 24978
+    }
+  },
+  "combined_decision_set_sha256": "ae80005a68883f97a840086f6cc5e3e3c697d71540619057eb366990883408ac",
+  "execution": {
+    "bundle_set_sha256": "4bf954e9da2298b4e3ff5d003a24a11d4a2152e26b0869e4bb2b80ea772266ae",
+    "commit": "173ff0299537bdccb0f609f06114b2d0d22a14d6",
+    "package_sha256": "8be235061123bfc3d3b3944f9a786d54ec38776e87d4cc2c7188ffa5b2586bbe",
+    "tag": "sourceafis-frozen-cohort-v1"
+  },
+  "external_archive_receipt_sha256": "214de36bc15ef5350d9fe83dbecbb2f63b52c155536e13a1df236e77bdc023fe",
+  "files": {
+    "evaluations/sourceafis_policy_application_v1/README.md": {
+      "sha256": "5b82a834757c69e4eebb6ee2600c3400a664e90eed6e15509bba0a914fe54b00",
+      "size_bytes": 2888
+    },
+    "evaluations/sourceafis_policy_application_v1/application_plan.json": {
+      "sha256": "280dbaa5060da539faa16350b38bcdda0726d9b1a0be6d3d1afc9937294fd122",
+      "size_bytes": 1157
+    },
+    "evaluations/sourceafis_policy_application_v1/application_validation_report.json": {
+      "sha256": "a34970447f7f216a4d3a19cc2385f88b5a96e3933d7d5b31535ee7d3fe179e12",
+      "size_bytes": 2430
+    },
+    "evaluations/sourceafis_policy_application_v1/input_bundle_registry.json": {
+      "sha256": "0ecb7d2d4083834ec98d0cabf3463d79628714b9969cf32445b7e3384f70ec6b",
+      "size_bytes": 9642
+    },
+    "evaluations/sourceafis_policy_application_v1/primary_results.csv": {
+      "sha256": "0d482f907cc36ceabe98548133d0dd3c61dc6c395f4a9d99170279a4edd3969d",
+      "size_bytes": 1985
+    },
+    "evaluations/sourceafis_policy_application_v1/primary_results.json": {
+      "sha256": "9d044501093a505ae20fa614ab0c335a3d9914cf8fac0bd44ca1786b88cb4795",
+      "size_bytes": 12834
+    },
+    "evaluations/sourceafis_policy_application_v1/verification_aggregates.json": {
+      "sha256": "9edfb46246c6d6c9e6cba348343171ea32d6b5de59e1d228df3a25cd33e2d1d0",
+      "size_bytes": 2196
+    }
+  },
+  "operator": ">=",
+  "policy": {
+    "commit": "fdef2e36a347e952a0509c07725a222e47aca9c3",
+    "sha256": "2bd6ca1d5d472c2c64342f9b59436ba5617240eadcb2e265bb4e5026ecfa1a46",
+    "tag": "sourceafis-decision-policy-v1",
+    "tree_sha256": "3b207a950b54e29db88c38239122717d4a7544865c713a963df777ed2c73a0d7"
+  },
+  "primary_unit_count": 8,
+  "protected_git_trees": {
+    "apps/sourceafis-sidecar": "d01aab7cb620699b2168cff0bd93a3e1cc62b68d",
+    "executions/sourceafis_frozen_cohort_v1": "1eb4117ba6f71dd2ea6ad5be6b7e34138db2e1a9",
+    "migration": "b87594670719a3be49f7980939de40deeaf64b97",
+    "migration-audit": "8b72dd0607c65e0e5ff7eec3a5bf9824adb07ed2",
+    "policies/sourceafis_decision_policy_v1": "ef83b019a432492eb9a955ef893084e49e797714",
+    "protocols/supervisor_50x10_v1": "0a49db320b18c42dd6834e285389383b3093ef1f",
+    "qualification/sourceafis_runtime_v1": "e6b1984af446d161623bdaa9fc4df921ed302aa5",
+    "src/fingerprint_benchmark": "763a5f5057a1d3e7603d13b3db5b28c367917a38"
+  },
+  "protocol": {
+    "commit": "29d8de0180403e9aa8a5e81cc468664b96dc8932",
+    "tag": "protocol-supervisor-50x10-v1",
+    "tree_sha256": "b88ce7ef428ab6bbb6ecc36e547ad05fddc0d536f3498159fbf6357d2ea3138e"
+  },
+  "qualification": {
+    "commit": "78af9d227a68456f96f1d63d2547222d5435bb5f",
+    "tag": "sourceafis-runtime-qualified-v1",
+    "tree_sha256": "b2b9494c9d3e3a1246cd2e42644d9ee864ecccc806dc07be576a8b5af4682f03"
+  },
+  "runtime": {
+    "commit": "db1e499f0ee3a5457ec71fbc7feba22214d34116",
+    "tag": "sourceafis-runtime-v1",
+    "tree_sha256": "7886827be3775d19d8eaecc89294727efb9a1046633b40cd141588b12d6870f7"
+  },
+  "source_bundles": [
+    {
+      "decision_set_sha256": "2888ff8e9d53f5ba87afaa16274ca7f02d333178e4a9c7e7506db5499805c31d",
+      "results_csv_sha256": "cf6c2183e8e4d8121d86b297516a984b82fcecf87f7f18191ca07f703cac6e44",
+      "run_id": "cf164bbff18e78facbfcf84e"
+    },
+    {
+      "decision_set_sha256": "24e074fdf43998b928673a5ba23de5407a2b0a40d1a0535e5e7bf3af730ef82b",
+      "results_csv_sha256": "90b25993a0718624d06274ddb339bc3cff12792aa3abc2087e590ad3d0298b1f",
+      "run_id": "ac6e3b0ad523ff12947133e9"
+    },
+    {
+      "decision_set_sha256": "6f9cd8a0af392e13624b0733670ed769681332cd334449bc55262df5d4c10281",
+      "results_csv_sha256": "1e8a44b283bd4870345247f3bc0507e3f3a0441ced09ccddf82e2d4456bbd503",
+      "run_id": "69ded8f227a9709559167a91"
+    },
+    {
+      "decision_set_sha256": "c25da4d45ad41810337aee55cc308ab489ec14812b89fa55512786222c962a19",
+      "results_csv_sha256": "5c79f2e5842cd37c9502a2c7ee55d210c25e78bf182737f94f68b7a633275f04",
+      "run_id": "b5d14af27653004c8411c259"
+    },
+    {
+      "decision_set_sha256": "d8bc6e9039bcaea435edfb39bafb6c5e6b9fecaebbb84ff866b4778e8e47d50f",
+      "results_csv_sha256": "a9647c1272a7012766b340f164b34a86d5c016fc31f9e8bafaefdccb9e1d8122",
+      "run_id": "b7c97e0df6bbb81d753fdd83"
+    },
+    {
+      "decision_set_sha256": "c09e3d49cf9a753d213c4ffc72c568f602f5107f938fa87c8580307b004bfeb9",
+      "results_csv_sha256": "f9e66cc95cd9c89ee90a549263f173edc11cab7454efe84d4e153cfd523026ab",
+      "run_id": "943a1f9cc21b55c9234651cb"
+    },
+    {
+      "decision_set_sha256": "e07f539ded14fea5d56a0e8b750a72ab4d3a369a443b5dc97b3a457b29bc2516",
+      "results_csv_sha256": "9e7ba97a397f6c7fd7fffb57fde93c32052715a98dac6905db3e53cbb1dfa9ab",
+      "run_id": "271e61698f3e81450933b947"
+    },
+    {
+      "decision_set_sha256": "4dda82f019562a2a4871f39fe9427bb5bda98574a483d058498d902272182eee",
+      "results_csv_sha256": "e1df3cfc2e5ebe9152f371572f2d80434d11429cfce453644e0ffa221d8471cf",
+      "run_id": "12d387dceb04ffd267698f7b"
+    }
+  ],
+  "threshold": "40.0",
+  "total_derived_decisions": 4000,
+  "total_input_rows": 4000
+}

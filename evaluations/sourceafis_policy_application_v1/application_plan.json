@@ -1,0 +1,32 @@
+{
+  "application_code_commit": "a97f554e64d61a9a6596e160024ad2a4a19b9db6",
+  "application_id": "sourceafis_policy_application_v1",
+  "application_version": 1,
+  "decision_policy_commit": "fdef2e36a347e952a0509c07725a222e47aca9c3",
+  "decision_policy_id": "sourceafis_decision_policy_v1",
+  "decision_policy_tag": "sourceafis-decision-policy-v1",
+  "decision_policy_version": 1,
+  "expected_rows": 4000,
+  "external_archive_verified": true,
+  "input_bundles": [
+    "cf164bbff18e78facbfcf84e",
+    "ac6e3b0ad523ff12947133e9",
+    "69ded8f227a9709559167a91",
+    "b5d14af27653004c8411c259",
+    "b7c97e0df6bbb81d753fdd83",
+    "943a1f9cc21b55c9234651cb",
+    "271e61698f3e81450933b947",
+    "12d387dceb04ffd267698f7b"
+  ],
+  "java_required": false,
+  "matcher_execution": false,
+  "operator": ">=",
+  "row_level_derived_output_tracked": false,
+  "score_analysis_allowed": false,
+  "source_execution_commit": "173ff0299537bdccb0f609f06114b2d0d22a14d6",
+  "source_execution_id": "sourceafis_frozen_cohort_v1",
+  "source_execution_tag": "sourceafis-frozen-cohort-v1",
+  "sourceafis_version": "3.18.1",
+  "threshold": "40.0",
+  "threshold_sweep_allowed": false
+}

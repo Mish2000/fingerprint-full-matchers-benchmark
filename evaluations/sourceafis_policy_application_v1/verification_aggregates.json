@@ -1,0 +1,83 @@
+{
+  "application_id": "sourceafis_policy_application_v1",
+  "entries": [
+    {
+      "correct_genuine": 321,
+      "correct_impostor": 500,
+      "dataset_release": "sd300b",
+      "false_matches": 0,
+      "false_non_matches": 179,
+      "fmr_valid": {
+        "denominator": 500,
+        "numerator": 0,
+        "value": "0.000000"
+      },
+      "fnmr_valid": {
+        "denominator": 500,
+        "numerator": 179,
+        "value": "0.358000"
+      },
+      "genuine_planned": 500,
+      "genuine_successful": 500,
+      "genuine_technical_failures": 0,
+      "impostor_planned": 500,
+      "impostor_successful": 500,
+      "impostor_technical_failures": 0,
+      "included_comparison_kinds": [
+        "plain_roll_genuine",
+        "plain_roll_next_subject"
+      ],
+      "plain_self_included": false,
+      "roll_self_included": false,
+      "verification_decision_coverage": {
+        "denominator": 1000,
+        "numerator": 1000,
+        "value": "1.000000"
+      },
+      "verification_strict_correct_completion_rate": {
+        "denominator": 1000,
+        "numerator": 821,
+        "value": "0.821000"
+      }
+    },
+    {
+      "correct_genuine": 308,
+      "correct_impostor": 500,
+      "dataset_release": "sd300c",
+      "false_matches": 0,
+      "false_non_matches": 192,
+      "fmr_valid": {
+        "denominator": 500,
+        "numerator": 0,
+        "value": "0.000000"
+      },
+      "fnmr_valid": {
+        "denominator": 500,
+        "numerator": 192,
+        "value": "0.384000"
+      },
+      "genuine_planned": 500,
+      "genuine_successful": 500,
+      "genuine_technical_failures": 0,
+      "impostor_planned": 500,
+      "impostor_successful": 500,
+      "impostor_technical_failures": 0,
+      "included_comparison_kinds": [
+        "plain_roll_genuine",
+        "plain_roll_next_subject"
+      ],
+      "plain_self_included": false,
+      "roll_self_included": false,
+      "verification_decision_coverage": {
+        "denominator": 1000,
+        "numerator": 1000,
+        "value": "1.000000"
+      },
+      "verification_strict_correct_completion_rate": {
+        "denominator": 1000,
+        "numerator": 808,
+        "value": "0.808000"
+      }
+    }
+  ]
+}
