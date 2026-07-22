@@ -465,6 +465,23 @@ def test_package_file_set_is_fixed() -> None:
     }
 
 
+def test_input_registry_snapshot_carries_application_identity(tmp_path: Path) -> None:
+    execution = tmp_path / "execution"
+    execution.mkdir()
+    lock_path = execution / "execution_lock.json"
+    lock_path.write_text("{}\n", encoding="utf-8")
+    frozen = {
+        "registry": {"execution_id": application.EXECUTION_ID, "bundles": []},
+        "execution_package_sha256": "a" * 64,
+        "execution_lock": {"bundle_set_sha256": "b" * 64},
+        "roots": {"execution": execution},
+    }
+    snapshot = application.build_input_bundle_registry(frozen)
+    assert snapshot["application_id"] == application.APPLICATION_ID
+    assert snapshot["execution_id"] == application.EXECUTION_ID
+    assert snapshot["external_archive_verified"] is True
+
+
 def test_lock_and_checksum_do_not_lock_themselves() -> None:
     locked = [name for name in application.EVALUATION_FILES if name not in {"application_lock.json", "SHA256SUMS.txt"}]
     assert "application_lock.json" not in locked

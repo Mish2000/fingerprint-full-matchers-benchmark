@@ -125,6 +125,13 @@ PROCESS_NOTE_EXECUTION_IDENTITY = (
     ". The user explicitly authorized bypassing this identity gate; the tagged commit was used and "
     "recorded without moving the tag."
 )
+PROCESS_NOTE_CODE_FIX_PREFIX = (
+    "The first application attempt at code commit 410f88cf9eb7a9b508668856cb39fe2a5325d2fe "
+    "processed all rows but published no evaluation because static candidate validation detected a "
+    "missing application_id in input_bundle_registry.json. The attempt artifacts were quarantined, "
+    "a synthetic regression test was added, and the application was restarted from the beginning "
+    "using code commit "
+)
 
 
 class ApplicationBlocked(RuntimeError):
@@ -961,6 +968,20 @@ def _primary_csv(path: Path, primary: list[dict[str, Any]]) -> None:
             writer.writerow(row)
 
 
+def build_input_bundle_registry(frozen: dict[str, Any]) -> dict[str, Any]:
+    """Create the application-owned canonical snapshot of the execution registry."""
+    registry = json.loads(json.dumps(frozen["registry"]))
+    registry.update({
+        "application_id": APPLICATION_ID,
+        "source_execution_package_sha256": frozen["execution_package_sha256"],
+        "source_execution_lock_sha256": file_sha256(frozen["roots"]["execution"] / "execution_lock.json"),
+        "bundle_set_sha256": frozen["execution_lock"]["bundle_set_sha256"],
+        "external_archive_verified": True,
+        "external_archive_id": "external_archive/sourceafis_frozen_cohort_v1",
+    })
+    return registry
+
+
 def _readme(primary: list[dict[str, Any]], aggregates: list[dict[str, Any]]) -> str:
     lines = [
         f"# {APPLICATION_ID}", "", "This frozen application deterministically applies the committed",
@@ -1022,14 +1043,7 @@ def _build_evaluation_candidate(
         "score_analysis_allowed": False, "threshold_sweep_allowed": False,
         "row_level_derived_output_tracked": False, "external_archive_verified": True,
     }
-    registry = json.loads(json.dumps(frozen["registry"]))
-    registry.update({
-        "source_execution_package_sha256": frozen["execution_package_sha256"],
-        "source_execution_lock_sha256": file_sha256(frozen["roots"]["execution"] / "execution_lock.json"),
-        "bundle_set_sha256": frozen["execution_lock"]["bundle_set_sha256"],
-        "external_archive_verified": True,
-        "external_archive_id": "external_archive/sourceafis_frozen_cohort_v1",
-    })
+    registry = build_input_bundle_registry(frozen)
     primary = {"application_id": APPLICATION_ID, "entries": result["primary"]}
     aggregates = {"application_id": APPLICATION_ID, "entries": result["aggregates"]}
     technical_failures = sum(entry["technical_failures"] for entry in result["primary"])
@@ -1048,7 +1062,11 @@ def _build_evaluation_candidate(
         "errors": [],
         "warnings": (["The real cohort contained no technical failures; failure handling was exercised only by synthetic tests."]
                      if technical_failures == 0 else []),
-        "process_notes": [PROCESS_NOTE_QUALIFICATION_DISPLAY, PROCESS_NOTE_EXECUTION_IDENTITY],
+        "process_notes": [
+            PROCESS_NOTE_QUALIFICATION_DISPLAY,
+            PROCESS_NOTE_EXECUTION_IDENTITY,
+            PROCESS_NOTE_CODE_FIX_PREFIX + application_code_commit + ".",
+        ],
     }
     (candidate / "README.md").write_text(_readme(result["primary"], result["aggregates"]), encoding="utf-8", newline="\n")
     write_json(candidate / "application_plan.json", plan)

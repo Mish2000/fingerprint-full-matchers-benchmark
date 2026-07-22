@@ -346,6 +346,12 @@ def validate_package_root(
         errors.append("qualification-display process note is missing")
     if application.PROCESS_NOTE_EXECUTION_IDENTITY not in report.get("process_notes", []):
         errors.append("execution-identity deviation note is missing")
+    if not any(
+        isinstance(note, str) and note.startswith(application.PROCESS_NOTE_CODE_FIX_PREFIX)
+        and lock.get("application_code_commit", "") in note
+        for note in report.get("process_notes", [])
+    ):
+        errors.append("application code-fix deviation note is missing")
 
     if lock.get("total_input_rows") != 4000 or lock.get("total_derived_decisions") != 4000:
         errors.append("application lock row totals mismatch")
