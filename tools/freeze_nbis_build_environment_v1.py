@@ -54,7 +54,9 @@ BUILD_USER = "nbisbuild"
 BUILD_UID = 2000
 BUILD_GID = 2000
 CANONICAL_INSTALL = "/opt/nbis/5.0.0"
-FIXED_PACKAGES = ("binutils", "build-essential", "file", "unzip")
+FIXED_PACKAGES = ("binutils", "build-essential", "file", "gcc-9", "unzip")
+TOOLCHAIN_BIN = "/opt/nbis-toolchain/gcc-9/bin"
+FIXED_PATH = f"{TOOLCHAIN_BIN}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 PHASES = (
     "preflight", "install-wsl", "configure", "build", "export",
     "restore-check", "package", "all",
@@ -479,7 +481,11 @@ def phase_configure(ctx: Context) -> dict[str, Any]:
         raise FreezeError("canonical WSL distribution is missing")
     receipt_path = ctx.receipts / "package_install_receipt.json"
     if receipt_path.is_file():
-        return read_json(receipt_path)
+        receipt = read_json(receipt_path)
+        recorded = {spec.split("=", 1)[0] for spec in receipt.get("installed_package_specs", [])}
+        if recorded != set(FIXED_PACKAGES):
+            raise FreezeError("existing package receipt predates the required pinned compiler selection")
+        return receipt
 
     archive_copy = "/opt/nbis-input/nbis_v5_0_0.zip"
     mounted_archive = windows_to_wsl(ctx.archive)
@@ -500,9 +506,28 @@ apt-get update
     _, setup_record = run_wsl(ctx, "configure-user-source-and-apt", setup_script)
     install_output, install_record = run_wsl(ctx, "install-pinned-build-packages", package_version_script())
 
-    inventory_script = """
+    compiler_script = f"""
 set -euo pipefail
-export LC_ALL=C LANG=C TZ=UTC
+test -x /usr/bin/gcc-9
+install -d -o root -g root -m 0755 '{TOOLCHAIN_BIN}'
+for name in gcc cc; do
+  path='{TOOLCHAIN_BIN}/'$name
+  if [ -e "$path" ] || [ -L "$path" ]; then
+    test "$(readlink -f "$path")" = "$(readlink -f /usr/bin/gcc-9)"
+  else
+    ln -s /usr/bin/gcc-9 "$path"
+  fi
+done
+export PATH='{FIXED_PATH}'
+test "$(command -v gcc)" = "{TOOLCHAIN_BIN}/gcc"
+test "$(command -v cc)" = "{TOOLCHAIN_BIN}/cc"
+gcc --version
+""".strip()
+    _, compiler_record = run_wsl(ctx, "select-pinned-gcc-9-toolchain", compiler_script)
+
+    inventory_script = f"""
+set -euo pipefail
+export LC_ALL=C LANG=C TZ=UTC PATH='{FIXED_PATH}'
 printf '%s\n' '===OS_RELEASE==='; cat /etc/os-release
 printf '%s\n' '===UNAME==='; uname -a
 printf '%s\n' '===LONG_BIT==='; getconf LONG_BIT
@@ -513,11 +538,12 @@ printf '%s\n' '===GMAKE==='; command -v gmake || true; gmake --version 2>/dev/nu
 printf '%s\n' '===BASH==='; command -v bash; bash --version
 printf '%s\n' '===LIBC==='; ldd --version
 printf '%s\n' '===BINUTILS==='; command -v readelf; readelf --version
-printf '%s\n' '===PACKAGES==='; dpkg-query -W -f='${Package}\t${Version}\n' | sort
+printf '%s\n' '===COMPILER_SELECTION==='; command -v gcc; readlink -f "$(command -v gcc)"; dpkg-query -W gcc-9
+printf '%s\n' '===PACKAGES==='; dpkg-query -W -f='${{Package}}\t${{Version}}\n' | sort
 printf '%s\n' '===MANUAL==='; apt-mark showmanual | sort
 printf '%s\n' '===APT_SOURCES==='; find /etc/apt -maxdepth 2 -type f \\( -name '*.list' -o -name '*.sources' \\) -print0 | sort -z | xargs -0 -r sha256sum
 printf '%s\n' '===DPKG_STATUS==='; sha256sum /var/lib/dpkg/status
-printf '%s\n' '===PACKAGE_POLICY==='; apt-cache policy binutils build-essential file unzip
+printf '%s\n' '===PACKAGE_POLICY==='; apt-cache policy binutils build-essential file gcc-9 unzip
 """.strip()
     inventory, inventory_record = run_wsl(ctx, "capture-toolchain-package-inventory", inventory_script)
     installed_specs = [line for line in normalized_lines(install_output) if re.fullmatch(r"[a-z0-9+.-]+=[^\s]+", line)]
@@ -525,14 +551,24 @@ printf '%s\n' '===PACKAGE_POLICY==='; apt-cache policy binutils build-essential 
         "apt_upgrade_performed": False,
         "archive_copied_to_linux_filesystem": True,
         "archive_sha256": ARCHIVE_SHA256,
-        "commands": {"configure": setup_record, "install": install_record, "inventory": inventory_record},
-        "fixed_environment": {"LANG": "C", "LC_ALL": "C", "TZ": "UTC", "umask": "022"},
+        "commands": {
+            "configure": setup_record, "install": install_record,
+            "select_compiler": compiler_record, "inventory": inventory_record,
+        },
+        "fixed_environment": {
+            "LANG": "C", "LC_ALL": "C", "PATH": FIXED_PATH, "TZ": "UTC", "umask": "022"
+        },
         "freeze_id": FREEZE_ID,
         "installed_package_specs": installed_specs,
         "inventory_bytes": len(inventory.encode("utf-8")),
         "inventory_sha256": sha256_bytes(inventory.encode("utf-8")),
         "package_sources_official_ubuntu_only": "ubuntu.com" in inventory and "ppa.launchpad" not in inventory,
         "third_party_repository_used": False,
+        "toolchain_selection": {
+            "compiler": "/usr/bin/gcc-9", "custom_compile_flags": False,
+            "method": "recorded ephemeral PATH selection", "path_prefix": TOOLCHAIN_BIN,
+            "reason": "NBIS 5.0.0 upstream common-symbol semantics without source changes or a compatibility flag",
+        },
         "toolchain_inventory": inventory,
         "user": {"gid": BUILD_GID, "home": "/home/nbisbuild", "shell": "/bin/bash", "uid": BUILD_UID},
     }
@@ -661,7 +697,7 @@ unzip -q /opt/nbis-input/{ARCHIVE_FILENAME} -d '{build_parent}'
             raise FreezeError(f"{build_id} source identity before build mismatch")
         command_script = f"""
 set -euo pipefail
-export LC_ALL=C LANG=C TZ=UTC
+export LC_ALL=C LANG=C TZ=UTC PATH='{FIXED_PATH}'
 umask 022
 cd '{source_root}'
 ./setup.sh '{install_root}' --without-X11 --without-OPENJP2 --64
@@ -685,7 +721,9 @@ make install LIBNBIS=no
                 "metadata": metadata_record,
             },
             "custom_flags_used": False,
-            "environment": {"LANG": "C", "LC_ALL": "C", "TZ": "UTC", "umask": "022"},
+            "environment": {
+                "LANG": "C", "LC_ALL": "C", "PATH": FIXED_PATH, "TZ": "UTC", "umask": "022"
+            },
             "executables": metadata["executables"],
             "freeze_id": FREEZE_ID,
             "installed_file_count": metadata["installed_file_count"],

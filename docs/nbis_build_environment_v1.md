@@ -61,9 +61,13 @@ accept an image, fixture, dataset, manifest, subject, score, threshold,
 decision, alternate source URL/version, or patch.
 
 The canonical build account is `nbisbuild` with UID/GID 2000. Builds use
-`LC_ALL=C`, `LANG=C`, `TZ=UTC`, and umask 022. The source is copied to the Linux
-filesystem and independently extracted twice. For each extraction, all 3,879
-official archive entries are verified before and after the build.
+`LC_ALL=C`, `LANG=C`, `TZ=UTC`, and umask 022. The compiler is the pinned
+official Ubuntu `gcc-9` package selected through a recorded process-local PATH
+prefix. GCC 9 preserves the upstream NBIS 5.0.0 common-symbol semantics without
+`-fcommon`, another compiler/linker flag, or a source change. The host and
+persistent distribution PATH remain unchanged. The source is copied to the
+Linux filesystem and independently extracted twice. For each extraction, all
+3,879 official archive entries are verified before and after the build.
 
 The command sequence comes directly from `INSTALL_LINUX_MACOSX.txt`:
 

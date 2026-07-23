@@ -104,8 +104,8 @@ def _valid_documents() -> dict[str, dict[str, object]]:
         "toolchain_manifest.json": {
             **common,
             "architecture": "x86_64", "locale": "C", "timezone": "UTC", "umask": "022",
-            "gcc": {"identity": "/usr/bin/gcc", "package": "gcc", "version": "gcc 13.3.0"},
-            "cc": {"identity": "/usr/bin/cc", "package": "gcc", "version": "gcc 13.3.0"},
+            "gcc": {"identity": "/opt/nbis-toolchain/gcc-9/bin/gcc", "package": "gcc-9", "version": "gcc 9.5.0"},
+            "cc": {"identity": "/opt/nbis-toolchain/gcc-9/bin/cc", "package": "gcc-9", "version": "gcc 9.5.0"},
             "gnu_make": {"identity": "/usr/bin/make", "is_gnu": True, "package": "make", "version": "GNU Make 4.3"},
             "bash": {"identity": "/usr/bin/bash", "package": "bash", "version": "GNU bash 5.2"},
             "libc": {"identity": "GNU C Library", "package": "libc6", "version": "2.39"},
@@ -115,13 +115,28 @@ def _valid_documents() -> dict[str, dict[str, object]]:
             **common,
             "apt_mark_manual_sha256": H1, "apt_source_files_sha256": H2,
             "downloaded_deb_used": False, "dpkg_query_sha256": H3, "dpkg_status_sha256": H1,
-            "installed_manual_packages": [{"name": "build-essential", "origin": "official Ubuntu repository", "version": "12.10ubuntu1"}],
+            "installed_manual_packages": [
+                {
+                    "name": name,
+                    "origin": "official Ubuntu repository",
+                    "reason": validator.PACKAGE_REASONS[name],
+                    "version": "locked-version",
+                }
+                for name in sorted(validator.REQUIRED_PACKAGES)
+            ],
             "official_ubuntu_repositories_only": True, "ppa_used": False, "third_party_repository_used": False,
         },
         "build_commands.json": {
             **common,
             "build_ids": ["BUILD_A", "BUILD_B"], "custom_flags_used": False,
-            "environment": {"LANG": "C", "LC_ALL": "C", "TZ": "UTC", "umask": "022"},
+            "compiler_selection": {
+                "compiler_package": "gcc-9", "custom_compile_flags": False,
+                "method": "recorded ephemeral PATH selection", "path_prefix": validator.TOOLCHAIN_BIN,
+            },
+            "environment": {
+                "LANG": "C", "LC_ALL": "C", "PATH": validator.FIXED_PATH,
+                "TZ": "UTC", "umask": "022",
+            },
             "normalized_command_sequence": [
                 "./setup.sh <INSTALL_ROOT> --without-X11 --without-OPENJP2 --64",
                 "make config", "make it", "make install LIBNBIS=no",
@@ -261,6 +276,12 @@ def test_missing_toolchain_is_rejected() -> None:
 
 def test_missing_compiler_version_is_rejected() -> None:
     assert "missing toolchain identity/version: gcc" in _mutate("toolchain_manifest.json", ("gcc", "version"), "")
+
+
+def test_wrong_compiler_package_is_rejected() -> None:
+    assert "pinned GCC 9 compiler selection is missing" in _mutate(
+        "toolchain_manifest.json", ("gcc", "package"), "gcc"
+    )
 
 
 def test_non_gnu_make_requires_rejection() -> None:
@@ -516,8 +537,14 @@ def test_two_clean_builds_are_fixed() -> None:
 
 def test_pinned_package_lookup_is_pipefail_safe() -> None:
     script = freeze.package_version_script()
-    assert "binutils build-essential file unzip" in script
+    assert "binutils build-essential file gcc-9 unzip" in script
     assert "Candidate:/ {print $2; exit}" not in script
+
+
+def test_no_fcommon_or_source_compatibility_patch_is_used() -> None:
+    source = (REPOSITORY_ROOT / "tools" / "freeze_nbis_build_environment_v1.py").read_text(encoding="utf-8")
+    assert "-fcommon" not in source
+    assert "gcc-9" in freeze.FIXED_PACKAGES
 
 
 def test_biometric_and_fixture_execution_are_disabled() -> None:

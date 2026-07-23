@@ -62,6 +62,16 @@ UBUNTU_WSL_FILENAME = "ubuntu-24.04.4-wsl-amd64.wsl"
 UBUNTU_WSL_URL = f"https://releases.ubuntu.com/noble/{UBUNTU_WSL_FILENAME}"
 UBUNTU_WSL_SHA256SUMS_URL = "https://releases.ubuntu.com/noble/SHA256SUMS"
 UBUNTU_WSL_SHA256 = "9b2f7730dc68227dd04a9f3e5eab86ad85caf556b8606ad94f1f29ff5c4fd3f5"
+TOOLCHAIN_BIN = "/opt/nbis-toolchain/gcc-9/bin"
+FIXED_PATH = f"{TOOLCHAIN_BIN}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+REQUIRED_PACKAGES = {"binutils", "build-essential", "file", "gcc-9", "unzip"}
+PACKAGE_REASONS = {
+    "binutils": "NBIS static-library build and ELF evidence inspection",
+    "build-essential": "official NBIS GNU make and native C build prerequisites",
+    "file": "executable format evidence",
+    "gcc-9": "NBIS 5.0.0 upstream common-symbol semantics without source changes or a compatibility flag",
+    "unzip": "independent extraction of the official NBIS ZIP archive",
+}
 REMAINING_GATES = (
     "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
     "NBIS_2000_PPI_PREPROCESSING_POLICY_V1",
@@ -225,6 +235,8 @@ def validate_semantics(documents: dict[str, Any]) -> list[str]:
             errors.append(f"missing toolchain identity/version: {component}")
     if toolchain.get("gnu_make", {}).get("is_gnu") is not True:
         errors.append("Make is not recorded as GNU Make")
+    if toolchain.get("gcc", {}).get("package") != "gcc-9" or toolchain.get("cc", {}).get("package") != "gcc-9":
+        errors.append("pinned GCC 9 compiler selection is missing")
 
     packages = documents["package_manifest.json"]
     if packages.get("official_ubuntu_repositories_only") is not True:
@@ -234,6 +246,14 @@ def validate_semantics(documents: dict[str, Any]) -> list[str]:
     installed = packages.get("installed_manual_packages", [])
     if not installed or any(not item.get("name") or not item.get("version") for item in installed):
         errors.append("package manifest lacks pinned package versions")
+    if {item.get("name") for item in installed} != REQUIRED_PACKAGES:
+        errors.append("required package set mismatch")
+    for item in installed:
+        if (
+            item.get("origin") != "official Ubuntu repository"
+            or item.get("reason") != PACKAGE_REASONS.get(item.get("name"))
+        ):
+            errors.append("package version/origin/reason is incomplete")
     for key in ("apt_source_files_sha256", "dpkg_status_sha256", "dpkg_query_sha256", "apt_mark_manual_sha256"):
         if not _is_sha256(packages.get(key)):
             errors.append(f"package manifest hash missing: {key}")
@@ -243,6 +263,13 @@ def validate_semantics(documents: dict[str, Any]) -> list[str]:
         errors.append("official build instruction source mismatch")
     if commands.get("build_ids") != ["BUILD_A", "BUILD_B"] or commands.get("custom_flags_used") is not False or commands.get("source_modified") is not False:
         errors.append("build command policy mismatch")
+    if commands.get("compiler_selection") != {
+        "compiler_package": "gcc-9", "custom_compile_flags": False,
+        "method": "recorded ephemeral PATH selection", "path_prefix": TOOLCHAIN_BIN,
+    }:
+        errors.append("build compiler selection mismatch")
+    if commands.get("environment", {}).get("PATH") != FIXED_PATH:
+        errors.append("build PATH selection mismatch")
     expected_sequence = [
         "./setup.sh <INSTALL_ROOT> --without-X11 --without-OPENJP2 --64",
         "make config", "make it", "make install LIBNBIS=no",
@@ -374,7 +401,12 @@ def build_documents_from_receipts(repository_root: Path, workspace_root: Path) -
     installed = []
     for spec in packages["installed_package_specs"]:
         name, version = spec.split("=", 1)
-        installed.append({"name": name, "origin": "official Ubuntu repository", "version": version})
+        installed.append({
+            "name": name,
+            "origin": "official Ubuntu repository",
+            "reason": PACKAGE_REASONS[name],
+            "version": version,
+        })
     package_rows = _section(inventory, "PACKAGES")
     manual_rows = _section(inventory, "MANUAL")
     apt_sources = _section(inventory, "APT_SOURCES")
@@ -482,8 +514,8 @@ def build_documents_from_receipts(repository_root: Path, workspace_root: Path) -
         "architecture": "x86_64",
         "bash": {"identity": _section(inventory, "BASH").splitlines()[0], "package": "bash", "version": _first_version(_section(inventory, "BASH"))},
         "binutils": {"identity": _section(inventory, "BINUTILS").splitlines()[0], "package": "binutils", "version": _first_version(_section(inventory, "BINUTILS"))},
-        "cc": {"identity": _section(inventory, "CC").splitlines()[0], "package": "gcc", "version": _first_version(_section(inventory, "CC"))},
-        "gcc": {"identity": _section(inventory, "GCC").splitlines()[0], "package": "gcc", "version": _first_version(_section(inventory, "GCC"))},
+        "cc": {"identity": _section(inventory, "CC").splitlines()[0], "package": "gcc-9", "version": _first_version(_section(inventory, "CC"))},
+        "gcc": {"identity": _section(inventory, "GCC").splitlines()[0], "package": "gcc-9", "version": _first_version(_section(inventory, "GCC"))},
         "gnu_make": {"identity": _section(inventory, "MAKE").splitlines()[0], "is_gnu": "GNU Make" in _section(inventory, "MAKE"), "package": "make", "version": _first_version(_section(inventory, "MAKE"))},
         "libc": {"identity": "GNU C Library", "package": "libc6", "version": _section(inventory, "LIBC").splitlines()[0]},
         "locale": "C", "timezone": "UTC", "umask": "022",
@@ -503,8 +535,16 @@ def build_documents_from_receipts(repository_root: Path, workspace_root: Path) -
     documents["build_commands.json"] = {
         **common,
         "build_ids": ["BUILD_A", "BUILD_B"],
+        "compiler_selection": {
+            "compiler_package": "gcc-9",
+            "custom_compile_flags": False,
+            "method": "recorded ephemeral PATH selection",
+            "path_prefix": TOOLCHAIN_BIN,
+        },
         "custom_flags_used": False,
-        "environment": {"LANG": "C", "LC_ALL": "C", "TZ": "UTC", "umask": "022"},
+        "environment": {
+            "LANG": "C", "LC_ALL": "C", "PATH": FIXED_PATH, "TZ": "UTC", "umask": "022"
+        },
         "normalized_command_sequence": build_a["official_command_sequence"],
         "official_instruction_source": "INSTALL_LINUX_MACOSX.txt",
         "source_modified": False,
