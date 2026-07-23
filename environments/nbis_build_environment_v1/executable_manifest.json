@@ -1,0 +1,44 @@
+{
+  "executables": {
+    "bozorth3": {
+      "architecture": "x86-64",
+      "build_a_sha256": "b0fd7639307c2aee939fd48de3f79bbec3d14bc4d525223407d213a68caaac7a",
+      "build_b_sha256": "b0fd7639307c2aee939fd48de3f79bbec3d14bc4d525223407d213a68caaac7a",
+      "bytes": 57480,
+      "canonical_relative_path": "bin/bozorth3",
+      "canonical_sha256": "b0fd7639307c2aee939fd48de3f79bbec3d14bc4d525223407d213a68caaac7a",
+      "dependencies_sha256": "6bc7072b5a42d0c94b2cb4f00b89b5a8e163e356fd3ea6d335e84387789fc9d7",
+      "file_type": "ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=b53fdff1e2ebc8eeb3d256aa81498e516fab1a85, for GNU/Linux 3.2.0, not stripped",
+      "freeze_id": "nbis_build_environment_v1",
+      "freeze_version": 1,
+      "interpreter": "/lib64/ld-linux-x86-64.so.2",
+      "linked_library_identities": {
+        "ldd_normalized_sha256": "6bc7072b5a42d0c94b2cb4f00b89b5a8e163e356fd3ea6d335e84387789fc9d7"
+      },
+      "nbis_release": "5.0.0",
+      "rodata_sha256": "e0bcab06f3f3cc7124f4ecc46748a7ec20c26c9ad39de8b8f70723ccd2be1423",
+      "text_sha256": "7dbebde4ed2854573b34117fd1a7e0d684ffae6bf7f176a623e02301567d1bc2"
+    },
+    "mindtct": {
+      "architecture": "x86-64",
+      "build_a_sha256": "8b08c10d0f6e2c6250a9254224e0b7258e6eab60a28a1c48095618c0af7e4d33",
+      "build_b_sha256": "8b08c10d0f6e2c6250a9254224e0b7258e6eab60a28a1c48095618c0af7e4d33",
+      "bytes": 754656,
+      "canonical_relative_path": "bin/mindtct",
+      "canonical_sha256": "8b08c10d0f6e2c6250a9254224e0b7258e6eab60a28a1c48095618c0af7e4d33",
+      "dependencies_sha256": "6bc7072b5a42d0c94b2cb4f00b89b5a8e163e356fd3ea6d335e84387789fc9d7",
+      "file_type": "ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=c517b090d0c76d15a5c512dd0b6111ced9f73786, for GNU/Linux 3.2.0, not stripped",
+      "freeze_id": "nbis_build_environment_v1",
+      "freeze_version": 1,
+      "interpreter": "/lib64/ld-linux-x86-64.so.2",
+      "linked_library_identities": {
+        "ldd_normalized_sha256": "6bc7072b5a42d0c94b2cb4f00b89b5a8e163e356fd3ea6d335e84387789fc9d7"
+      },
+      "nbis_release": "5.0.0",
+      "rodata_sha256": "a87275ad661ffd7a4fee876a7de53ea3838cab933bb6ebd66e0361be4df9b922",
+      "text_sha256": "5f1b66050e2aa5404bf6f0488b35787b613f1399e79ab5af29420391b935e0f7"
+    }
+  },
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1
+}

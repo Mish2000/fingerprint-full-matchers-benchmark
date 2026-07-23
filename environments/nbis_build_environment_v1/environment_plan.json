@@ -1,0 +1,38 @@
+{
+  "archive_layout_identity_is_diagnostic_only": true,
+  "audit_baselines": {
+    "candidate_audit": {
+      "commit": "6a14e4c1a960494bc2e1a8a9c351790f6cc2d571",
+      "tag": "nbis-candidate-audit-v1"
+    },
+    "provenance_erratum": {
+      "commit": "d5f8122a1b76ff79556d909155f8e3b586adcabc",
+      "tag": "nbis-candidate-audit-v1-erratum1"
+    }
+  },
+  "biometric_input_allowed": false,
+  "build_count": 2,
+  "distribution": {
+    "architecture": "x86_64",
+    "family": "Ubuntu",
+    "release": "24.04 LTS",
+    "wsl_generation": 2
+  },
+  "environment_id": "wsl2_ubuntu_24_04_lts_x86_64",
+  "fixture_probe_allowed": false,
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "official_archive": {
+    "filename": "nbis_v5_0_0.zip",
+    "sha256": "0adf8ab0f6b0e4208de50ca00ba21d3d77112ecd66288757ddfed21f6bee92c3",
+    "size_bytes": 52595795
+  },
+  "prerequisite_id": "NBIS_BUILD_ENVIRONMENT_FREEZE_V1",
+  "source_identity": {
+    "algorithm_id": "nbis_source_tree_identity_v2",
+    "archive_layout_diagnostic_sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8",
+    "canonical_release_root_sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+    "file_count": 3879
+  },
+  "source_modifications_allowed": false
+}

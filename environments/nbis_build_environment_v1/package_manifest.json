@@ -1,0 +1,44 @@
+{
+  "apt_mark_manual_sha256": "9a154404392d739f3926ef17c36ab1ca414d14f5f23adac68c21b0bba2cf807c",
+  "apt_source_files_sha256": "9d8454efbf47b533324f727e300addc64103c25584b9556faa316d89efba9095",
+  "downloaded_deb_used": false,
+  "dpkg_query_sha256": "675f1c7afd68f854eb9778549b411f7227a77cd95fd48f898d6d9dfe92e3075e",
+  "dpkg_status_sha256": "d881b78771aaed68745089add96c3547b918188aba9e23ac7551ba5004c115cc",
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "installed_manual_packages": [
+    {
+      "name": "binutils",
+      "origin": "official Ubuntu repository",
+      "reason": "NBIS static-library build and ELF evidence inspection",
+      "version": "2.42-4ubuntu2.10"
+    },
+    {
+      "name": "build-essential",
+      "origin": "official Ubuntu repository",
+      "reason": "official NBIS GNU make and native C build prerequisites",
+      "version": "12.10ubuntu1"
+    },
+    {
+      "name": "file",
+      "origin": "official Ubuntu repository",
+      "reason": "executable format evidence",
+      "version": "1:5.45-3build1"
+    },
+    {
+      "name": "gcc-9",
+      "origin": "official Ubuntu repository",
+      "reason": "NBIS 5.0.0 upstream common-symbol semantics without source changes or a compatibility flag",
+      "version": "9.5.0-6ubuntu2.1"
+    },
+    {
+      "name": "unzip",
+      "origin": "official Ubuntu repository",
+      "reason": "independent extraction of the official NBIS ZIP archive",
+      "version": "6.0-28ubuntu4.1"
+    }
+  ],
+  "official_ubuntu_repositories_only": true,
+  "ppa_used": false,
+  "third_party_repository_used": false
+}

@@ -1,0 +1,74 @@
+{
+  "archive_valid": true,
+  "bozorth3_built": true,
+  "build_a_passed": true,
+  "build_b_passed": true,
+  "canonical_install_valid": true,
+  "dataset_accessed": false,
+  "distribution_official": true,
+  "errors": [],
+  "export_valid": true,
+  "external_receipts": [
+    {
+      "bytes": 9077,
+      "filename": "build_a_receipt.json",
+      "sha256": "6c9157ceb4ad50e0d4e1c884e5d8f97b58971eebf283cf708f2793246da6d769",
+      "stored_outside_git": true
+    },
+    {
+      "bytes": 9077,
+      "filename": "build_b_receipt.json",
+      "sha256": "4e88fba4a6d65c46480e5a4a9947b8d9d9e98200d6799289b5768f93f8071135",
+      "stored_outside_git": true
+    },
+    {
+      "bytes": 26610,
+      "filename": "canonical_install_receipt.json",
+      "sha256": "583b934f130e3490897690a93536e650ef45d400d9c9e7e7a855e8678ce0dd73",
+      "stored_outside_git": true
+    },
+    {
+      "bytes": 3434,
+      "filename": "distribution_acquisition_receipt.json",
+      "sha256": "c8c70c5d00f73a2b9fa67cd0f1dba5c506dae570045088094b9f43c3fe230b5e",
+      "stored_outside_git": true
+    },
+    {
+      "bytes": 1590,
+      "filename": "environment_export_receipt.json",
+      "sha256": "b265372ab8c5e6cb23eaac780c9a0ea46f0aa11bfe929d2884627093fa49bf41",
+      "stored_outside_git": true
+    },
+    {
+      "bytes": 29873,
+      "filename": "package_install_receipt.json",
+      "sha256": "832e9cbf21519fb0f2ca36a4ca0a2f014570403124f21dca4250acc56355aa60",
+      "stored_outside_git": true
+    },
+    {
+      "bytes": 5866,
+      "filename": "restore_verification_receipt.json",
+      "sha256": "ef1e192e13025b1106d93f854da8cd263b417ead0b8d16e0bc0cb1055e5efa9e",
+      "stored_outside_git": true
+    },
+    {
+      "bytes": 4739,
+      "filename": "wsl_install_receipt.json",
+      "sha256": "bfc054ca9de0f8df51c2116786b76fc11f45839f1d80f198f5f93b6a833750e4",
+      "stored_outside_git": true
+    }
+  ],
+  "fingerprint_images_read": false,
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "mindtct_built": true,
+  "packages_pinned": true,
+  "reproducibility_accepted": true,
+  "restore_valid": true,
+  "scores_generated": false,
+  "source_trees_valid": true,
+  "source_unchanged": true,
+  "threshold_used": false,
+  "toolchain_pinned": true,
+  "valid": true
+}

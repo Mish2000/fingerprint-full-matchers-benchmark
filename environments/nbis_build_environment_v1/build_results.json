@@ -1,0 +1,32 @@
+{
+  "build_count": 2,
+  "builds": {
+    "BUILD_A": {
+      "bozorth3_built": true,
+      "exit_status": 0,
+      "installed_file_count": 303,
+      "mindtct_built": true,
+      "source_modified": false,
+      "source_tree_sha256_after": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+      "source_tree_sha256_before": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+      "stderr_sha256": "050ce936fb5d20e8ae9b2e18e00087ec47a73794eaad8e0be60f049654580496",
+      "stdout_sha256": "73ea310bea091398a5974c194689c01a907fa412aa9fae5e0eceb3a95e1277a3",
+      "warning_count": 0
+    },
+    "BUILD_B": {
+      "bozorth3_built": true,
+      "exit_status": 0,
+      "installed_file_count": 303,
+      "mindtct_built": true,
+      "source_modified": false,
+      "source_tree_sha256_after": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+      "source_tree_sha256_before": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+      "stderr_sha256": "907ca0aa477d3a75991386b26758296692c9e982f505f319464313c97af08321",
+      "stdout_sha256": "d56d2f1a3482df53ddb01cc3cc9ff91146f328b0b43527d90394611f22661229",
+      "warning_count": 0
+    }
+  },
+  "canonical_build_selected": "BUILD_A",
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1
+}

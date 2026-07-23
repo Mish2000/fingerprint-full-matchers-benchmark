@@ -1,0 +1,12 @@
+{
+  "canonical_executable_sha256": {
+    "bozorth3": "b0fd7639307c2aee939fd48de3f79bbec3d14bc4d525223407d213a68caaac7a",
+    "mindtct": "8b08c10d0f6e2c6250a9254224e0b7258e6eab60a28a1c48095618c0af7e4d33"
+  },
+  "export_sha256": "185a36f7c44398f5fe5d72f5b9bd58da60540e76b95d02e69e7dc4fb46af6fa7",
+  "export_size_bytes": 2306140160,
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "restore_verification_status": "PASS",
+  "stored_outside_git": true
+}

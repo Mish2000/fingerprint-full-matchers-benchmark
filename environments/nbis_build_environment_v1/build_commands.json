@@ -1,0 +1,36 @@
+{
+  "build_ids": [
+    "BUILD_A",
+    "BUILD_B"
+  ],
+  "compiler_selection": {
+    "compiler_package": "gcc-9",
+    "custom_compile_flags": false,
+    "method": "recorded ephemeral PATH selection",
+    "path_prefix": "/opt/nbis-toolchain/gcc-9/bin"
+  },
+  "custom_flags_used": false,
+  "environment": {
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/opt/nbis-toolchain/gcc-9/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "TZ": "UTC",
+    "umask": "022"
+  },
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "normalized_command_sequence": [
+    "./setup.sh <INSTALL_ROOT> --without-X11 --without-OPENJP2 --64",
+    "make config",
+    "make it",
+    "make install LIBNBIS=no"
+  ],
+  "official_instruction_source": "INSTALL_LINUX_MACOSX.txt",
+  "source_modified": false,
+  "working_directory_placeholders": [
+    "<BUILD_A_ROOT>",
+    "<BUILD_B_ROOT>",
+    "<CANONICAL_INSTALL_ROOT>",
+    "<WSL_SOURCE_ROOT>"
+  ]
+}

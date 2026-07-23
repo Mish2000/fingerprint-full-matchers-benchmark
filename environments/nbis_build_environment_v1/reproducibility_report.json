@@ -1,0 +1,30 @@
+{
+  "algorithmically_relevant_variance": false,
+  "executables": {
+    "bozorth3": {
+      "binary_hashes_equal": true,
+      "canonical_executable_sha256": "b0fd7639307c2aee939fd48de3f79bbec3d14bc4d525223407d213a68caaac7a",
+      "cli_payload_equal": true,
+      "dynamic_dependencies_equal": true,
+      "rodata_section_equal": true,
+      "symbols_equal": true,
+      "text_section_equal": true,
+      "variance_algorithmically_relevant": false,
+      "variance_description": "none"
+    },
+    "mindtct": {
+      "binary_hashes_equal": true,
+      "canonical_executable_sha256": "8b08c10d0f6e2c6250a9254224e0b7258e6eab60a28a1c48095618c0af7e4d33",
+      "cli_payload_equal": true,
+      "dynamic_dependencies_equal": true,
+      "rodata_section_equal": true,
+      "symbols_equal": true,
+      "text_section_equal": true,
+      "variance_algorithmically_relevant": false,
+      "variance_description": "none"
+    }
+  },
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "status": "EXACT_BINARY_REPRODUCIBILITY"
+}

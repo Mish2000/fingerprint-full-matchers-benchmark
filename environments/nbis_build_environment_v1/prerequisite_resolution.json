@@ -1,0 +1,23 @@
+{
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "prerequisite_id": "NBIS_BUILD_ENVIRONMENT_FREEZE_V1",
+  "remaining_gates": [
+    "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+    "NBIS_2000_PPI_PREPROCESSING_POLICY_V1",
+    "NBIS_TECHNICAL_DETERMINISM_PROBE_V1"
+  ],
+  "resolution_criterion": {
+    "biometric_input_processed": false,
+    "bozorth3_built": true,
+    "clean_rebuild_completed": true,
+    "executable_identity_recorded": true,
+    "export_created": true,
+    "frozen_environment_defined": true,
+    "mindtct_built": true,
+    "official_archive_verified": true,
+    "restore_verified": true,
+    "source_modified": false
+  },
+  "status": "RESOLVED"
+}

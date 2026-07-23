@@ -1,0 +1,39 @@
+{
+  "architecture": "x86_64",
+  "bash": {
+    "identity": "/usr/bin/bash",
+    "package": "bash",
+    "version": "GNU bash, version 5.2.21(1)-release (x86_64-pc-linux-gnu)"
+  },
+  "binutils": {
+    "identity": "/usr/bin/readelf",
+    "package": "binutils",
+    "version": "GNU readelf (GNU Binutils for Ubuntu) 2.42"
+  },
+  "cc": {
+    "identity": "/opt/nbis-toolchain/gcc-9/bin/cc",
+    "package": "gcc-9",
+    "version": "cc (Ubuntu 9.5.0-6ubuntu2.1) 9.5.0"
+  },
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "gcc": {
+    "identity": "/opt/nbis-toolchain/gcc-9/bin/gcc",
+    "package": "gcc-9",
+    "version": "gcc (Ubuntu 9.5.0-6ubuntu2.1) 9.5.0"
+  },
+  "gnu_make": {
+    "identity": "/usr/bin/make",
+    "is_gnu": true,
+    "package": "make",
+    "version": "GNU Make 4.3"
+  },
+  "libc": {
+    "identity": "GNU C Library",
+    "package": "libc6",
+    "version": "ldd (Ubuntu GLIBC 2.39-0ubuntu8.7) 2.39"
+  },
+  "locale": "C",
+  "timezone": "UTC",
+  "umask": "022"
+}

@@ -1,0 +1,22 @@
+{
+  "acquisition_method": "official_canonical_wsl_image_from_file",
+  "architecture": "x86_64",
+  "bootstrap_rootfs_bytes": 391541571,
+  "bootstrap_rootfs_sha256": "9b2f7730dc68227dd04a9f3e5eab86ad85caf556b8606ad94f1f29ff5c4fd3f5",
+  "distribution": "Ubuntu",
+  "export_sha256": "185a36f7c44398f5fe5d72f5b9bd58da60540e76b95d02e69e7dc4fb46af6fa7",
+  "export_size_bytes": 2306140160,
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "official_image_filename": "ubuntu-24.04.4-wsl-amd64.wsl",
+  "official_image_sha256sums_url": "https://releases.ubuntu.com/noble/SHA256SUMS",
+  "official_image_url": "https://releases.ubuntu.com/noble/ubuntu-24.04.4-wsl-amd64.wsl",
+  "publisher": "Canonical",
+  "release": "24.04 LTS",
+  "restore_verification_status": "PASS",
+  "rootfs_export_freezes_userspace": true,
+  "wsl2_kernel_host_provided": true,
+  "wsl_generation": 2,
+  "wsl_kernel_version": "6.18.33.2-2",
+  "wsl_version": "2.7.10.0"
+}

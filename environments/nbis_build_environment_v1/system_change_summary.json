@@ -1,0 +1,15 @@
+{
+  "cygwin_installed_by_task": false,
+  "distribution_created_by_task": true,
+  "distribution_installed": true,
+  "distribution_name": "NBIS-BUILD-V1",
+  "docker_installed_by_task": false,
+  "freeze_id": "nbis_build_environment_v1",
+  "freeze_version": 1,
+  "host_compiler_installed_by_task": false,
+  "persistent_path_modified": false,
+  "reboot_performed_by_task": false,
+  "reboot_required": false,
+  "virtual_machine_platform_available": true,
+  "wsl_enabled": true
+}
