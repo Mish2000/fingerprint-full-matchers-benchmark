@@ -622,12 +622,14 @@ for name in mindtct bozorth3; do
   printf '%s.dependencies_sha256=%s\n' "$name" "$(ldd "$path" | LC_ALL=C sort | sha256sum | awk '{{print $1}}')"
   printf '%s.dynamic_sha256=%s\n' "$name" "$(readelf -d "$path" | sha256sum | awk '{{print $1}}')"
   printf '%s.symbols_sha256=%s\n' "$name" "$(readelf -Ws "$path" | sed 's/[[:space:]]\\+/ /g' | sha256sum | awk '{{print $1}}')"
-  text_file=$(mktemp); rodata_file=$(mktemp)
-  objcopy --dump-section .text="$text_file" "$path"
-  objcopy --dump-section .rodata="$rodata_file" "$path"
+  text_file=$(mktemp); rodata_file=$(mktemp); work_file=$(mktemp)
+  cp -- "$path" "$work_file"
+  chmod u+w "$work_file"
+  objcopy --dump-section .text="$text_file" "$work_file"
+  objcopy --dump-section .rodata="$rodata_file" "$work_file"
   printf '%s.text_sha256=%s\n' "$name" "$(sha256sum "$text_file" | awk '{{print $1}}')"
   printf '%s.rodata_sha256=%s\n' "$name" "$(sha256sum "$rodata_file" | awk '{{print $1}}')"
-  rm -f "$text_file" "$rodata_file"
+  rm -f "$text_file" "$rodata_file" "$work_file"
 done
 printf 'installed_file_count=%s\n' "$(find '{install_root}' -type f | wc -l)"
 """.strip()
