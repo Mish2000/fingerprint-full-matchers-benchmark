@@ -274,7 +274,9 @@ def preflight_data(ctx: Context, *, require_clean: bool = True) -> dict[str, Any
         ("list_verbose", ["wsl.exe", "--list", "--verbose"]),
         ("list_online", ["wsl.exe", "--list", "--online"]),
     ):
-        completed, record = run_command(ctx, f"preflight-wsl-{label}", args, check=label not in {"list_verbose"})
+        completed, record = run_command(
+            ctx, f"preflight-wsl-{label}", args, check=label not in {"help", "list_verbose"}
+        )
         commands[label] = record
         outputs[label] = decode_process_output(completed.stdout) + decode_process_output(completed.stderr)
     if "--from-file" not in outputs["help"] or "--name" not in outputs["help"]:
