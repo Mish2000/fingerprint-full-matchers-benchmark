@@ -1,0 +1,65 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "documents": [
+    {
+      "file_size_bytes": 3144114,
+      "normative_status": "INFORMATIVE_STUDY_WITH_SAMPLE_CODE",
+      "official": true,
+      "official_url": "https://www.nist.gov/publications/examination-downsampling-strategies-converting-1000-ppi-fingerprint-imagery-500-ppi",
+      "page_count": 84,
+      "publication_date": "2013-01-22",
+      "publisher": "National Institute of Standards and Technology",
+      "relevant_pages_sections": [
+        "PDF pages 27-28, section 3.1.4",
+        "PDF pages 83-84, Appendix C"
+      ],
+      "report_number": "NISTIR 7839",
+      "resolved_url": "https://nvlpubs.nist.gov/nistpubs/ir/2013/NIST.IR.7839.pdf",
+      "retrieval_utc": "2026-07-23T13:15:49.788Z",
+      "sha256": "5b062527c035955256c7e6f3e141453302555686ceaf9d586a690ba5a1f6304d",
+      "title": "Examination of Downsampling Strategies for Converting 1000 ppi Fingerprint Imagery to 500 ppi"
+    },
+    {
+      "file_size_bytes": 863391,
+      "normative_status": "NIST_GUIDANCE",
+      "official": true,
+      "official_url": "https://www.nist.gov/publications/compression-guidance-1000-ppi-friction-ridge-imagery",
+      "page_count": 23,
+      "publication_date": "2014-02-24",
+      "publisher": "National Institute of Standards and Technology",
+      "relevant_pages_sections": [
+        "PDF page 12, section 4.4",
+        "PDF page 13, section 5.1",
+        "PDF page 19, section 5.11"
+      ],
+      "report_number": "NIST SP 500-289",
+      "resolved_url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.500-289.pdf",
+      "retrieval_utc": "2026-07-23T13:15:52.936Z",
+      "sha256": "b8d0649c1184baf5c9523d78a7748497939f36aaef21458a1eba53eb65be551c",
+      "title": "Compression Guidance for 1000 ppi Friction Ridge Imagery"
+    },
+    {
+      "file_size_bytes": 1355370,
+      "normative_status": "NIST_CONFORMANCE_AND_CERTIFICATION_GUIDANCE",
+      "official": true,
+      "official_url": "https://www.nist.gov/publications/certification-pathway-downsampling-1000-ppi-fingerprint-friction-ridge-imagery-500-ppi",
+      "page_count": 28,
+      "publication_date": "2016-08-11",
+      "publisher": "National Institute of Standards and Technology",
+      "relevant_pages_sections": [
+        "PDF pages 9-10, sections 2.2 and 3.1",
+        "PDF page 15, sections 3.3-3.4",
+        "PDF pages 17-20, section 5"
+      ],
+      "report_number": "NIST SP 500-306",
+      "resolved_url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.500-306.pdf",
+      "retrieval_utc": "2026-07-23T13:15:54.941Z",
+      "sha256": "9c7cf3fa76426e0b8f99dcd1f9df7370dc8735753f9151444cd7c5bb1f0dc2d0",
+      "title": "Certification Pathway for Downsampling 1000 ppi Fingerprint Friction Ridge Imagery to 500 ppi"
+    }
+  ],
+  "pdf_text_extraction_performed": true,
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "relevant_pages_rendered_and_visually_reviewed": true,
+  "retrieval_policy": "NIST_OFFICIAL_ONLY"
+}

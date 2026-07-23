@@ -1,0 +1,12 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "certification_received": false,
+  "claim_permitted": "LOCAL_CONFORMANCE_ONLY",
+  "current_submission_availability": "NOT_VERIFIED_ACTIVE_FOR_DOWNSAMPLER_SUBMISSIONS",
+  "official_test_package_availability": "IDENTIFIED_BUT_GATED_AND_NOT_DOWNLOADED",
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "reference_software_availability": "IDENTIFIED_IN_SP_500_306_BUT_CURRENT_ARTIFACT_NOT_FOUND",
+  "sp_500_306_reviewed": true,
+  "submission_performed": false,
+  "web_status_evidence": "The broad NIST fingerprint-compression project is marked ongoing, but current official pages do not expose a downsampler submission portal or ungated package."
+}

@@ -1,0 +1,8 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "canonical_implementation_selected": false,
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "reason": "Critical byte-affecting semantics remain unresolved and no usable official NIST oracle artifact was found.",
+  "reference_implementation_sha256": null,
+  "source_file_sha256": null
+}

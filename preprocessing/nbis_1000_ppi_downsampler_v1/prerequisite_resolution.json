@@ -1,0 +1,20 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "canonical_implementation_selected": false,
+  "combined_result": "PASS + UNRESOLVED",
+  "next_task_permitted": false,
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "reason": "Official guidance fixes sigma, radius, filter-before-decimation, and a named odd-row/odd-column strategy, but it does not establish one byte-exact contract. NISTIR 7839 contains a direct border prose/code conflict, other critical numerical and dimension semantics remain non-normative, and the NIST Downsampler artifact identified by SP 500-306 is not currently available from the official release index.",
+  "status": "UNRESOLVED",
+  "task_status": "PASS",
+  "unresolved_pixel_semantics": [
+    "border_extension_rule",
+    "clipping_or_saturation",
+    "coefficient_precision",
+    "column_parity",
+    "normalization_rule",
+    "odd_input_dimensions",
+    "output_rounding",
+    "row_parity"
+  ]
+}

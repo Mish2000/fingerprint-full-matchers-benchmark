@@ -1,0 +1,13 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "border_discriminating_tests_present": true,
+  "clipping_sensitive_tests_present": true,
+  "execution_status": "NOT_EXECUTED_UNRESOLVED_SPEC",
+  "odd_even_dimension_tests_present": true,
+  "overall_status": "NOT_APPLICABLE_UNRESOLVED",
+  "parity_discriminating_tests_present": true,
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "reason": "Executing a locally chosen downsampler would convert unresolved semantics into an unsupported canonical result.",
+  "rounding_sensitive_tests_present": true,
+  "synthetic_design_completed": true
+}

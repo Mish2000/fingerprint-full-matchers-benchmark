@@ -1,0 +1,18 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "current_attempt_id": "nbis_1000_ppi_downsampler_v1_attempt_2",
+  "incidents": [
+    {
+      "attempt_id": "nbis_1000_ppi_downsampler_v1_attempt_1",
+      "cause": "unrestricted pytest collection executed a dataset-backed protocol test",
+      "dataset_accessed": true,
+      "dataset_modified": false,
+      "matcher_invoked": false,
+      "results_discarded": true,
+      "scores_generated": false,
+      "status": "FAIL",
+      "used_as_audit_evidence": false
+    }
+  ],
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1"
+}

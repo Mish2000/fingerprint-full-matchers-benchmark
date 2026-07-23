@@ -1,0 +1,9 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "execution_performed": false,
+  "overall_status": "NOT_EXECUTED_UNRESOLVED_SPEC",
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "reason": "No canonical implementation exists to execute reproducibly.",
+  "required_fresh_process_repetitions": 3,
+  "windows_ci_equality": "NOT_EXECUTED_UNRESOLVED_SPEC"
+}

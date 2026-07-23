@@ -1,0 +1,155 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "audit_version": 1,
+  "biometric_input_allowed": false,
+  "critical_pixel_semantics": [
+    "coefficient_precision",
+    "normalization_rule",
+    "border_extension_rule",
+    "output_rounding",
+    "clipping_or_saturation",
+    "row_parity",
+    "column_parity",
+    "odd_input_dimensions"
+  ],
+  "dataset_access_allowed": false,
+  "decision_rule": {
+    "resolved": "all critical pixel semantics are authoritative or decided by an official NIST oracle",
+    "unresolved": "at least one output-affecting critical semantic lacks authoritative evidence and no official NIST oracle decides it"
+  },
+  "dimension_cases": [
+    {
+      "height": 1,
+      "width": 1
+    },
+    {
+      "height": 2,
+      "width": 2
+    },
+    {
+      "height": 3,
+      "width": 3
+    },
+    {
+      "height": 8,
+      "width": 8
+    },
+    {
+      "height": 9,
+      "width": 9
+    },
+    {
+      "height": 10,
+      "width": 10
+    },
+    {
+      "height": 11,
+      "width": 11
+    },
+    {
+      "height": 9,
+      "width": 8
+    },
+    {
+      "height": 8,
+      "width": 9
+    },
+    {
+      "height": 11,
+      "width": 10
+    },
+    {
+      "height": 10,
+      "width": 11
+    }
+  ],
+  "fixed_random_seeds": [
+    0,
+    1,
+    7839,
+    500289,
+    500306
+  ],
+  "fresh_process_repetitions": 3,
+  "matcher_execution_allowed": false,
+  "official_source_policy": "NIST_OFFICIAL_ONLY",
+  "pixel_semantic_fields": [
+    "gaussian_sigma",
+    "filter_radius",
+    "kernel_dimensions",
+    "coefficient_generation_formula",
+    "kernel_separability",
+    "normalization_rule",
+    "coefficient_precision",
+    "numeric_representation",
+    "accumulation_precision",
+    "intermediate_rounding",
+    "output_rounding",
+    "clipping_or_saturation",
+    "border_extension_rule",
+    "corner_handling",
+    "repeated_edge_vs_reflection",
+    "mirrored_pixel_semantics",
+    "decimation_order",
+    "row_parity",
+    "column_parity",
+    "coordinate_origin",
+    "filter_before_decimation",
+    "output_width",
+    "output_height",
+    "even_input_dimensions",
+    "odd_input_dimensions",
+    "input_smaller_than_kernel",
+    "accepted_bit_depth",
+    "accepted_color_model",
+    "output_bit_depth",
+    "output_ppi_metadata",
+    "png_metadata_treatment",
+    "alpha_channel_treatment",
+    "compression_scope",
+    "jpeg2000_relationship",
+    "conformance_metric",
+    "conformance_tolerance",
+    "certification_submission_procedure",
+    "certification_pathway_availability"
+  ],
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "required_platforms": [
+    "WINDOWS_PROJECT_PYTHON",
+    "GITHUB_ACTIONS_PYTHON_3_11"
+  ],
+  "required_vector_purposes": [
+    "all_zeros",
+    "all_255",
+    "constant_mid_gray",
+    "impulse_center",
+    "impulse_top_left",
+    "impulse_top_right",
+    "impulse_bottom_left",
+    "impulse_bottom_right",
+    "impulse_adjacent_top",
+    "impulse_adjacent_bottom",
+    "impulse_adjacent_left",
+    "impulse_adjacent_right",
+    "horizontal_gradient",
+    "vertical_gradient",
+    "two_dimensional_gradient",
+    "horizontal_alternating_stripes",
+    "vertical_alternating_stripes",
+    "checkerboard",
+    "isolated_zero_in_255",
+    "isolated_255_in_zero",
+    "clipping_sensitive",
+    "rounding_half_sensitive",
+    "kernel_sized_9x9",
+    "smaller_than_kernel",
+    "even_width_even_height",
+    "odd_width_odd_height",
+    "even_width_odd_height",
+    "odd_width_even_height",
+    "dimensions_1_through_12",
+    "deterministic_pseudorandom",
+    "parity_sensitive",
+    "border_sensitive"
+  ]
+}

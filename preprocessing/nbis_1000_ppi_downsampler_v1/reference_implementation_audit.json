@@ -1,0 +1,31 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "execution_performed": false,
+  "findings": [
+    "SP 500-306 identifies a NIST Downsampler and says it was released as part of NBIS.",
+    "The current official NIGOS page exposes NBIS 5.0.0 as the newest stable release.",
+    "The official NBIS 5.0.0 source tree and changelog contain no identified SP 500-289 downsampler artifact.",
+    "No versioned source, binary, archive, or synthetic-input interface for the NIST Downsampler was found on current official NIST pages."
+  ],
+  "hash": null,
+  "license": "NOT_VERIFIED_FOR_MISSING_ARTIFACT",
+  "official_publisher": "National Institute of Standards and Technology",
+  "official_reference_found": false,
+  "official_reference_identified_in_sp_500_306": true,
+  "official_reference_searched": true,
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "relationship_to_guidance": "SP 500-306 states that the NIST Downsampler was used to generate the reference outputs for supplier evaluation.",
+  "search_completed_utc": "2026-07-23T13:26:44.243Z",
+  "search_scope": [
+    "Official NBIS software page",
+    "Official NIGOS release index and changelog",
+    "Official NIST publication and fingerprint-compression pages",
+    "Official NBIS 5.0.0 source tree"
+  ],
+  "software_name": "NIST Downsampler",
+  "source_or_binary": null,
+  "synthetic_input_only": true,
+  "third_party_oracle_used": false,
+  "used_as_oracle": false,
+  "version": null
+}

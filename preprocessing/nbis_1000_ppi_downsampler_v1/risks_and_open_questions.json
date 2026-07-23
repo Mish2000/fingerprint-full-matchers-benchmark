@@ -1,0 +1,43 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "open_questions": [
+    {
+      "field": "border_extension_rule",
+      "question": "Which exact coordinate mapping supersedes the conflict between prose and Appendix C center-pixel substitution?"
+    },
+    {
+      "field": "coefficient_precision",
+      "question": "Is there an official coefficient table or locked NIST Downsampler build that fixes coefficient bytes?"
+    },
+    {
+      "field": "normalization_rule",
+      "question": "Is finite-kernel normalization and its operation order normative?"
+    },
+    {
+      "field": "output_rounding",
+      "question": "Is truncation, nearest rounding, or another conversion required?"
+    },
+    {
+      "field": "clipping_or_saturation",
+      "question": "What exact range enforcement and ordering are required?"
+    },
+    {
+      "field": "row_parity",
+      "question": "Which zero-based row indices correspond to the guidance's odd-row terminology?"
+    },
+    {
+      "field": "column_parity",
+      "question": "Which zero-based column indices correspond to the guidance's odd-column terminology?"
+    },
+    {
+      "field": "odd_input_dimensions",
+      "question": "Are floor, ceiling, rejection, padding, or cropping required for odd dimensions?"
+    },
+    {
+      "field": "certification_pathway_availability",
+      "question": "Is NIST currently accepting downsampler submissions under SP 500-306?"
+    }
+  ],
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "risk_level": "BLOCKS_CANONICAL_PIXEL_CONTRACT"
+}

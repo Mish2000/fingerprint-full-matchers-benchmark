@@ -1,0 +1,564 @@
+{
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "field_count": 38,
+  "fields": {
+    "accepted_bit_depth": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Accept only unsigned eight-bit samples for this contract.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "The base raster is eight-bit grayscale with one unsigned byte per pixel.",
+      "page": 13,
+      "resolved": true,
+      "section": "5.1 Base Raster Format",
+      "source": "NIST SP 500-289",
+      "status": "EXPLICIT",
+      "value": 8
+    },
+    "accepted_color_model": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "No automatic color conversion is justified.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "The base raster is grayscale.",
+      "page": 13,
+      "resolved": true,
+      "section": "5.1 Base Raster Format",
+      "source": "NIST SP 500-289",
+      "status": "EXPLICIT",
+      "value": "grayscale"
+    },
+    "accumulation_precision": {
+      "ambiguity": "The conformance guidance does not lock evaluation order or floating-point environment.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Accumulator precision and order remain non-normative.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "The sample convolution accumulates into a double variable.",
+      "page": 83,
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "C-sharp double in sample code"
+    },
+    "alpha_channel_treatment": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Reject alpha-bearing input from the pure matrix contract.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "The base grayscale raster is specified without an alpha channel.",
+      "page": 13,
+      "resolved": true,
+      "section": "5.1 Base Raster Format",
+      "source": "NIST SP 500-289",
+      "status": "EXPLICIT",
+      "value": "alpha channel is not part of the base raster"
+    },
+    "border_extension_rule": {
+      "ambiguity": "The prose says missing taps are filled by mirroring or duplicating edge pixels; the code instead substitutes the current convolution-center pixel for every out-of-bounds tap.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Border pixels cannot have canonical outputs.",
+      "normative_level": "STUDY_PROSE_VERSUS_SAMPLE_CODE",
+      "normative_text_summary": "The printed prose and printed code prescribe observably different border values for nonconstant images.",
+      "page": [
+        28,
+        83
+      ],
+      "resolved": false,
+      "section": "3.1.4 and Appendix C",
+      "source": "NISTIR 7839",
+      "status": "CONFLICTING",
+      "value": null
+    },
+    "certification_pathway_availability": {
+      "ambiguity": "The broad fingerprint-compression project is marked ongoing and the publication is maintained, but no current downsampler portal, ungated test package, or confirmed response was found.",
+      "confidence": "MEDIUM",
+      "implementation_consequence": "Report submission and certification as not performed; do not claim present availability.",
+      "normative_level": "CURRENT_WEB_METADATA",
+      "normative_text_summary": "Current official pages preserve the guidance but do not establish an active downsampler submission service.",
+      "page": null,
+      "resolved": false,
+      "section": "Current web status reviewed 2026-07-23",
+      "source": "NIST official project and publication pages",
+      "status": "INFORMATIVE_ONLY",
+      "value": "current downsampler-specific submission availability not verified"
+    },
+    "certification_submission_procedure": {
+      "ambiguity": "The 2016 procedure does not by itself prove current service availability.",
+      "confidence": "HIGH",
+      "implementation_consequence": "No certification claim is permitted without an actual NIST result.",
+      "normative_level": "HISTORICAL_CERTIFICATION_PROCEDURE",
+      "normative_text_summary": "SP 500-306 defines the submission sequence and configuration-specific evaluation.",
+      "page": [
+        17,
+        18,
+        19,
+        20
+      ],
+      "resolved": true,
+      "section": "5 Procedures for Conformance Testing",
+      "source": "NIST SP 500-306",
+      "status": "EXPLICIT",
+      "value": "obtain a NIST identifier, receive the gated reference image link, process the suite, and submit outputs for evaluation"
+    },
+    "clipping_or_saturation": {
+      "ambiguity": "No required clipping interval, saturation order, or out-of-range behavior is stated.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Out-of-range and floating-error handling cannot be selected.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "The sample code constructs a gray color from an integer but does not define a canonical clipping rule.",
+      "page": [
+        83,
+        84
+      ],
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "NOT_SPECIFIED",
+      "value": null
+    },
+    "coefficient_generation_formula": {
+      "ambiguity": "The sample code is not identified as the conformance reference artifact.",
+      "confidence": "HIGH",
+      "implementation_consequence": "The mathematical coefficient shape is identified, but byte identity still depends on precision and normalization authority.",
+      "normative_level": "STUDY_METHOD_AND_SAMPLE_CODE",
+      "normative_text_summary": "The report prints the Gaussian formula and sample C-sharp evaluation at integer grid distances.",
+      "page": [
+        27,
+        28,
+        83,
+        84
+      ],
+      "resolved": true,
+      "section": "3.1.4 and Appendix C",
+      "source": "NISTIR 7839",
+      "status": "EXPLICIT",
+      "value": "radial Gaussian evaluated at integer offsets from -4 through +4, followed by finite-kernel normalization in sample code"
+    },
+    "coefficient_precision": {
+      "ambiguity": "No runtime, library version, coefficient table, hexadecimal representation, or conformance artifact identity is fixed.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Coefficient byte identity remains unresolved.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "The sample code uses double and platform math functions.",
+      "page": [
+        83,
+        84
+      ],
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "C-sharp double in sample code"
+    },
+    "column_parity": {
+      "ambiguity": "The human column terminology is not explicitly mapped to a coordinate origin in the guidance.",
+      "confidence": "HIGH",
+      "implementation_consequence": "The retained zero-based column origin is not authoritative.",
+      "normative_level": "GUIDANCE_AND_SAMPLE_CODE",
+      "normative_text_summary": "SP 500-289 names odd-column decimation and Appendix C labels a zero-based odd-index branch OO.",
+      "page": [
+        19,
+        84
+      ],
+      "resolved": false,
+      "section": "5.11; Appendix C",
+      "source": "NIST SP 500-289; NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "described as odd-column decimation; sample code's OO branch retains zero-based odd indices"
+    },
+    "compression_scope": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Compression codecs are outside the pure downsampling function.",
+      "normative_level": "CONFORMANCE_GUIDANCE",
+      "normative_text_summary": "The procedure addresses downsampling independently and also describes pre- and post-compression contexts.",
+      "page": 9,
+      "resolved": true,
+      "section": "3.1 Test Image Preparation",
+      "source": "NIST SP 500-306",
+      "status": "EXPLICIT",
+      "value": "downsampling may be standalone or adjacent to compression; this audit isolates downsampling"
+    },
+    "conformance_metric": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "This is a certification-level image-suite metric, not a byte-exact pixel oracle.",
+      "normative_level": "CERTIFICATION_PROCEDURE",
+      "normative_text_summary": "Supplier outputs are compared through the mean spectral-image RMSD measure.",
+      "page": 15,
+      "resolved": true,
+      "section": "3.4 Scoring",
+      "source": "NIST SP 500-306",
+      "status": "EXPLICIT",
+      "value": "mean RMSD of SIVV signals over the official image suite"
+    },
+    "conformance_tolerance": {
+      "ambiguity": "The tolerance accepts nonidentical pixel outputs and therefore cannot choose among exact pixel semantics.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Record the limits but do not translate them into a byte-exact implementation choice.",
+      "normative_level": "CERTIFICATION_PROCEDURE",
+      "normative_text_summary": "SP 500-306 provides empirical SIVV limits.",
+      "page": 15,
+      "resolved": true,
+      "section": "3.4 Scoring",
+      "source": "NIST SP 500-306",
+      "status": "EXPLICIT",
+      "value": "Gold mean below 0.00521; Silver mean at least 0.00521 and below 0.00631; recommendation requires mean below 0.00631"
+    },
+    "coordinate_origin": {
+      "ambiguity": "Odd row and odd column are not defined as one-based ordinals or zero-based indices.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Parity wording cannot be translated canonically to indices.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "The guidance does not define its indexing convention.",
+      "page": 19,
+      "resolved": false,
+      "section": "5.11 Interoperability Guidance",
+      "source": "NIST SP 500-289",
+      "status": "NOT_SPECIFIED",
+      "value": null
+    },
+    "corner_handling": {
+      "ambiguity": "Neither the prose nor the code resolves how two-axis overflow maps under the stated mirror-or-duplicate wording; the code uses the center pixel.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Corner outputs remain unresolved.",
+      "normative_level": "STUDY_PROSE_VERSUS_SAMPLE_CODE",
+      "normative_text_summary": "Corner taps inherit the same prose/code conflict as edges.",
+      "page": [
+        28,
+        83
+      ],
+      "resolved": false,
+      "section": "3.1.4 and Appendix C",
+      "source": "NISTIR 7839",
+      "status": "CONFLICTING",
+      "value": null
+    },
+    "decimation_order": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Filtering must precede decimation.",
+      "normative_level": "CONFORMANCE_GUIDANCE",
+      "normative_text_summary": "The 1000 ppi image is low-pass filtered before rows and columns are discarded.",
+      "page": [
+        9,
+        10
+      ],
+      "resolved": true,
+      "section": "2.2 and 3.1",
+      "source": "NIST SP 500-306",
+      "status": "EXPLICIT",
+      "value": "Gaussian filter, then factor-two subsampling"
+    },
+    "even_input_dimensions": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Even-dimension size reduction is fixed.",
+      "normative_level": "CONFORMANCE_GUIDANCE",
+      "normative_text_summary": "Factor-two subsampling of even dimensions yields one-half width and height regardless of parity.",
+      "page": [
+        9,
+        10
+      ],
+      "resolved": true,
+      "section": "3.1 Test Image Preparation",
+      "source": "NIST SP 500-306",
+      "status": "DERIVED_UNAMBIGUOUSLY",
+      "value": "exactly one half on each even dimension"
+    },
+    "filter_before_decimation": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Reject decimation-before-filter implementations.",
+      "normative_level": "CONFORMANCE_GUIDANCE",
+      "normative_text_summary": "The Gaussian is applied as an anti-aliasing low-pass filter before subsampling.",
+      "page": [
+        9,
+        10
+      ],
+      "resolved": true,
+      "section": "3.1 Test Image Preparation",
+      "source": "NIST SP 500-306",
+      "status": "EXPLICIT",
+      "value": true
+    },
+    "filter_radius": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Fix radius at four pixels.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "The selected Gaussian treatment uses radius four pixels.",
+      "page": 19,
+      "resolved": true,
+      "section": "5.11 Interoperability Guidance",
+      "source": "NIST SP 500-289",
+      "status": "EXPLICIT",
+      "value": 4
+    },
+    "gaussian_sigma": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Fix sigma at 0.8475.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "The selected Gaussian treatment uses sigma 0.8475.",
+      "page": 19,
+      "resolved": true,
+      "section": "5.11 Interoperability Guidance",
+      "source": "NIST SP 500-289",
+      "status": "EXPLICIT",
+      "value": 0.8475
+    },
+    "input_smaller_than_kernel": {
+      "ambiguity": "No minimum dimensions or behavior for multiple simultaneous out-of-bounds taps is specified normatively.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Inputs smaller than 9 by 9 are unsupported by a canonical contract.",
+      "normative_level": "INFORMATIVE",
+      "normative_text_summary": "The sample code can execute but does not establish conformance semantics.",
+      "page": [
+        28,
+        83
+      ],
+      "resolved": false,
+      "section": "3.1.4 and Appendix C",
+      "source": "NISTIR 7839",
+      "status": "NOT_SPECIFIED",
+      "value": null
+    },
+    "intermediate_rounding": {
+      "ambiguity": "No normative statement forbids contraction, reordering, or other intermediate behavior.",
+      "confidence": "MEDIUM",
+      "implementation_consequence": "Intermediate arithmetic cannot be made canonical.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "The shown loop multiplies and adds double values before final conversion.",
+      "page": 83,
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "no explicit intermediate rounding in sample code"
+    },
+    "jpeg2000_relationship": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Do not use codec defaults as the Gaussian oracle.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "Gaussian filtering plus decimation is the selected interoperability strategy; JPEG 2000 transcoding is discussed as a distinct performance tradeoff.",
+      "page": [
+        12,
+        19
+      ],
+      "resolved": true,
+      "section": "4.4 and 5.11",
+      "source": "NIST SP 500-289",
+      "status": "EXPLICIT",
+      "value": "a separate upstream compression or selective-transcoding pathway, not a substitute definition for exact Gaussian pixel semantics"
+    },
+    "kernel_dimensions": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Use nine taps on each axis.",
+      "normative_level": "STUDY_METHOD",
+      "normative_text_summary": "The report defines width as two times radius plus one; radius four gives a 9 by 9 kernel.",
+      "page": 28,
+      "resolved": true,
+      "section": "3.1.4 Gaussian Filter",
+      "source": "NISTIR 7839",
+      "status": "DERIVED_UNAMBIGUOUSLY",
+      "value": [
+        9,
+        9
+      ]
+    },
+    "kernel_separability": {
+      "ambiguity": "The formula is mathematically separable, while the sample code constructs a two-dimensional array; no required implementation structure is stated.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Do not require either implementation structure as canonical.",
+      "normative_level": "INFORMATIVE",
+      "normative_text_summary": "No source requires a separable or non-separable implementation.",
+      "page": [
+        27,
+        28,
+        83
+      ],
+      "resolved": false,
+      "section": "3.1.4 and Appendix C",
+      "source": "NISTIR 7839",
+      "status": "NOT_SPECIFIED",
+      "value": null
+    },
+    "mirrored_pixel_semantics": {
+      "ambiguity": "The exact coordinate mapping implied by mirroring is absent and conflicts with center-pixel substitution in code.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Exact mirror indices cannot be selected.",
+      "normative_level": "STUDY_PROSE_VERSUS_SAMPLE_CODE",
+      "normative_text_summary": "The report does not specify reflect, reflect-101, or symmetric endpoint behavior.",
+      "page": [
+        28,
+        83
+      ],
+      "resolved": false,
+      "section": "3.1.4 and Appendix C",
+      "source": "NISTIR 7839",
+      "status": "CONFLICTING",
+      "value": null
+    },
+    "normalization_rule": {
+      "ambiguity": "SP 500-289 does not normatively require this exact operation order or precision.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Exact normalized coefficients cannot be locked from guidance alone.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "Appendix C normalizes the generated finite kernel to unit sum.",
+      "page": 83,
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "sample code divides every finite 9 by 9 coefficient by the double-precision sum"
+    },
+    "numeric_representation": {
+      "ambiguity": "The guidance does not prohibit an equivalent fixed-point implementation or define intermediate equivalence.",
+      "confidence": "HIGH",
+      "implementation_consequence": "No canonical numeric representation may be selected.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "Appendix C stores coefficients and the weighted sum as double.",
+      "page": [
+        83,
+        84
+      ],
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "floating point in sample code"
+    },
+    "odd_input_dimensions": {
+      "ambiguity": "SP 500-289 and SP 500-306 do not define odd-dimension retention, and parity itself is unresolved.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Odd dimensions are unsupported by a canonical contract.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "Appendix C demonstrates different odd-size outputs among the four branches.",
+      "page": 84,
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "sample branches choose floor or ceiling according to retained parity"
+    },
+    "output_bit_depth": {
+      "ambiguity": "NONE",
+      "confidence": "HIGH",
+      "implementation_consequence": "Output samples are unsigned eight-bit values.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "The interoperability raster uses 256 gray levels in unsigned bytes.",
+      "page": 13,
+      "resolved": true,
+      "section": "5.1 Base Raster Format",
+      "source": "NIST SP 500-289",
+      "status": "EXPLICIT",
+      "value": 8
+    },
+    "output_height": {
+      "ambiguity": "The guidance does not state a general odd-height contract or authoritative retained origin.",
+      "confidence": "HIGH",
+      "implementation_consequence": "General output height remains unresolved for odd input.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "Appendix C dimensions depend on the selected parity branch.",
+      "page": 84,
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "sample code uses floor(height/2) for retained odd zero-based rows and ceil(height/2) for retained even rows"
+    },
+    "output_ppi_metadata": {
+      "ambiguity": "The target spatial sample rate is stated, but metadata preservation or encoding is not defined for the algorithm contract.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Defer file metadata behavior to a later integration policy.",
+      "normative_level": "GUIDANCE",
+      "normative_text_summary": "The output is described as 500 ppi imagery.",
+      "page": 19,
+      "resolved": false,
+      "section": "5.11 Interoperability Guidance",
+      "source": "NIST SP 500-289",
+      "status": "NOT_SPECIFIED",
+      "value": "target sample rate is 500 ppi; exact metadata encoding is not specified for a pure matrix"
+    },
+    "output_rounding": {
+      "ambiguity": "SP 500-289 does not specify rounding, and the official conformance downsampler artifact is unavailable.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Pixel values near integer boundaries are unresolved.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "Appendix C passes an integer cast of the weighted sum to the color constructor.",
+      "page": 83,
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "sample code casts the weighted sum to int, which truncates nonnegative values toward zero"
+    },
+    "output_width": {
+      "ambiguity": "The guidance does not state a general odd-width contract or authoritative retained origin.",
+      "confidence": "HIGH",
+      "implementation_consequence": "General output width remains unresolved for odd input.",
+      "normative_level": "SAMPLE_CODE",
+      "normative_text_summary": "Appendix C dimensions depend on the selected parity branch.",
+      "page": 84,
+      "resolved": false,
+      "section": "Appendix C",
+      "source": "NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "sample code uses floor(width/2) for retained odd zero-based columns and ceil(width/2) for retained even columns"
+    },
+    "png_metadata_treatment": {
+      "ambiguity": "PNG may carry a required identifier in a comment, but general PNG metadata copying, dropping, and PPI encoding are not specified.",
+      "confidence": "HIGH",
+      "implementation_consequence": "Do not add a PNG production contract in this audit.",
+      "normative_level": "CERTIFICATION_PROCEDURE",
+      "normative_text_summary": "PGM is the only format accepted by NIST for conformance testing even though PNG is discussed for standalone output.",
+      "page": [
+        14,
+        15
+      ],
+      "resolved": false,
+      "section": "3.3 Output Image Format",
+      "source": "NIST SP 500-306",
+      "status": "NOT_SPECIFIED",
+      "value": null
+    },
+    "repeated_edge_vs_reflection": {
+      "ambiguity": "The phrase mirroring or duplicating does not select reflection, repeated-edge reflection, or edge replication, and the sample code implements none of those generally.",
+      "confidence": "HIGH",
+      "implementation_consequence": "No library border mode is admissible as a default.",
+      "normative_level": "STUDY_PROSE_VERSUS_SAMPLE_CODE",
+      "normative_text_summary": "Multiple standard border interpretations remain distinguishable.",
+      "page": [
+        28,
+        83
+      ],
+      "resolved": false,
+      "section": "3.1.4 and Appendix C",
+      "source": "NISTIR 7839",
+      "status": "CONFLICTING",
+      "value": null
+    },
+    "row_parity": {
+      "ambiguity": "The human row terminology is not explicitly mapped to a coordinate origin in the guidance.",
+      "confidence": "HIGH",
+      "implementation_consequence": "The retained zero-based row origin is not authoritative.",
+      "normative_level": "GUIDANCE_AND_SAMPLE_CODE",
+      "normative_text_summary": "SP 500-289 names odd-row decimation and Appendix C labels a zero-based odd-index branch OO.",
+      "page": [
+        19,
+        84
+      ],
+      "resolved": false,
+      "section": "5.11; Appendix C",
+      "source": "NIST SP 500-289; NISTIR 7839",
+      "status": "INFORMATIVE_ONLY",
+      "value": "described as odd-row decimation; sample code's OO branch retains zero-based odd indices"
+    }
+  },
+  "matrix_status": "INCOMPLETE_FOR_BYTE_EXACT_IMPLEMENTATION",
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1"
+}

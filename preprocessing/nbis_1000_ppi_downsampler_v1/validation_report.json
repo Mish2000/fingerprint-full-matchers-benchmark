@@ -1,0 +1,16 @@
+{
+  "attempt_id": "nbis_1000_ppi_downsampler_v1_attempt_2",
+  "audit_id": "nbis_1000_ppi_downsampler_v1",
+  "bozorth3_invoked": false,
+  "dataset_accessed": false,
+  "errors": [],
+  "fingerprint_images_accessed": false,
+  "fixture_processed": false,
+  "mindtct_invoked_on_image": false,
+  "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+  "scores_generated": false,
+  "task_status": "PASS",
+  "threshold_used": false,
+  "valid": true,
+  "validation_scope": "Dataset-independent package semantics, locks, checksums, baseline identities, and explicit test allowlists."
+}
