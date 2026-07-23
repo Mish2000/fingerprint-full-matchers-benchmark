@@ -195,7 +195,10 @@ def run_wsl(
     user: str = "root",
     check: bool = True,
 ) -> tuple[str, dict[str, Any]]:
-    command = ["wsl.exe", "--distribution", distro, "--user", user, "--", "bash", "-lc", script]
+    command = [
+        "wsl.exe", "--distribution", distro, "--user", user,
+        "--exec", "bash", "-lc", script,
+    ]
     completed, record = run_command(ctx, label, command, check=check)
     return decode_process_output(completed.stdout), record
 
@@ -461,7 +464,7 @@ umask 022
 packages=({packages})
 specs=()
 for package in "${{packages[@]}}"; do
-  version=$(apt-cache policy "$package" | awk '/Candidate:/ {{print $2; exit}}')
+  version=$(apt-cache policy "$package" | awk '/Candidate:/ {{print $2}}')
   test -n "$version" && test "$version" != "(none)"
   specs+=("$package=$version")
 done

@@ -235,6 +235,7 @@ def test_orchestrator_uses_pinned_direct_canonical_wsl_image() -> None:
     source = (REPOSITORY_ROOT / "tools" / "freeze_nbis_build_environment_v1.py").read_text(encoding="utf-8")
     assert "official_canonical_wsl_image_from_file" in source
     assert "--from-file" in source
+    assert '"--exec", "bash", "-lc", script' in source
     assert validator.UBUNTU_WSL_FILENAME in source
     assert validator.UBUNTU_WSL_SHA256 in source
     assert "official_wsl_alias_bootstrap_export_import" not in source
@@ -511,6 +512,12 @@ def test_phase_values_are_exactly_the_authorized_set() -> None:
 
 def test_two_clean_builds_are_fixed() -> None:
     assert _valid_documents()["environment_plan.json"]["build_count"] == 2
+
+
+def test_pinned_package_lookup_is_pipefail_safe() -> None:
+    script = freeze.package_version_script()
+    assert "binutils build-essential file unzip" in script
+    assert "Candidate:/ {print $2; exit}" not in script
 
 
 def test_biometric_and_fixture_execution_are_disabled() -> None:
