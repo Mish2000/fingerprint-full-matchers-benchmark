@@ -3,6 +3,7 @@ name: runtime-ci
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   dataset-independent-runtime:
