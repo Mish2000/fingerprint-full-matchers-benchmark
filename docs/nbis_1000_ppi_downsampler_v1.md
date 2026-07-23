@@ -71,7 +71,9 @@ dataset, minutiae, score, or threshold. It checks baseline tags and identities,
 the complete evidence matrix, official provenance, verdict consistency,
 synthetic-only vector coverage, diagnostic test coverage, certification claim
 boundaries, protected-tree identities, locks, checksums, and prohibited tracked
-artifact types.
+artifact types. Protected areas are compared by committed Git tree OID and
+worktree status; the validator does not recursively open protected files or
+protocol manifests to calculate those identities.
 
 CI always runs the synthetic tests. It runs the package validator when the
 result package exists, and retains the NBIS candidate, provenance erratum, and

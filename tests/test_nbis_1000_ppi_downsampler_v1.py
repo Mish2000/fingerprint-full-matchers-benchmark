@@ -437,6 +437,12 @@ def test_tree_identity_changes_with_content(tmp_path: Path) -> None:
     assert validator.tree_identity(root) != before
 
 
+def test_protected_tree_validation_does_not_open_protocol_manifests() -> None:
+    identities = validator.protected_tree_oids(REPOSITORY_ROOT)
+    lock = {"protected_area_git_tree_oids": identities}
+    assert validator.validate_protected_trees(REPOSITORY_ROOT, lock) == []
+
+
 def test_baseline_tags_are_fixed() -> None:
     assert validator.validate_baseline_tags(REPOSITORY_ROOT) == []
 

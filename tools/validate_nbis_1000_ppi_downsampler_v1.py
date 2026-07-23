@@ -495,15 +495,44 @@ def validate_baseline_tags(repository_root: Path) -> list[str]:
     return errors
 
 
+def protected_tree_oids(repository_root: Path) -> dict[str, dict[str, str]]:
+    """Identify protected committed trees without opening their file contents."""
+
+    identities: dict[str, dict[str, str]] = {}
+    for relative in PROTECTED_AREAS:
+        oid = _git_output(repository_root, "rev-parse", f"HEAD:{relative}")
+        object_type = _git_output(repository_root, "cat-file", "-t", oid)
+        if object_type != "tree":
+            raise ValueError(f"protected path is not a Git tree: {relative}")
+        identities[relative] = {"algorithm": "git_tree_oid_sha1", "oid": oid}
+    return identities
+
+
 def validate_protected_trees(repository_root: Path, lock: dict[str, Any]) -> list[str]:
-    errors: list[str] = []
-    recorded = lock.get("protected_area_tree_hashes", {})
+    """Validate protected trees using Git metadata, never recursive file reads."""
+
+    recorded = lock.get("protected_area_git_tree_oids", {})
     if set(recorded) != set(PROTECTED_AREAS):
         return ["protected-area lock set mismatch"]
-    for relative in PROTECTED_AREAS:
-        root = repository_root / Path(relative)
-        if not root.is_dir() or tree_identity(root) != recorded.get(relative):
-            errors.append(f"protected tree identity mismatch: {relative}")
+    try:
+        current = protected_tree_oids(repository_root)
+        worktree_changes = _git_output(
+            repository_root,
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all",
+            "--",
+            *PROTECTED_AREAS,
+        )
+    except (OSError, subprocess.CalledProcessError, ValueError) as exc:
+        return [f"cannot validate protected Git trees: {exc}"]
+    errors = [
+        f"protected tree identity mismatch: {relative}"
+        for relative in PROTECTED_AREAS
+        if recorded.get(relative) != current.get(relative)
+    ]
+    if worktree_changes:
+        errors.append("protected areas contain staged, unstaged, or untracked changes")
     return errors
 
 
