@@ -1,0 +1,18 @@
+{
+  "audit_id": "nbis_candidate_v1",
+  "bozorth3_built": false,
+  "build_attempted": false,
+  "build_environment": null,
+  "build_reproducibility_assessment": "PREREQUISITE: freeze a documented Linux or Cygwin build environment, build the unmodified official archive, and record toolchain and executable hashes.",
+  "commands_normalized": [],
+  "errors_count": 0,
+  "executable_hashes": {},
+  "exit_code": null,
+  "linked_runtime_summary": null,
+  "logs": [],
+  "mindtct_built": false,
+  "official_instructions_followed": false,
+  "source_modified": false,
+  "third_party_binary_used": false,
+  "warnings_count": 0
+}

@@ -1,0 +1,44 @@
+{
+  "MINDTCT_direct_PNG_support": true,
+  "audit_id": "nbis_candidate_v1",
+  "conversion_lossless": null,
+  "conversion_officiality": "NOT_REQUIRED",
+  "conversion_required": false,
+  "converter_identity": null,
+  "evidence": [
+    {
+      "claim": "The image type detector identifies the PNG signature as PNG_IMG.",
+      "lines": "PNG identification branch",
+      "source_file": "imgtools/src/lib/image/imgtype.c",
+      "source_file_sha256": "374395a62f482cf841fb8ee9f21a0f021eb51eea92c9595d01677bc0d857d584"
+    },
+    {
+      "claim": "The grayscale image decoder dispatches PNG input to png_decode_mem when PNG support is compiled.",
+      "lines": "PNG_IMG decoder branch",
+      "source_file": "imgtools/src/lib/image/imgdecod.c",
+      "source_file_sha256": "403c0165e364a6dcebd2c5fd9e592c7928dce6cec631a7c5ea13cf7b88c439af"
+    },
+    {
+      "claim": "The PNG decoder copies decoded scan-line bytes and reports PNG PPI as unavailable; MINDTCT rejects decoded depth other than 8 bits.",
+      "lines": "png_decode_mem metadata and pixel-copy branches",
+      "source_file": "an2k/src/lib/an2k/dec_png.c",
+      "source_file_sha256": "c4b1d52c368ba273f7383a2cb514f0cdee1cf8021671a058e1027f6ed29a8d6a"
+    }
+  ],
+  "pixel_equivalence_verified": "NOT_APPLICABLE_NO_CONVERSION",
+  "preprocessing_beyond_format_conversion": false,
+  "prohibited_preprocessing": {
+    "crop": false,
+    "enhancement": false,
+    "generic_resize": false,
+    "inversion": false,
+    "lossy_conversion": false
+  },
+  "protocol_input_constraints": {
+    "bit_depth": 8,
+    "color_model": "grayscale",
+    "format": "PNG"
+  },
+  "protocol_input_format": "PNG",
+  "verdict": "DIRECT_PNG_SUPPORTED"
+}

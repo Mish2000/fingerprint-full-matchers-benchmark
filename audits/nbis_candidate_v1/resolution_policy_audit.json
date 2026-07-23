@@ -1,0 +1,59 @@
+{
+  "audit_id": "nbis_candidate_v1",
+  "cascade_2000_to_1000_to_500_approved": false,
+  "official_cascade_source_present": false,
+  "records": {
+    "sd300b_1000_ppi": {
+      "canonical_path_verdict": "PREREQUISITE",
+      "canonical_pipeline_available": false,
+      "conversion_required": true,
+      "declared_ppi_support": false,
+      "evidence": [
+        "NBIS 5.0.0 PNG decoding does not preserve or consume a PNG PPI declaration.",
+        "MINDTCT falls back to 500 PPI when decoder PPI is unavailable.",
+        "MINDTCT does not resample image dimensions; PPI is passed to the minutia reliability neighborhood calculation.",
+        "NISTIR 7839 and SP 500-289 define a 1000-to-500 PPI Gaussian and decimation method.",
+        "The exact NBIS 5.0.0 archive does not contain that downsampler implementation."
+      ],
+      "implementation_in_nbis_5_0_0": false,
+      "internal_scaling": false,
+      "local_validation_performed": false,
+      "native_support": false,
+      "official_guidance_found": true,
+      "official_implementation_found": true,
+      "official_method": {
+        "decimation": "odd-column and odd-row",
+        "edge_handling": "mirror or duplicate edge pixels",
+        "gaussian_radius": 4,
+        "gaussian_sigma": "0.8475",
+        "output_ppi": 500
+      },
+      "unresolved_questions": [
+        "Which immutable implementation will be used and how will its output be shown conformant to NIST SP 500-289?",
+        "How will odd-dimension and edge behavior be acceptance-tested before integration?"
+      ]
+    },
+    "sd300c_2000_ppi": {
+      "canonical_path_verdict": "PREREQUISITE",
+      "canonical_pipeline_available": false,
+      "conversion_required": true,
+      "declared_ppi_support": false,
+      "evidence": [
+        "No official 2000-to-1000, 2000-to-500, direct-2000 MINDTCT, or cascade policy was found in the audited NIST sources.",
+        "NIST SP 500-306 mentions 2000 PPI scans for reference-region alignment but scopes conformance to 1000-to-500 PPI."
+      ],
+      "implementation_in_nbis_5_0_0": false,
+      "inferred_from_1000_guidance": false,
+      "internal_scaling": false,
+      "local_validation_performed": false,
+      "native_support": false,
+      "official_guidance_found": false,
+      "official_implementation_found": false,
+      "unresolved_questions": [
+        "What official or scientifically validated 2000 PPI preprocessing policy is fair for SD300C?",
+        "Does the approved path target 500 PPI directly or another explicitly supported sample rate?"
+      ]
+    }
+  },
+  "source_search_limitation": "No official policy was found in the audited sources; this is not a universal claim that no such policy exists."
+}

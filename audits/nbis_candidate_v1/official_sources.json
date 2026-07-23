@@ -1,0 +1,175 @@
+{
+  "audit_id": "nbis_candidate_v1",
+  "official_source_only": true,
+  "retrieval_date": "2026-07-23",
+  "source_groups": {
+    "1000_ppi_sources": [
+      {
+        "claims_supported": [
+          "NIST evaluated 1000-to-500 PPI fingerprint downsampling methods",
+          "Gaussian low-pass filtering with sigma 0.8475 and radius 4 followed by decimation was selected",
+          "SP 500-289 specifies odd-column and odd-row decimation",
+          "edge handling in the study mirrors or duplicates edge pixels"
+        ],
+        "document_date": "2012-12",
+        "document_number": "NISTIR 7839",
+        "download_sha256": "5b062527c035955256c7e6f3e141453302555686ceaf9d586a690ba5a1f6304d",
+        "limitations": "A research report about 1000-to-500 PPI only; it is not evidence for any 2000 PPI path.",
+        "official": true,
+        "official_url": "https://nvlpubs.nist.gov/nistpubs/ir/2012/NIST.IR.7839.pdf",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Method selection, kernel parameters, edge behavior, and decimation study",
+        "retrieval_date": "2026-07-23",
+        "title": "Examination of Downsampling Strategies for Converting 1000 ppi Fingerprint Imagery to 500 ppi",
+        "version_specificity": "Not specific to NBIS 5.0.0"
+      },
+      {
+        "claims_supported": [
+          "NIST guidance defines a 1000-to-500 PPI interoperability path",
+          "The selected method uses sigma 0.8475, radius 4, and odd-column/odd-row decimation"
+        ],
+        "document_date": "2013-06",
+        "document_number": "NIST SP 500-289",
+        "download_sha256": "b8d0649c1184baf5c9523d78a7748497939f36aaef21458a1eba53eb65be551c",
+        "limitations": "Does not place a downsampler implementation in NBIS 5.0.0 and does not address 2000 PPI.",
+        "official": true,
+        "official_url": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication500-289.pdf",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Normative NIST compression and interoperability guidance",
+        "retrieval_date": "2026-07-23",
+        "title": "Compression Guidance for 1000 ppi Friction Ridge Imagery",
+        "version_specificity": "Not specific to NBIS 5.0.0"
+      },
+      {
+        "claims_supported": [
+          "NIST defines a conformance pathway for supplier implementations of the 1000-to-500 PPI method",
+          "The procedure compares outputs to a NIST reference downsampler"
+        ],
+        "document_date": "2016-08",
+        "document_number": "NIST SP 500-306",
+        "download_sha256": "9c7cf3fa76426e0b8f99dcd1f9df7370dc8735753f9151444cd7c5bb1f0dc2d0",
+        "limitations": "Published after NBIS 5.0.0; mentioning a reference downsampler does not prove that implementation is in the 5.0.0 archive.",
+        "official": true,
+        "official_url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.500-306.pdf",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Independent conformance evidence and implementation identity requirements",
+        "retrieval_date": "2026-07-23",
+        "title": "Certification Pathway for Downsampling 1000 ppi Fingerprint Friction Ridge Imagery to 500 ppi",
+        "version_specificity": "Postdates NBIS 5.0.0"
+      }
+    ],
+    "2000_ppi_search_sources": [
+      {
+        "claims_supported": [
+          "The reference data preparation used scans at 500, 1000, and 2000 PPI to align corresponding regions",
+          "The conformance procedure itself is scoped to 1000-to-500 PPI"
+        ],
+        "document_date": "2016-08",
+        "document_number": "NIST SP 500-306",
+        "download_sha256": "9c7cf3fa76426e0b8f99dcd1f9df7370dc8735753f9151444cd7c5bb1f0dc2d0",
+        "limitations": "A 2000 PPI scan used in reference-data alignment is not approval for direct matching, 2000-to-1000, 2000-to-500, or a cascade.",
+        "official": true,
+        "official_url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.500-306.pdf",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Bounds what the official certification document does and does not establish",
+        "retrieval_date": "2026-07-23",
+        "title": "Certification Pathway for Downsampling 1000 ppi Fingerprint Friction Ridge Imagery to 500 ppi",
+        "version_specificity": "Postdates NBIS 5.0.0"
+      }
+    ],
+    "bozorth3_sources": [
+      {
+        "claims_supported": [
+          "BOZORTH3 accepts MINDTCT minutiae output",
+          "BOZORTH3 is the NBIS minutiae matcher"
+        ],
+        "document_date": "2015-03-04",
+        "document_number": "NBIS 5.0.0 product record",
+        "download_sha256": null,
+        "limitations": "Product-level description; detailed command and output semantics were audited in the acquired source tree.",
+        "official": true,
+        "official_url": "https://www.nist.gov/services-resources/software/nist-biometric-image-software-nbis",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Official component identity",
+        "retrieval_date": "2026-07-23",
+        "title": "NIST Biometric Image Software (NBIS)",
+        "version_specificity": "Page identifies release 5.0.0"
+      }
+    ],
+    "build_sources": [
+      {
+        "claims_supported": [
+          "NBIS was developed using gcc and gmake",
+          "NIST reports testing on Linux, macOS, and Cygwin"
+        ],
+        "document_date": "2015-03-04",
+        "document_number": "NBIS 5.0.0 product record",
+        "download_sha256": null,
+        "limitations": "No supported build environment was already present on the audit host.",
+        "official": true,
+        "official_url": "https://www.nist.gov/services-resources/software/nist-biometric-image-software-nbis",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Official build-tool and platform statement",
+        "retrieval_date": "2026-07-23",
+        "title": "NIST Biometric Image Software (NBIS)",
+        "version_specificity": "Page identifies release 5.0.0"
+      }
+    ],
+    "mindtct_sources": [
+      {
+        "claims_supported": [
+          "MINDTCT detects minutiae and produces minutiae data usable by BOZORTH3"
+        ],
+        "document_date": "2007-01",
+        "document_number": "NISTIR 7392",
+        "download_sha256": "42e18bccc508f113b4b7cd5ffdf231a0e2b0fc93b5eaca0f97726689659fc932",
+        "limitations": "The guide predates release 5.0.0; release-specific behavior was checked against the acquired 5.0.0 source.",
+        "official": true,
+        "official_url": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7392.pdf",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Official algorithm and command documentation",
+        "retrieval_date": "2026-07-23",
+        "title": "User's Guide to NIST Biometric Image Software (NBIS)",
+        "version_specificity": "Predates NBIS 5.0.0"
+      }
+    ],
+    "software_identity_sources": [
+      {
+        "claims_supported": [
+          "The official stable release is NBIS 5.0.0",
+          "The official archive is hosted by NIST",
+          "The release date is 2015-03-04"
+        ],
+        "document_date": "2015-03-04",
+        "document_number": "NIGOS release listing",
+        "download_sha256": null,
+        "limitations": "Release listing and archive link only.",
+        "official": true,
+        "official_url": "https://www.nist.gov/itl/iad/btg/products-and-services/image-group-open-source-server-nigos",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Release identity and official acquisition endpoint",
+        "retrieval_date": "2026-07-23",
+        "title": "NIST Image Group Open Source Server (NIGOS)",
+        "version_specificity": "Explicitly lists NBIS 5.0.0"
+      },
+      {
+        "claims_supported": [
+          "NBIS is provided by NIST as public-domain software",
+          "MINDTCT and BOZORTH3 are NBIS components"
+        ],
+        "document_date": "2015-03-04",
+        "document_number": "NBIS 5.0.0 product record",
+        "download_sha256": null,
+        "limitations": "The page is descriptive; exact source provenance is separately locked by archive hash.",
+        "official": true,
+        "official_url": "https://www.nist.gov/services-resources/software/nist-biometric-image-software-nbis",
+        "publisher": "National Institute of Standards and Technology",
+        "relevance": "Identity, licensing, component scope, and build overview",
+        "retrieval_date": "2026-07-23",
+        "title": "NIST Biometric Image Software (NBIS)",
+        "version_specificity": "Page identifies release 5.0.0"
+      }
+    ]
+  },
+  "third_party_evidence_used": false
+}

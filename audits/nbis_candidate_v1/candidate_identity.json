@@ -1,0 +1,21 @@
+{
+  "audit_id": "nbis_candidate_v1",
+  "audit_status": "PASS",
+  "candidate": {
+    "extractor": "MINDTCT",
+    "fork_used": false,
+    "matcher": "BOZORTH3",
+    "name": "NIST Biometric Image Software",
+    "pipeline": "MINDTCT -> BOZORTH3",
+    "release": "5.0.0",
+    "source_modified": false,
+    "source_type": "official_nist_release"
+  },
+  "candidate_verdict": "SUITABLE_WITH_PREREQUISITES",
+  "dataset_releases": {
+    "sd300b": 1000,
+    "sd300c": 2000
+  },
+  "intended_task": "one_to_one_fingerprint_verification",
+  "protocol_id": "supervisor_50x10_v1"
+}

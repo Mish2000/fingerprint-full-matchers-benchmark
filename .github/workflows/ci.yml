@@ -27,6 +27,15 @@ jobs:
           cache: maven
       - name: Install Python package
         run: python -m pip install '.[test]'
+      - name: Validate NBIS candidate audit package
+        shell: bash
+        run: |
+          if [ -d audits/nbis_candidate_v1 ]; then
+            python tools/validate_nbis_candidate_audit_v1.py
+            python -m pytest -q tests/test_nbis_candidate_audit_v1.py
+          else
+            echo 'NBIS candidate audit package not recorded yet; static validation skipped.'
+          fi
       - name: Run dataset-independent Python tests
         run: >-
           python -m pytest -q

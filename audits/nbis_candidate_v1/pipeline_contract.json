@@ -1,0 +1,56 @@
+{
+  "audit_id": "nbis_candidate_v1",
+  "cache_policy": "Cache only representations keyed by source image hash, approved resolution-policy identity, MINDTCT executable hash, release, and parameter identity; disabled until prerequisites resolve.",
+  "compare_contract": "compare(representation_a, representation_b) -> CompareOutcome",
+  "compare_operations": [
+    "official BOZORTH3 1:1 invocation with one probe XYT and one gallery XYT",
+    "parse exactly one base-10 integer score line"
+  ],
+  "compatibility_with_benchmark_contract": {
+    "encoded_input": true,
+    "error_code": true,
+    "explicit_nominal_ppi": true,
+    "finite_raw_score": true,
+    "protocol_change_required": false,
+    "status": "MAPPABLE_AFTER_PREREQUISITES",
+    "structured_compare_status": true,
+    "structured_prepare_status": true
+  },
+  "excluded_operations": [
+    "threshold selection",
+    "decision generation",
+    "score normalization",
+    "score calibration",
+    "quality filtering",
+    "subject filtering",
+    "score clipping",
+    "pixel inversion",
+    "enhancement",
+    "cropping",
+    "generic resize"
+  ],
+  "failure_semantics": {
+    "compare_failure": "Nonzero BOZORTH3 exit, missing output, extra output, or non-integer output is a technical failure and has no score.",
+    "prepare_failure": "Nonzero MINDTCT exit, missing XYT output, malformed output, or rejected input is a technical failure.",
+    "valid_zero_score": "BOZORTH3 score zero is a valid raw score, including the documented fewer-than-ten-minutiae case, and is not itself a technical failure."
+  },
+  "method_id": "nbis_mindtct_bozorth3",
+  "method_version": "5.0.0",
+  "prepare_contract": "prepare(image_path, metadata) -> PrepareOutcome",
+  "prepare_operations": [
+    "decode approved 8-bit grayscale PNG",
+    "apply only the separately approved resolution policy for the declared nominal PPI",
+    "run official unmodified MINDTCT without optional contrast boost",
+    "retain canonical XYT representation"
+  ],
+  "representation_cleanup": "Delete all temporary MINDTCT outputs after comparison or cache publication; never track them in Git.",
+  "representation_format": "MINDTCT XYT text: integer x, y, theta, and quality columns; BOZORTH3 consumes the first three and accepts the fourth.",
+  "score_direction": "higher_is_more_similar",
+  "score_semantics": "nonnegative integer raw BOZORTH3 match score",
+  "status": "BLOCKED_BY_PREREQUISITES",
+  "success_semantics": {
+    "compare": "BOZORTH3 exits zero and stdout is exactly one base-10 integer line.",
+    "prepare": "MINDTCT exits zero and emits the expected XYT representation, which may be empty when no minutiae are found."
+  },
+  "temporary_file_policy": "Use a fresh private directory per prepare operation, pass no user-controlled output root, and clean it after the representation lifecycle ends."
+}

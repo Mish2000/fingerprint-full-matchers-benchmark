@@ -1,0 +1,34 @@
+{
+  "architecture": "x86_64",
+  "audit_id": "nbis_candidate_v1",
+  "environment_already_present": false,
+  "environments": [
+    {
+      "compiler_id": null,
+      "compiler_version": null,
+      "cygwin_runtime_present": false,
+      "environment_id": "native_windows",
+      "gcc_present": false,
+      "gmake_present": false,
+      "make_id": null,
+      "make_version": null,
+      "status": "DOCUMENTED_BUILD_PREREQUISITES_NOT_PRESENT"
+    },
+    {
+      "environment_id": "wsl",
+      "kernel_version": null,
+      "status": "NO_DISTRIBUTION_INSTALLED",
+      "wsl_distribution": null
+    },
+    {
+      "docker_present": false,
+      "environment_id": "container_runtime",
+      "podman_present": false,
+      "status": "NOT_PRESENT"
+    }
+  ],
+  "installation_performed": false,
+  "inventory_completed": true,
+  "selected_environment": null,
+  "windows_version": "Windows 11 Home 10.0.26200 build 26200"
+}

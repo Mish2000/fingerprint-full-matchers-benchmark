@@ -1,0 +1,159 @@
+{
+  "artifact_tracking": {
+    "binary_tracked": false,
+    "image_tracked": false,
+    "minutiae_tracked": false,
+    "raw_log_tracked": false,
+    "raw_score_value_tracked": false,
+    "source_archive_tracked": false,
+    "source_tree_tracked": false
+  },
+  "audit_id": "nbis_candidate_v1",
+  "audit_status": "PASS",
+  "build_environment_summary": {
+    "build_attempted": false,
+    "environment_already_present": false,
+    "installation_performed": false,
+    "selected_environment": null
+  },
+  "candidate_verdict": "SUITABLE_WITH_PREREQUISITES",
+  "code_files": {
+    "tests/test_nbis_candidate_audit_v1.py": {
+      "bytes": 13798,
+      "sha256": "2ac298e31a3869d8db7c199b53009a5f8463e270dc8cda58835261f0ccabb778"
+    },
+    "tools/validate_nbis_candidate_audit_v1.py": {
+      "bytes": 23495,
+      "sha256": "27835a28f7fde80f9cc601c44802e2bbb9a8f6359c5e9ba5d141c6585e36d913"
+    }
+  },
+  "executable_hashes": {},
+  "files": {
+    "AUDIT_REPORT.md": {
+      "bytes": 8932,
+      "sha256": "4fe1abf915efaac00b98cab56de83b1826fdf01fc8d6f7859becc4a68d4a4892"
+    },
+    "README.md": {
+      "bytes": 1698,
+      "sha256": "622e4fd8c7abd346561459f7949d4256c8cc1f34cfaa4a39965552d1262bef8c"
+    },
+    "audit_validation_report.json": {
+      "bytes": 1401,
+      "sha256": "5d703eab156e0016f80f93f02c0965e339026d2733f9621ea03b06e719caf848"
+    },
+    "build_audit.json": {
+      "bytes": 617,
+      "sha256": "6baaa53f57016c01705c0b3d3ff3534a0464907cd9b79558a8b92ebabac39922"
+    },
+    "build_environment_inventory.json": {
+      "bytes": 914,
+      "sha256": "6a5aea0d4df0a8de4f2e25524a2af143239da408ec06b616084a769c827c7a0b"
+    },
+    "candidate_identity.json": {
+      "bytes": 566,
+      "sha256": "51bb893e690a594e1f76b7b7681b50e997eeffc464648b3ca872dc71c2b000bb"
+    },
+    "determinism_probe.json": {
+      "bytes": 859,
+      "sha256": "5be437074e5851db175a8cab614e51876f648f0cfbfdb29598f961563a4ad3d9"
+    },
+    "input_format_audit.json": {
+      "bytes": 1685,
+      "sha256": "87a9fe4d79c66da71b8d8ec1ef011b51e480a5126d88b8f480d94b2ff41ad0a6"
+    },
+    "official_sources.json": {
+      "bytes": 8923,
+      "sha256": "b70425bc4434fbd017da3f29f361b00e995e36201ddf4581f653df10f89ecca3"
+    },
+    "pipeline_contract.json": {
+      "bytes": 2843,
+      "sha256": "ab89f1a7486451472271cbddb2bfdec698553c13a5b41679d963526a4f5910c1"
+    },
+    "resolution_policy_audit.json": {
+      "bytes": 2715,
+      "sha256": "4cb3925fc7dfee18999223dd07c81018ca75928d2e562d878f43498b8cb76dfd"
+    },
+    "risks_and_open_questions.json": {
+      "bytes": 8587,
+      "sha256": "3f9b9600b7352bd990bc181e1ffc9bf13850ea35105c6155c6eba6bf45c48ff5"
+    },
+    "source_archive.json": {
+      "bytes": 2233,
+      "sha256": "ad328baca441be768fb9c1da788597f28fc1a2a3a342049440ded3ab7e60ea72"
+    }
+  },
+  "inspected_source_file_hashes": {
+    "an2k/src/lib/an2k/dec_png.c": "c4b1d52c368ba273f7383a2cb514f0cdee1cf8021671a058e1027f6ed29a8d6a",
+    "bozorth3/include/bozorth.h": "c779b137d3d2c038184ea34a8643a3078046c0117ea0c0f0069e470d4df5687f",
+    "bozorth3/src/bin/bozorth3/bozorth3.c": "6792dd742c8f48310b55e7e0d698c369f1570e0629965c241c67790c94ac9530",
+    "bozorth3/src/bin/bozorth3/usage.c": "47dcfa3dc5e1bf10cbbf50627c69178dcb7da21043e2d6f836508d9725e6e970",
+    "bozorth3/src/lib/bozorth3/bz_io.c": "58e2582e6a635778d611ed0bd18878711b5bc45b90bbcbdbb34c79d467f7b41b",
+    "imgtools/src/lib/image/imgdecod.c": "403c0165e364a6dcebd2c5fd9e592c7928dce6cec631a7c5ea13cf7b88c439af",
+    "imgtools/src/lib/image/imgtype.c": "374395a62f482cf841fb8ee9f21a0f021eb51eea92c9595d01677bc0d857d584",
+    "man/man1/bozorth3.1": "4355fad0575dc39c7e62b7c059372f00c4c5bedee8bf7ca2807a5a7a28481947",
+    "man/man1/mindtct.1": "30ce4f33db07b1fb96f403f9190f8fc0e9d1a0b48f33f32a3e828af26052c4ec",
+    "mindtct/include/lfs.h": "1944208fdb9c3a24c7d01e0e20584cb407d9a3b5a710f20c942a0664c86c0a71",
+    "mindtct/src/bin/mindtct/mindtct.c": "d23c84e13eb4533a2b20a918d98874bc404a7735395a210e3039d9997ecf912c",
+    "mindtct/src/lib/mindtct/getmin.c": "88631a314cd919d07a72447dc84d64c8eb91361d88f2c7538d54efc672d68bd1",
+    "mindtct/src/lib/mindtct/quality.c": "26cf0fd8597597fdf1ad42cd5bfb38343a8c2556d7a2d5ff505f0263e08671ff",
+    "mindtct/src/lib/mindtct/results.c": "f496195f70105b1d72807c56e975c730e47550b848136a9cf656c7e916546ac6"
+  },
+  "lock_scope": "Files locks every stable audit file except audit_lock.json and SHA256SUMS.txt to avoid self-reference and a checksum cycle. SHA256SUMS.txt separately hashes audit_lock.json and every other package file except itself.",
+  "official_source_archive_sha256": "0adf8ab0f6b0e4208de50ca00ba21d3d77112ecd66288757ddfed21f6bee92c3",
+  "official_source_hashes": {
+    "NISTIR_7392.pdf": "42e18bccc508f113b4b7cd5ffdf231a0e2b0fc93b5eaca0f97726689659fc932",
+    "NISTIR_7839.pdf": "5b062527c035955256c7e6f3e141453302555686ceaf9d586a690ba5a1f6304d",
+    "NIST_SP_500-289.pdf": "b8d0649c1184baf5c9523d78a7748497939f36aaef21458a1eba53eb65be551c",
+    "NIST_SP_500-306.pdf": "9c7cf3fa76426e0b8f99dcd1f9df7370dc8735753f9151444cd7c5bb1f0dc2d0",
+    "nbis_v5_0_0.zip": "0adf8ab0f6b0e4208de50ca00ba21d3d77112ecd66288757ddfed21f6bee92c3"
+  },
+  "ppi_verdicts": {
+    "sd300b_1000_ppi": "PREREQUISITE",
+    "sd300c_2000_ppi": "PREREQUISITE"
+  },
+  "probe_status": "NOT_RUN",
+  "protected_area_tree_hashes": {
+    "apps/sourceafis-sidecar": {
+      "file_count": 8,
+      "sha256": "96643ee0cc885352b8a564ebe58f92c385e5dacc83a90459350c26fa9892c9ea"
+    },
+    "evaluations": {
+      "file_count": 9,
+      "sha256": "7f9c09b2e4a375fb39538e72d75705abe12cae490354858646d7d5405463dfee"
+    },
+    "executions": {
+      "file_count": 7,
+      "sha256": "27f61dacee605c6180beceb720a693686d97153288100d017f7caa247d975110"
+    },
+    "migration": {
+      "file_count": 2,
+      "sha256": "acf50ad972b8dbafe1c5a36081ae4450ed9f29a0c4f42fe6cd758bc4f6df9bbf"
+    },
+    "migration-audit": {
+      "file_count": 4,
+      "sha256": "a8a2498a6bb5da9e1be1e25359b560e1bea27c1a8bb8fd38192de2e140704569"
+    },
+    "policies": {
+      "file_count": 7,
+      "sha256": "f05d79cf99a88effe6bff997b824bbb5b3fa1b1310f62588df79805b28395275"
+    },
+    "protocols": {
+      "file_count": 21,
+      "sha256": "522729d477b5b751e3759c86b8f582848c633df8b51cafab0efcd21320c39ddc"
+    },
+    "qualification": {
+      "file_count": 7,
+      "sha256": "b63f28ecd97b0ff1ca11950376fde3e0b0c9b481b9c74c89eb7a7f2004d7685d"
+    },
+    "src/fingerprint_benchmark": {
+      "file_count": 13,
+      "sha256": "480b289024bed6f7975ec4577ee622dad3b1059598eba47bbbd0437ab457ef2d"
+    }
+  },
+  "protocol_id": "supervisor_50x10_v1",
+  "source_tree_sha256": "058aeb4638644f998109371c821acb75649d39ee411429fef268f6e4c1ae5bc9",
+  "sourceafis_baseline": {
+    "commit": "241dfe41eb8d07a3c6b953b6114040637c4f3012",
+    "tag": "sourceafis-policy-application-v1"
+  }
+}

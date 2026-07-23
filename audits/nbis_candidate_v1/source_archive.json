@@ -1,0 +1,45 @@
+{
+  "archive_filename": "nbis_v5_0_0.zip",
+  "archive_sha256": "0adf8ab0f6b0e4208de50ca00ba21d3d77112ecd66288757ddfed21f6bee92c3",
+  "archive_size_bytes": 52595795,
+  "audit_id": "nbis_candidate_v1",
+  "build_script_hashes": {
+    "CHANGELOG.txt": "14c881be89768167d42cb4bb66c0a2d1810a4ad32b2a3b69fd0ffa832bf21ef2",
+    "INSTALL_CYGWIN.txt": "7cc4f9ff5762ea542507ab2727e8feceb9112e56e1c6f6dd9aace8cfa9a3edcf",
+    "INSTALL_LINUX_MACOSX.txt": "de6e30d15773b3a9e526a3a75bc8d1545a659217cb9647ffd70bcb8941f0e5fa",
+    "INSTALL_WINDOWS.txt": "a2006f3c598d734ce1b0fb1a1f6b08d23e9e6da3ee4454530d59f90b6777ddba",
+    "Makefile": "ac354ffc76f776093f006efd01884d3fb009f60509c8c63d45f2252a0c0e17b2",
+    "rules.mak.src": "c93f1f1fe06a6c6c7468b5dbdd974b08e32fa77f233595acfc6e7db27b2e46b0",
+    "rules_msys.mak.src": "8b170e21c73edf71c42929b38c1ad38e4f7668947dacc42ccfb8cac43bf4a058",
+    "rules_superdome.mak.src": "dba8bba0a908d4bb4504a500febc2855dbeab82ab6e26417fae160c552ff3ccf",
+    "setup.sh": "0ed60f5888c7b172d482a7cf337e4811b374ad46a8b33b3682f7d878998085b9"
+  },
+  "http_metadata": {
+    "content_type": "application/zip",
+    "etag": "\"3228c53-5106893bf8a40\"",
+    "last_modified": "Tue, 03 Mar 2015 20:57:05 GMT",
+    "status_code": 200
+  },
+  "official_release_identifier": "NIST NBIS Release 5.0.0",
+  "requested_url": "https://nigos.nist.gov/nist/nbis/nbis_v5_0_0.zip",
+  "resolved_url": "https://nigos.nist.gov/nist/nbis/nbis_v5_0_0.zip",
+  "retrieval_utc": "2026-07-23T06:53:17.7044064Z",
+  "source_acquired": true,
+  "source_file_count": 3879,
+  "source_modified": false,
+  "source_subtrees": {
+    "bozorth3": {
+      "file_count": 18,
+      "sha256": "ae2ac6cefee221a62716d941498d64e06e39eb60716936243459756cb5cb1ef8"
+    },
+    "mindtct": {
+      "file_count": 44,
+      "sha256": "6271302a7a049102d7cc0fa078d2d393cbd3647d6cc59c037bf71d915e51ed2f"
+    }
+  },
+  "source_tree_hash_algorithm": "SHA-256 of UTF-8 lines sorted by ordinal relative path: file_sha256, two spaces, byte size, two spaces, forward-slash relative path, LF",
+  "source_tree_sha256": "058aeb4638644f998109371c821acb75649d39ee411429fef268f6e4c1ae5bc9",
+  "third_party_mirror_used": false,
+  "top_level_directory": "Rel_5.0.0",
+  "tracked_in_git": false
+}

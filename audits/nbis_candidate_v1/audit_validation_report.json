@@ -1,0 +1,47 @@
+{
+  "audit_id": "nbis_candidate_v1",
+  "audit_status": "PASS",
+  "checks": {
+    "absolute_paths_absent": true,
+    "archive_not_tracked": true,
+    "audit_id_consistent": true,
+    "build_evidence_consistent": true,
+    "candidate_identity_valid": true,
+    "cascade_not_assumed": true,
+    "checksums_valid": true,
+    "cohort_not_accessed": true,
+    "decisions_absent": true,
+    "fixture_restricted": true,
+    "fork_absent": true,
+    "input_format_evidence_present": true,
+    "local_identifiers_absent": true,
+    "lock_valid": true,
+    "nbis_net_absent": true,
+    "official_source_only": true,
+    "prohibited_artifacts_absent": true,
+    "protected_areas_unchanged": true,
+    "raw_score_values_absent": true,
+    "resolution_records_separate": true,
+    "source_modified_false": true,
+    "sourceafis_comparison_absent": true,
+    "third_party_binary_absent": true,
+    "threshold_absent": true,
+    "verdict_criteria_satisfied": true
+  },
+  "ci_mode": {
+    "dataset_required": false,
+    "executes_bozorth3": false,
+    "executes_mindtct": false,
+    "network_required": false,
+    "source_tree_required": false
+  },
+  "errors": [],
+  "protected_sourceafis_artifacts_modified": false,
+  "test_results": {
+    "audit_tests": "PASS: 48",
+    "full_project_tests": "PASS: 349",
+    "static_validator": "PASS"
+  },
+  "valid": true,
+  "validator_mode": "STATIC_READ_ONLY_STANDARD_LIBRARY"
+}

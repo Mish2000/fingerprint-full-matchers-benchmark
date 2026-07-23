@@ -1,0 +1,151 @@
+{
+  "audit_id": "nbis_candidate_v1",
+  "blocking_prerequisites": [
+    {
+      "acceptable_evidence": [
+        "Immutable environment definition identifying operating system, compiler, make, architecture, and dependencies",
+        "Successful build of the unmodified locked archive using official instructions",
+        "Hashes and linked-runtime summaries for both executables",
+        "A clean rebuild that reproduces the executable identities or documents controlled variance"
+      ],
+      "blocks_integration": true,
+      "description": "No documented NBIS build environment was already present, and installation was outside this audit's authorization.",
+      "evidence": "Native gcc, gmake, Cygwin, container runtimes, and installed WSL distributions were absent.",
+      "exact_unresolved_question": "Can official NBIS 5.0.0 be built unmodified and reproducibly in a frozen supported environment?",
+      "prerequisite_id": "NBIS_BUILD_ENVIRONMENT_FREEZE_V1",
+      "prohibited_shortcuts": [
+        "third-party binaries",
+        "forks",
+        "unrecorded source patches",
+        "installing tools as part of this audit"
+      ],
+      "recommended_next_task": "NBIS Reproducible Build Environment Freeze",
+      "resolution_criterion": "Both official executables build from the locked archive in a frozen environment and their identities are recorded.",
+      "risk_id": "BUILD_ENVIRONMENT_ABSENT",
+      "severity": "BLOCKING",
+      "status": "UNRESOLVED",
+      "why_it_blocks_integration": "Executable identity, full image-to-score behavior, and runtime failures cannot be established without a successful unmodified build."
+    },
+    {
+      "acceptable_evidence": [
+        "An authenticated official NIST downsampler with immutable identity and applicable terms, or an independently reviewable exact implementation of SP 500-289",
+        "Conformance evidence covering sigma, radius, odd-row/odd-column selection, borders, odd dimensions, output dimensions, and pixel values"
+      ],
+      "blocks_integration": true,
+      "description": "The official 1000-to-500 guidance is clear, but its implementation is not present in the locked NBIS 5.0.0 archive.",
+      "evidence": "NISTIR 7839, SP 500-289, SP 500-306, and an exhaustive text search of the acquired source tree.",
+      "exact_unresolved_question": "Which immutable implementation will supply the NIST 1000-to-500 PPI operation and how will conformance be proven?",
+      "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+      "prohibited_shortcuts": [
+        "generic resize",
+        "unvalidated image-library defaults",
+        "silent parity selection",
+        "treating a later NIST reference as if it were in NBIS 5.0.0"
+      ],
+      "recommended_next_task": "NBIS 1000 PPI Downsampler Conformance Audit",
+      "resolution_criterion": "A locked, reviewable implementation passes pixel-level conformance tests for the official method.",
+      "risk_id": "PPI_1000_IMPLEMENTATION_MISSING",
+      "severity": "BLOCKING",
+      "status": "UNRESOLVED",
+      "why_it_blocks_integration": "MINDTCT does not internally convert the 1000 PPI PNG to its intended 500 PPI operating scale."
+    },
+    {
+      "acceptable_evidence": [
+        "Explicit NIST guidance applicable to 2000 PPI operational preprocessing, or",
+        "A separately approved scientific validation plan and results demonstrating a fair canonical path for SD300C"
+      ],
+      "blocks_integration": true,
+      "description": "No official 2000 PPI operational path was found in the audited NIST sources.",
+      "evidence": "The 2000 PPI mentions in SP 500-306 concern aligned reference scans, while the conformance method remains 1000-to-500 PPI.",
+      "exact_unresolved_question": "What canonical, scientifically defensible resolution policy should transform or handle SD300C 2000 PPI images?",
+      "prerequisite_id": "NBIS_2000_PPI_PREPROCESSING_POLICY_V1",
+      "prohibited_shortcuts": [
+        "inferring 2000 support from 1000 guidance",
+        "assuming a 2000-to-1000-to-500 cascade",
+        "direct experimental use merely to see whether it runs",
+        "bespoke enhancement, crop, inversion, or resize"
+      ],
+      "recommended_next_task": "NBIS 2000 PPI Preprocessing Policy Audit",
+      "resolution_criterion": "An approved policy identifies the exact operation, implementation, parameters, validation evidence, and fairness rationale for SD300C.",
+      "risk_id": "PPI_2000_POLICY_UNRESOLVED",
+      "severity": "BLOCKING",
+      "status": "UNRESOLVED",
+      "why_it_blocks_integration": "A protocol release cannot be processed through an unsupported or inferred resolution path."
+    },
+    {
+      "acceptable_evidence": [
+        "Three fresh-process repetitions on only the authorized fixture after all preceding gates resolve",
+        "Stable minutiae payload hashes and BOZORTH3 score payload hashes without committing score values"
+      ],
+      "blocks_integration": true,
+      "description": "Runtime determinism has not been measured because the authorization gates did not pass.",
+      "evidence": "The probe record is intentionally NOT_RUN.",
+      "exact_unresolved_question": "Are MINDTCT representations and BOZORTH3 score payloads deterministic across fresh processes, paths, order, and fixed locale?",
+      "prerequisite_id": "NBIS_TECHNICAL_DETERMINISM_PROBE_V1",
+      "prohibited_shortcuts": [
+        "another fixture",
+        "cohort access",
+        "score publication",
+        "threshold selection",
+        "normalizing unexplained output differences"
+      ],
+      "recommended_next_task": "NBIS Authorized Technical Determinism Probe",
+      "resolution_criterion": "The authorized three-repetition probe passes all deterministic-output criteria after build and PPI gates resolve.",
+      "risk_id": "DETERMINISM_NOT_PROBED",
+      "severity": "BLOCKING",
+      "status": "UNRESOLVED",
+      "why_it_blocks_integration": "Source inspection cannot replace executable-level evidence for reproducible outputs."
+    }
+  ],
+  "build_and_portability_risks": [
+    {
+      "blocks_integration": true,
+      "description": "Official documentation targets gcc/gmake and reports Linux, macOS, and Cygwin testing; current modern toolchain compatibility remains unmeasured.",
+      "evidence": "Official product page and release installation files.",
+      "resolution_criterion": "The frozen build gate records all warnings and portability decisions without changing algorithmic source.",
+      "risk_id": "LEGACY_BUILD_PORTABILITY",
+      "severity": "HIGH"
+    }
+  ],
+  "format_conversion_risks": [],
+  "licensing_and_provenance_risks": [
+    {
+      "blocks_integration": false,
+      "description": "NIST identifies NBIS as public domain, but downstream packaging must retain provenance and must not substitute third-party builds.",
+      "evidence": "Official NBIS product page and locked official archive.",
+      "resolution_criterion": "Runtime package records the official archive and local build identity.",
+      "risk_id": "PROVENANCE_DRIFT",
+      "severity": "MEDIUM"
+    }
+  ],
+  "non_blocking_risks": [
+    {
+      "blocks_integration": false,
+      "description": "BOZORTH3 documents a default top-minutiae limit and an equal-quality cutoff whose order may be undefined.",
+      "evidence": "Official BOZORTH3 manual in the locked source tree.",
+      "resolution_criterion": "The determinism probe confirms stable effective input and score payloads for the authorized fixture.",
+      "risk_id": "EQUAL_QUALITY_CUTOFF_ORDER",
+      "severity": "MEDIUM"
+    }
+  ],
+  "resolution_risks": [
+    {
+      "blocks_integration": true,
+      "description": "PNG PPI metadata is not propagated by the NBIS 5.0.0 decoder, and MINDTCT falls back to 500 PPI without changing image dimensions.",
+      "evidence": "Locked decoder and MINDTCT source files.",
+      "resolution_criterion": "Every protocol release enters MINDTCT only through its approved canonical resolution path.",
+      "risk_id": "PNG_PPI_NOT_CONSUMED",
+      "severity": "HIGH"
+    }
+  ],
+  "scientific_validity_risks": [
+    {
+      "blocks_integration": true,
+      "description": "An unsupported 2000 PPI preprocessing choice could change minutiae geometry and invalidate cross-matcher fairness.",
+      "evidence": "Absence of an applicable policy in the audited official-source set.",
+      "resolution_criterion": "Resolve NBIS_2000_PPI_PREPROCESSING_POLICY_V1 before any SD300C processing.",
+      "risk_id": "SD300C_FAIRNESS",
+      "severity": "BLOCKING"
+    }
+  ]
+}
