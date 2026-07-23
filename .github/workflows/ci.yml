@@ -48,6 +48,16 @@ jobs:
           else
             echo 'NBIS candidate audit erratum 1 not recorded yet; static validation skipped.'
           fi
+      - name: Test NBIS 1000 PPI downsampler audit tools
+        run: python tools/run_nbis_1000_ppi_downsampler_tests_v1.py --suite audit
+      - name: Validate NBIS 1000 PPI downsampler audit package
+        shell: bash
+        run: |
+          if [ -d preprocessing/nbis_1000_ppi_downsampler_v1 ]; then
+            python tools/validate_nbis_1000_ppi_downsampler_v1.py
+          else
+            echo 'NBIS downsampler audit package not recorded yet; static validation skipped.'
+          fi
       - name: Test NBIS build environment freeze v1 tools
         run: python -m pytest -q tests/test_nbis_build_environment_v1.py
       - name: Validate NBIS build environment freeze v1 package
@@ -59,19 +69,7 @@ jobs:
             echo 'NBIS build environment freeze v1 package not recorded yet; static validation skipped.'
           fi
       - name: Run dataset-independent Python tests
-        run: >-
-          python -m pytest -q
-          tests/test_benchmark_contract.py
-          tests/test_benchmark_runner.py
-          tests/test_protocol_manifest_reader.py
-          tests/test_sourceafis_adapter.py
-          tests/test_sourceafis_client.py
-          tests/test_sourceafis_sidecar_lifecycle.py
-          tests/test_forbidden_runtime_coupling.py
-          tests/test_sourceafis_runtime_qualification.py
-          tests/test_sourceafis_decision_policy_v1.py
-          tests/test_sourceafis_frozen_cohort_v1.py
-          tests/test_sourceafis_policy_application_v1.py
+        run: python tools/run_nbis_1000_ppi_downsampler_tests_v1.py --suite project
       - name: Validate frozen SourceAFIS decision policy
         run: python tools/validate_sourceafis_decision_policy_v1.py
       - name: Validate SourceAFIS frozen-cohort execution package
