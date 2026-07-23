@@ -1,0 +1,45 @@
+{
+  "differences": {
+    "content": 0,
+    "extra": 0,
+    "missing": 0,
+    "path_only": 3879,
+    "size": 0
+  },
+  "erratum_id": "nbis_candidate_v1_erratum_1",
+  "erratum_version": 1,
+  "original_locked_identity": {
+    "sha256": "058aeb4638644f998109371c821acb75649d39ee411429fef268f6e4c1ae5bc9",
+    "status": "NON_REPRODUCIBLE"
+  },
+  "results": [
+    {
+      "file_count": 3879,
+      "method": "ZIP direct",
+      "prefix_included": true,
+      "root_scope": "archive extraction parent",
+      "tree_sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8"
+    },
+    {
+      "file_count": 3879,
+      "method": "ZIP direct",
+      "prefix_included": false,
+      "root_scope": "Rel_5.0.0",
+      "tree_sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e"
+    },
+    {
+      "file_count": 3879,
+      "method": "clean extraction",
+      "prefix_included": true,
+      "root_scope": "extraction parent",
+      "tree_sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8"
+    },
+    {
+      "file_count": 3879,
+      "method": "clean extraction",
+      "prefix_included": false,
+      "root_scope": "Rel_5.0.0",
+      "tree_sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e"
+    }
+  ]
+}

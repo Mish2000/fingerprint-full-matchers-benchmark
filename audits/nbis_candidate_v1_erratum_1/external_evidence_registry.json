@@ -1,0 +1,62 @@
+{
+  "erratum_id": "nbis_candidate_v1_erratum_1",
+  "erratum_version": 1,
+  "evidence": [
+    {
+      "absolute_path_recorded": false,
+      "bytes": 5287,
+      "filename": "reconciliation-report.json",
+      "label": "reconciliation_report",
+      "sha256": "c66dd63e5002b3457c1ea8e984d3f2a3633402ae34331d6a21bf2ddaff79feef",
+      "stored_outside_git": true
+    },
+    {
+      "absolute_path_recorded": false,
+      "bytes": 5487,
+      "filename": "diff-summary.json",
+      "label": "diff_summary",
+      "sha256": "28177cbed1a6f2da80862e5c4718f3fb31366b26b143f8f3dcc7e910cd36225d",
+      "stored_outside_git": true
+    },
+    {
+      "absolute_path_recorded": false,
+      "bytes": 4367,
+      "filename": "first-20-path-only-differences.txt",
+      "label": "first_20_path_only_differences",
+      "sha256": "0a010207fd3282b5dcb30b50d42dfbee3ad5bde326e523eaa8543c32f2abdd98",
+      "stored_outside_git": true
+    },
+    {
+      "absolute_path_recorded": false,
+      "bytes": 528891,
+      "filename": "zip-direct-prefix-included.manifest.txt",
+      "label": "zip_direct_prefix_included_manifest",
+      "sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8",
+      "stored_outside_git": true
+    },
+    {
+      "absolute_path_recorded": false,
+      "bytes": 490101,
+      "filename": "zip-direct-prefix-stripped.manifest.txt",
+      "label": "zip_direct_prefix_stripped_manifest",
+      "sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+      "stored_outside_git": true
+    },
+    {
+      "absolute_path_recorded": false,
+      "bytes": 528891,
+      "filename": "clean-extraction-parent-root.manifest.txt",
+      "label": "clean_extraction_parent_root_manifest",
+      "sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8",
+      "stored_outside_git": true
+    },
+    {
+      "absolute_path_recorded": false,
+      "bytes": 490101,
+      "filename": "clean-extraction-rel-root.manifest.txt",
+      "label": "clean_extraction_rel_root_manifest",
+      "sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+      "stored_outside_git": true
+    }
+  ]
+}

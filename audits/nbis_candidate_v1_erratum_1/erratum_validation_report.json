@@ -1,0 +1,22 @@
+{
+  "archive_identity_verified": true,
+  "archive_layout_identity_verified": true,
+  "canonical_identity_verified": true,
+  "ci_mode": {
+    "archive_required": false,
+    "dataset_required": false,
+    "network_required": false,
+    "wsl_required": false
+  },
+  "erratum_id": "nbis_candidate_v1_erratum_1",
+  "erratum_version": 1,
+  "errors": [],
+  "external_evidence_locked": true,
+  "independent_methods_agree": true,
+  "original_audit_package_unchanged": true,
+  "original_audit_tag_unchanged": true,
+  "original_hash_prohibited": true,
+  "prerequisites_resolved": false,
+  "scientific_verdict_changed": false,
+  "valid": true
+}

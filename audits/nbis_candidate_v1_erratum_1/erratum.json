@@ -1,0 +1,18 @@
+{
+  "affected_field": "source_tree_sha256",
+  "archive_layout_diagnostic_value": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8",
+  "canonical_algorithm_id": "nbis_source_tree_identity_v2",
+  "corrected_value": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+  "discovery_date": "2026-07-23",
+  "erratum_id": "nbis_candidate_v1_erratum_1",
+  "erratum_version": 1,
+  "future_use_of_original_value_prohibited": true,
+  "original_audit_commit": "6a14e4c1a960494bc2e1a8a9c351790f6cc2d571",
+  "original_audit_id": "nbis_candidate_v1",
+  "original_audit_tag": "nbis-candidate-audit-v1",
+  "original_hash_root_cause": "NOT_RECOVERED",
+  "original_value": "058aeb4638644f998109371c821acb75649d39ee411429fef268f6e4c1ae5bc9",
+  "original_value_status": "NON_REPRODUCIBLE",
+  "scientific_verdict_changed": false,
+  "severity": "PROVENANCE_BLOCKING"
+}

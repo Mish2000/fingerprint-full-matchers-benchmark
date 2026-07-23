@@ -1,0 +1,81 @@
+{
+  "artifact_tracking": {
+    "archive_tracked": false,
+    "binary_tracked": false,
+    "dataset_tracked": false,
+    "full_manifest_tracked": false,
+    "image_tracked": false,
+    "minutiae_tracked": false,
+    "raw_score_tracked": false,
+    "source_tree_tracked": false
+  },
+  "code_files": {
+    "tests/test_nbis_candidate_v1_erratum_1.py": {
+      "bytes": 15767,
+      "sha256": "bc23508f6fcb68a0b5e45f99077219495d783a3e8a124923b67d54be27fe9daa"
+    },
+    "tools/recompute_nbis_source_tree_identity_v2.py": {
+      "bytes": 10455,
+      "sha256": "ea249879f3737afb7725ffe2d1ae7a09612a13c54d5265ab9d8a6a3fe7dec526"
+    },
+    "tools/validate_nbis_candidate_v1_erratum_1.py": {
+      "bytes": 21295,
+      "sha256": "96cccf0a59e8b1a26af3fa00f9f104136c8d69ff38a459f2c5374fcbbcf66d29"
+    }
+  },
+  "corrected_identity": {
+    "algorithm_id": "nbis_source_tree_identity_v2",
+    "archive_layout_tree_sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8",
+    "archive_sha256": "0adf8ab0f6b0e4208de50ca00ba21d3d77112ecd66288757ddfed21f6bee92c3",
+    "archive_size_bytes": 52595795,
+    "canonical_release_root_tree_sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+    "file_count": 3879
+  },
+  "erratum_id": "nbis_candidate_v1_erratum_1",
+  "erratum_version": 1,
+  "files": {
+    "README.md": {
+      "bytes": 1340,
+      "sha256": "d090ebcb433873e4759fc56386fc2e321fbf2938342e0df47e009b74d87102c8"
+    },
+    "corrected_source_identity.json": {
+      "bytes": 2293,
+      "sha256": "8cd36374b6cd06c18ec1c6b8d429aaf5284f5696dc0caee48afbc2530e10d2f8"
+    },
+    "erratum.json": {
+      "bytes": 879,
+      "sha256": "d50f6929fae4cd963bed4d4caeec612b51e266428b2192f0edac35cd826f7a31"
+    },
+    "erratum_validation_report.json": {
+      "bytes": 633,
+      "sha256": "acbc0a26a5123419569346927d02bc8d039f444c2c47925ebe73a3f06d97553a"
+    },
+    "external_evidence_registry.json": {
+      "bytes": 2157,
+      "sha256": "23d40da5ee02a894548f7f4caa1ceda9cad59be17abbe5846b52076ab616049b"
+    },
+    "impact_assessment.json": {
+      "bytes": 1273,
+      "sha256": "9dc5efb77dde11afbce9d4db285ff2d4cb472c7e37e15dac21779a9ee4ce2bc4"
+    },
+    "reconciliation_summary.json": {
+      "bytes": 1280,
+      "sha256": "9a65a8d9fd0b9987ce624f064b5ed1c383ab3610404fe65a4598cdcc734760e6"
+    }
+  },
+  "original_audit": {
+    "commit": "6a14e4c1a960494bc2e1a8a9c351790f6cc2d571",
+    "tag": "nbis-candidate-audit-v1",
+    "tag_target": "6a14e4c1a960494bc2e1a8a9c351790f6cc2d571"
+  },
+  "original_immutable_paths": [
+    "audits/nbis_candidate_v1",
+    "tools/validate_nbis_candidate_audit_v1.py",
+    "tests/test_nbis_candidate_audit_v1.py"
+  ],
+  "original_value": {
+    "future_use_prohibited": true,
+    "sha256": "058aeb4638644f998109371c821acb75649d39ee411429fef268f6e4c1ae5bc9",
+    "status": "NON_REPRODUCIBLE"
+  }
+}

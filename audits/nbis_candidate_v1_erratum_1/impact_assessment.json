@@ -1,0 +1,38 @@
+{
+  "archive_provenance_remains_valid": true,
+  "audit_verdict": "SUITABLE_WITH_PREREQUISITES",
+  "biometric_data_affected": false,
+  "blocking_prerequisites_changed": false,
+  "build_authorization_remains_blocked_until_erratum_is_frozen": true,
+  "erratum_id": "nbis_candidate_v1_erratum_1",
+  "erratum_version": 1,
+  "mindtct_evidence_changed": false,
+  "no_prerequisite_resolved_by_erratum": true,
+  "only_corrected_claim": "full source-tree identity and its canonicalization definition",
+  "original_audit_verdict": "SUITABLE_WITH_PREREQUISITES",
+  "ppi_findings_changed": false,
+  "remaining_prerequisites": [
+    {
+      "prerequisite_id": "NBIS_BUILD_ENVIRONMENT_FREEZE_V1",
+      "status": "UNRESOLVED"
+    },
+    {
+      "prerequisite_id": "NBIS_1000_PPI_DOWNSAMPLER_CONFORMANCE_V1",
+      "status": "UNRESOLVED"
+    },
+    {
+      "prerequisite_id": "NBIS_2000_PPI_PREPROCESSING_POLICY_V1",
+      "status": "UNRESOLVED"
+    },
+    {
+      "prerequisite_id": "NBIS_TECHNICAL_DETERMINISM_PROBE_V1",
+      "status": "UNRESOLVED"
+    }
+  ],
+  "score_affected": false,
+  "source_contents_changed": false,
+  "source_inspection_findings_remain_valid": true,
+  "sourceafis_artifact_affected": false,
+  "subtree_evidence_remains_valid": true,
+  "verdict_changed": false
+}

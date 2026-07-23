@@ -1,0 +1,50 @@
+{
+  "algorithm": {
+    "absolute_paths_allowed": false,
+    "algorithm_id": "nbis_source_tree_identity_v2",
+    "backslash_separators_allowed": false,
+    "directory_entries_included": false,
+    "drive_prefixes_allowed": false,
+    "duplicate_normalized_paths_allowed": false,
+    "field_separator": "two ASCII spaces",
+    "file_content": "SHA-256 of uncompressed ZIP entry bytes",
+    "file_size": "uncompressed byte size",
+    "final_newline_required": true,
+    "manifest_encoding": "UTF-8 without BOM",
+    "path_separator": "forward slash",
+    "path_sort": "ordinal case-sensitive by normalized relative path",
+    "path_traversal_allowed": false,
+    "record_format": "<file_sha256>  <byte_size>  <relative_path>\\n",
+    "top_level_prefix_action": "remove exactly Rel_5.0.0/ from every file entry"
+  },
+  "archive_layout_tree_sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8",
+  "bozorth3_subtree_sha256": "ae2ac6cefee221a62716d941498d64e06e39eb60716936243459756cb5cb1ef8",
+  "canonical_release_root_tree_sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+  "clean_extraction_reproduction": {
+    "archive_layout_tree_sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8",
+    "canonical_release_root_tree_sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+    "status": "PASS"
+  },
+  "erratum_id": "nbis_candidate_v1_erratum_1",
+  "erratum_version": 1,
+  "file_count": 3879,
+  "independent_methods_agree": true,
+  "mindtct_subtree_sha256": "6271302a7a049102d7cc0fa078d2d393cbd3647d6cc59c037bf71d915e51ed2f",
+  "official_archive": {
+    "filename": "nbis_v5_0_0.zip",
+    "release": "NIST NBIS Release 5.0.0",
+    "sha256": "0adf8ab0f6b0e4208de50ca00ba21d3d77112ecd66288757ddfed21f6bee92c3",
+    "size_bytes": 52595795
+  },
+  "top_level_directory_rule": {
+    "allowed_file_entry_prefix": "Rel_5.0.0/",
+    "directory_count": 1,
+    "directory_name": "Rel_5.0.0",
+    "entries_outside_prefix_allowed": false
+  },
+  "zip_direct_reproduction": {
+    "archive_layout_tree_sha256": "1338ea21b50a084ec4d724449af226b129aedaf70a184109590f7cb64251d2d8",
+    "canonical_release_root_tree_sha256": "00ae5eff70693fa5647e3ff57232eff7abd623e4786c110a3286ac8614ac7f3e",
+    "status": "PASS"
+  }
+}
