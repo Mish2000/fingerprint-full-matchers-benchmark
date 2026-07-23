@@ -619,7 +619,7 @@ for name in mindtct bozorth3; do
   printf '%s.sha256=%s\n' "$name" "$(sha256sum "$path" | awk '{{print $1}}')"
   printf '%s.file=%s\n' "$name" "$(file -b "$path")"
   printf '%s.interpreter=%s\n' "$name" "$(readelf -l "$path" | sed -n 's/.*interpreter: \\(.*\\)]/\\1/p')"
-  printf '%s.dependencies_sha256=%s\n' "$name" "$(ldd "$path" | LC_ALL=C sort | sha256sum | awk '{{print $1}}')"
+  printf '%s.dependencies_sha256=%s\n' "$name" "$(ldd "$path" | sed -E 's/0x[[:xdigit:]]+/0xADDR/g' | LC_ALL=C sort | sha256sum | awk '{{print $1}}')"
   printf '%s.dynamic_sha256=%s\n' "$name" "$(readelf -d "$path" | sha256sum | awk '{{print $1}}')"
   printf '%s.symbols_sha256=%s\n' "$name" "$(readelf -Ws "$path" | sed 's/[[:space:]]\\+/ /g' | sha256sum | awk '{{print $1}}')"
   text_file=$(mktemp); rodata_file=$(mktemp); work_file=$(mktemp)
@@ -860,14 +860,22 @@ for name in mindtct bozorth3; do
   path='{CANONICAL_INSTALL}/bin/'$name
   test -x "$path"
   printf '%s.sha256=%s\n' "$name" "$(sha256sum "$path" | awk '{{print $1}}')"
-  printf '%s.ldd_sha256=%s\n' "$name" "$(ldd "$path" | LC_ALL=C sort | sha256sum | awk '{{print $1}}')"
+  printf '%s.ldd_sha256=%s\n' "$name" "$(ldd "$path" | sed -E 's/0x[[:xdigit:]]+/0xADDR/g' | LC_ALL=C sort | sha256sum | awk '{{print $1}}')"
 done
 set +e
-'{CANONICAL_INSTALL}/bin/mindtct' >/tmp/restore-mindtct.out 2>/tmp/restore-mindtct.err
-'{CANONICAL_INSTALL}/bin/bozorth3' >/tmp/restore-bozorth3.out 2>/tmp/restore-bozorth3.err
-set -e
-printf 'smoke_payload_sha256=%s\n' "$(cat /tmp/restore-mindtct.out /tmp/restore-mindtct.err /tmp/restore-bozorth3.out /tmp/restore-bozorth3.err | sha256sum | awk '{{print $1}}')"
-rm -f /tmp/restore-mindtct.out /tmp/restore-mindtct.err /tmp/restore-bozorth3.out /tmp/restore-bozorth3.err
+'{CANONICAL_INSTALL}/bin/mindtct' >/tmp/mindtct.out 2>/tmp/mindtct.err; m1=$?
+'{CANONICAL_INSTALL}/bin/mindtct' /definitely/missing/input /tmp/never-created >/tmp/mindtct-missing.out 2>/tmp/mindtct-missing.err; m2=$?
+'{CANONICAL_INSTALL}/bin/bozorth3' >/tmp/bozorth3.out 2>/tmp/bozorth3.err; b1=$?
+'{CANONICAL_INSTALL}/bin/bozorth3' /definitely/missing.xyt >/tmp/bozorth3-missing.out 2>/tmp/bozorth3-missing.err; b2=$?
+printf 'mindtct_usage_exit=%s\n' "$m1"
+printf 'mindtct_missing_exit=%s\n' "$m2"
+printf 'bozorth3_usage_exit=%s\n' "$b1"
+printf 'bozorth3_missing_exit=%s\n' "$b2"
+for item in /tmp/mindtct.out /tmp/mindtct.err /tmp/mindtct-missing.out /tmp/mindtct-missing.err /tmp/bozorth3.out /tmp/bozorth3.err /tmp/bozorth3-missing.out /tmp/bozorth3-missing.err; do
+  printf '%s=%s\n' "$(basename "$item").sha256" "$(sha256sum "$item" | awk '{{print $1}}')"
+done
+rm -f /tmp/mindtct.out /tmp/mindtct.err /tmp/mindtct-missing.out /tmp/mindtct-missing.err /tmp/bozorth3.out /tmp/bozorth3.err /tmp/bozorth3-missing.out /tmp/bozorth3-missing.err
+exit 0
 """.strip()
     output, verify_record = run_wsl(
         ctx, "restore-verify-identities", verify_script, distro=VERIFY_DISTRO_NAME
@@ -876,6 +884,11 @@ rm -f /tmp/restore-mindtct.out /tmp/restore-mindtct.err /tmp/restore-bozorth3.ou
     for name in ("mindtct", "bozorth3"):
         if values.get(f"{name}.sha256") != canonical["executables"][name]["sha256"]:
             raise FreezeError(f"restored executable mismatch: {name}")
+        if values.get(f"{name}.ldd_sha256") != canonical["executables"][name]["dependencies_sha256"]:
+            raise FreezeError(f"restored dependency identity mismatch: {name}")
+    for key, expected in canonical["smoke_results"].items():
+        if values.get(key) != expected:
+            raise FreezeError(f"restored non-biometric smoke mismatch: {key}")
     inventory = package_receipt["toolchain_inventory"]
     status_match = re.search(r"===DPKG_STATUS===\n([0-9a-f]{64})", inventory)
     if status_match and values.get("dpkg_status_sha256") != status_match.group(1):

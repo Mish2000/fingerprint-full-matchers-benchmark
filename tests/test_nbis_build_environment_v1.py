@@ -554,6 +554,13 @@ def test_elf_sections_are_extracted_from_disposable_copy() -> None:
     assert 'objcopy --dump-section .text="$text_file" "$path"' not in source
 
 
+def test_ldd_identity_is_aslr_normalized_and_restore_compared() -> None:
+    source = (REPOSITORY_ROOT / "tools" / "freeze_nbis_build_environment_v1.py").read_text(encoding="utf-8")
+    assert source.count("s/0x[[:xdigit:]]+/0xADDR/g") == 2
+    assert "restored dependency identity mismatch" in source
+    assert "restored non-biometric smoke mismatch" in source
+
+
 def test_biometric_and_fixture_execution_are_disabled() -> None:
     plan = _valid_documents()["environment_plan.json"]
     assert plan["biometric_input_allowed"] is False
