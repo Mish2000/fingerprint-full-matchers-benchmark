@@ -1,0 +1,13 @@
+{
+  "biometric_input_accessed": false,
+  "bozorth3_invoked": false,
+  "dataset_accessed": false,
+  "errors": [],
+  "fixture_processed": false,
+  "mindtct_invoked": false,
+  "policy_id": "NBIS_1000_TO_500_MANUAL_POLICY_V1",
+  "policy_version": 1,
+  "protocol_image_manifest_read": false,
+  "scores_generated": false,
+  "valid": true
+}

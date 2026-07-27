@@ -1,0 +1,39 @@
+{
+  "canonical_function": "downsample_u8_matrix",
+  "canonical_structure": "SEPARABLE_TWO_PASS_SINGLE_FINAL_DIVISION",
+  "files": {
+    ".github/workflows/nbis-1000-to-500-manual-policy-v1.yml": {
+      "bytes": 1578,
+      "sha256": "4ded7286cf337ebe684eb033be934c58f8464ef6d62d15f2ab919f62fdc562a8"
+    },
+    "docs/nbis_1000_to_500_manual_policy_v1.md": {
+      "bytes": 3630,
+      "sha256": "332d16ffa70cc2ce98d084d72f73d6c606b3f46de331e0095e87be6c9ce6e51f"
+    },
+    "tests/test_nbis_1000_to_500_manual_policy_v1.py": {
+      "bytes": 10267,
+      "sha256": "dd6e37ffdc40b8e1614b73acd127d2cfcc64990d3e7eba3815c60ff52456a87c"
+    },
+    "tools/nbis_downsample_1000_to_500_manual_reference_v1.py": {
+      "bytes": 2961,
+      "sha256": "13183f1d596c82a73d807a8135a1b20459d0f91650b1b182572f3337c48c4faa"
+    },
+    "tools/nbis_downsample_1000_to_500_manual_v1.py": {
+      "bytes": 4636,
+      "sha256": "cce33babcc9a96375953bef8531e7be976db76f1bcc181dd230c76cb1d0fe50f"
+    },
+    "tools/run_nbis_1000_to_500_manual_policy_tests_v1.py": {
+      "bytes": 3163,
+      "sha256": "90ccba8570063fd2e4d906721fcfad5088b695cdefcebdbce9462263957e668c"
+    },
+    "tools/validate_nbis_1000_to_500_manual_policy_v1.py": {
+      "bytes": 13642,
+      "sha256": "fd7ba4feaa34a6c234b3914eb40d4ac904c28e85d5ac4a0f884eca1cb3919cdb"
+    }
+  },
+  "policy_id": "NBIS_1000_TO_500_MANUAL_POLICY_V1",
+  "policy_version": 1,
+  "reference_function": "downsample_u8_matrix",
+  "reference_structure": "DIRECT_TWO_DIMENSIONAL_CONVOLUTION",
+  "third_party_dependencies": []
+}

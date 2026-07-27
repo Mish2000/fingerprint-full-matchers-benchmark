@@ -1,0 +1,41 @@
+name: nbis-1000-to-500-manual-policy-v1
+
+on:
+  push:
+    paths:
+      - ".github/workflows/nbis-1000-to-500-manual-policy-v1.yml"
+      - "docs/nbis_1000_to_500_manual_policy_v1.md"
+      - "preprocessing/nbis_1000_to_500_manual_policy_v1/**"
+      - "tests/test_nbis_1000_to_500_manual_policy_v1.py"
+      - "tools/nbis_downsample_1000_to_500_manual_v1.py"
+      - "tools/nbis_downsample_1000_to_500_manual_reference_v1.py"
+      - "tools/run_nbis_1000_to_500_manual_policy_tests_v1.py"
+      - "tools/validate_nbis_1000_to_500_manual_policy_v1.py"
+  pull_request:
+    paths:
+      - ".github/workflows/nbis-1000-to-500-manual-policy-v1.yml"
+      - "docs/nbis_1000_to_500_manual_policy_v1.md"
+      - "preprocessing/nbis_1000_to_500_manual_policy_v1/**"
+      - "tests/test_nbis_1000_to_500_manual_policy_v1.py"
+      - "tools/nbis_downsample_1000_to_500_manual_v1.py"
+      - "tools/nbis_downsample_1000_to_500_manual_reference_v1.py"
+      - "tools/run_nbis_1000_to_500_manual_policy_tests_v1.py"
+      - "tools/validate_nbis_1000_to_500_manual_policy_v1.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-policy-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run fixed synthetic manual-policy tests
+        run: python tools/run_nbis_1000_to_500_manual_policy_tests_v1.py
+      - name: Validate manual-policy package
+        run: python tools/validate_nbis_1000_to_500_manual_policy_v1.py

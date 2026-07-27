@@ -1,0 +1,14 @@
+{
+  "ci_required": true,
+  "ci_status_at_package_creation": "PENDING_GITHUB_ACTIONS",
+  "fresh_process_repetitions": 3,
+  "local_fresh_process_status": "PASS",
+  "policy_id": "NBIS_1000_TO_500_MANUAL_POLICY_V1",
+  "policy_version": 1,
+  "process_variants": [
+    "run=1;hashseed=1;timezone=UTC;working_directory_variant=1",
+    "run=2;hashseed=2;timezone=Asia/Jerusalem;working_directory_variant=2",
+    "run=3;hashseed=3;timezone=Pacific/Honolulu;working_directory_variant=3"
+  ],
+  "serialized_payload_sha256": "9ca1eb7bbf273628de4470463b947d9d4f070275102965286ba7db1890e85818"
+}
