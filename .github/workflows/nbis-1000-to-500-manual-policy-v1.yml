@@ -35,6 +35,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install Python package and declared test extra
+        run: python -m pip install '.[test]'
       - name: Run fixed synthetic manual-policy tests
         run: python tools/run_nbis_1000_to_500_manual_policy_tests_v1.py
       - name: Validate manual-policy package

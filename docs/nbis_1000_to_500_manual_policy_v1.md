@@ -61,7 +61,8 @@ The dedicated runner accepts no user-provided paths and collects exactly one
 dataset-independent test file with repository conftest loading disabled. Its
 filesystem guard blocks the external dataset tree and committed protocol
 manifests before Python can open them. The dedicated GitHub Actions workflow
-does not download evidence or software and does not invoke NBIS executables.
+installs the repository's declared test extra, but does not download NIST
+evidence or reference software and does not invoke NBIS executables.
 
 ## Claim boundary
 

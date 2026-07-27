@@ -3,12 +3,12 @@
   "canonical_structure": "SEPARABLE_TWO_PASS_SINGLE_FINAL_DIVISION",
   "files": {
     ".github/workflows/nbis-1000-to-500-manual-policy-v1.yml": {
-      "bytes": 1578,
-      "sha256": "4ded7286cf337ebe684eb033be934c58f8464ef6d62d15f2ab919f62fdc562a8"
+      "bytes": 1684,
+      "sha256": "4fe4c1bcf78b38b4d9893b069288f4d6c56889454f6daa8d744714ec4f4ba37e"
     },
     "docs/nbis_1000_to_500_manual_policy_v1.md": {
-      "bytes": 3630,
-      "sha256": "332d16ffa70cc2ce98d084d72f73d6c606b3f46de331e0095e87be6c9ce6e51f"
+      "bytes": 3696,
+      "sha256": "1a53c4008cda85771a696fc6f2485e2fd5ec025c5da05e5864b179e3de61c63b"
     },
     "tests/test_nbis_1000_to_500_manual_policy_v1.py": {
       "bytes": 10267,
